@@ -5,8 +5,12 @@
 #include "Segment.hpp"
 #include "plane3d.hpp"
 
+#define CAMERA_ROTATION_SENSIBILITY    0.25
+#define CAMERA_TRANSLATION_SENSIBILITY 4
+
 class Camera {
 public:
+	enum class DIRECTION { FRONT, BACK, RIGHT, LEFT, UP, DOWN };
 
 private:
 	Vector position;
@@ -24,6 +28,11 @@ public:
 		const unsigned window_height);
 
 	// operatori
+	Camera operator+=(const Vector& v);
+
+	//altele
+	void rotate(const double mouse_move_x, const double mouse_move_y);
+	void move(const DIRECTION direction);
 	Vector transform_vector(const Vector& v) const;
 	Segment transform_segment(const Segment& s) const;
 

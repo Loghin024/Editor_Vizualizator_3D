@@ -57,3 +57,20 @@ void Solid3d::render_solid(sf::RenderWindow& window, const unsigned window_width
 
     window.draw(figure);
 }
+
+
+//rotire corp
+void Solid3d::rotate(const Vector& rotation_center, const Vector& axis, const double theta, const bool object_axis) {
+
+    Vector center_of_rotation(rotation_center);
+
+    if (object_axis)
+        center_of_rotation = center;
+
+    for (auto& s : edges) {
+        s.a.rotate(center_of_rotation, axis, theta);
+        s.b.rotate(center_of_rotation, axis, theta);
+    }
+
+    center.rotate(center_of_rotation, axis, theta);
+}

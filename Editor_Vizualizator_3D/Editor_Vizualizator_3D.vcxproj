@@ -140,6 +140,7 @@
     <ClCompile Include="src\geometry\solid3d.cpp" />
     <ClCompile Include="src\geometry\vector.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\utils\mouse.cpp" />
     <ClCompile Include="src\utils\tools.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="src\geometry\segment.hpp" />
     <ClInclude Include="src\geometry\solid3d.hpp" />
     <ClInclude Include="src\geometry\vector.hpp" />
+    <ClInclude Include="src\utils\mouse.hpp" />
     <ClInclude Include="src\utils\tools.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

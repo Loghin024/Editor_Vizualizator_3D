@@ -28,3 +28,36 @@ Cub::Cub(const Vector& _center, const double size) : Solid3d() {
 
     *this += _center;
 }
+
+// ##############################################
+// ### Sphere3d #################################
+// ##############################################
+
+Sphere3d::Sphere3d(const Vector& _center,
+    const double size,
+    const unsigned number_of_circles,
+    const unsigned number_of_points_per_circle) : Solid3d() {
+
+    std::vector<Vector> points;
+
+    for (unsigned i = 0; i < number_of_circles; ++i) {
+        double theta = map(i, 0, number_of_circles - 1, -90, 90);
+
+        for (unsigned j = 0; j < number_of_points_per_circle; ++j) {
+            double phi = map(j, 0, number_of_points_per_circle, -180, 180);
+
+            points.push_back(Vector(size * cos(as_radians(theta)) * cos(as_radians(phi)),
+                size * cos(as_radians(theta)) * sin(as_radians(phi)),
+                size * sin(as_radians(theta))));
+
+            // no need to repeat this point
+            if (theta <= -90 || theta >= 90)
+                break;
+        }
+    }
+
+    for (size_t i = 0; i < points.size(); ++i)
+        add_segment(Segment(points[i], points[i] + Vector(0.5, 0, 0)));
+
+    *this += _center;
+}

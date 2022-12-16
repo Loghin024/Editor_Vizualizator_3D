@@ -29,4 +29,5 @@ public:
     void add_segment(const Segment& s) { edges.push_back(s); }
     void render_solid(sf::RenderWindow& window, const unsigned window_width, const unsigned window_height, const Camera& camera);
     void clear() { edges.clear(); }
+    void rotate(const Vector& rotation_center, const Vector& axis, const double theta, const bool object_axis = false);
 };
