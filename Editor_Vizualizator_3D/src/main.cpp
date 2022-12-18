@@ -2,20 +2,17 @@
 #include "geometry/geometrie.hpp"
 #include "geometry/solid3d.hpp"
 #include "utils/mouse.hpp"
-//#include <cstring>
-//#include <string>
-//#include <stdio.h>
-//#include <stdlib.h>
-//#include <iostream>
+#include <cstring>
+#include <string>
 
 //using namespace sf;
 //using namespace std;
-//
-//int language = 1, linie;
-//int curentWindow = 0;
-//char sir[100], proiect[100];
-//bool q;						
-//char stergere[200];
+
+int language = 1, linie;
+int curentWindow = 0;
+char sir[100], proiect[100];
+bool q;						
+char stergere[200];
 
 
 //void Home()
@@ -549,10 +546,17 @@ int main()
 	Mouse::setPosition(sf::Vector2i(1200 / 2, 800 / 2), window);
 
 	//creaza un cub 
-	Cub cub(Vector(0, 0, 0), 40);
-	Cub cub1(Vector(0, -30, 0), 20);
-	Cub cub2(Vector(0, -45, 0), 10);
+	//Cub cub(Vector(0, 0, 0), 40);
+	//Cub cub1(Vector(0, -30, 0), 20);
+	//Cub cub2(Vector(0, -45, 0), 10);
 	//Cub cub1(Vector(100, 100, 100), 30);
+	Prism prisma1(Vector(0,0,0), 50, 20, 30);
+
+	Prism leg1(Vector(0, 0, 0), 30, 5, 5);
+	Prism leg2(Vector(0, 0, 20), 30, 5, 5);
+	Prism leg3(Vector(40, 0, 0), 30, 5, 5);
+	Prism leg4(Vector(40, 0, 20), 30, 5, 5);
+	Prism fata(Vector(-25, -15, -25), 5, 50, 70);
 
 
 	// creaza camera
@@ -587,14 +591,22 @@ int main()
 
 		//afisare
 		window.clear();
-		cub.render_solid(window, 1200, 800, camera);
-		cub1.render_solid(window, 1200, 800, camera);
-		cub2.render_solid(window, 1200, 800, camera);
-		//platou.render_solid(window, 1200, 800, camera);
+		//cub.render_solid(window, 1200, 800, camera);
 		//cub1.render_solid(window, 1200, 800, camera);
-		cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
-		cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-		cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+		//cub2.render_solid(window, 1200, 800, camera);
+		////platou.render_solid(window, 1200, 800, camera);
+		////cub1.render_solid(window, 1200, 800, camera);
+		//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
+		//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+		//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+
+		//prisma1.render_solid(window, 1200, 800, camera);
+		//prisma1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+		leg1.render_solid(window, 1200, 800, camera);
+		leg2.render_solid(window, 1200, 800, camera);
+		leg3.render_solid(window, 1200, 800, camera);
+		leg4.render_solid(window, 1200, 800, camera);
+		fata.render_solid(window, 1200, 800, camera);
 
 		window.display();
 	}

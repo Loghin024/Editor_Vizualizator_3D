@@ -12,3 +12,9 @@ class Cub : public Solid3d {
 public:
     Cub(const Vector& _center, const double size);
 };
+
+class Prism : public Solid3d {
+
+public:
+    Prism(const Vector& _center, const double height, const double lenght, const double width);
+};
