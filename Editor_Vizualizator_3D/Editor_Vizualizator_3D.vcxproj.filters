@@ -71,5 +71,11 @@
     <ClInclude Include="src\utils\mouse.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\utils\Button.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="C:\Users\Loghin024\AppData\Local\Temp\Rar$DRa19760.24161\Calibri Regular.ttf" />
   </ItemGroup>
 </Project>

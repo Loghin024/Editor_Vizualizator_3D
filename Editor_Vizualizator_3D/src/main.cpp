@@ -2,8 +2,10 @@
 #include "geometry/geometrie.hpp"
 #include "geometry/solid3d.hpp"
 #include "utils/mouse.hpp"
+#include "utils/Button.hpp"
 #include <cstring>
 #include <string>
+#include <iostream>
 
 //using namespace sf;
 //using namespace std;
@@ -525,7 +527,8 @@ char stergere[200];
 		windowCreari.display();
 	}
 }*/
-
+bool rotateCamera = true;
+bool ok = false;
 
 int main()
 {
@@ -543,7 +546,17 @@ int main()
 	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "Editor\Vizualizator 3D", sf::Style::Close | sf::Style::Resize, window_settings);
 	window.setVerticalSyncEnabled(true);
+	window.setKeyRepeatEnabled(false);
 	Mouse::setPosition(sf::Vector2i(1200 / 2, 800 / 2), window);
+
+	//butoane
+	Button btnAddPrism("Prism", {100,50}, 20, sf::Color::Blue, sf::Color::White);
+	btnAddPrism.setPosition({50,50});
+
+	sf::Font arial;
+	arial.loadFromFile("res/Fonts/ARIAL.TTF");
+	btnAddPrism.setFont(arial);
+
 
 	//creaza un cub 
 	//Cub cub(Vector(0, 0, 0), 40);
@@ -556,7 +569,7 @@ int main()
 	Prism leg2(Vector(0, 0, 20), 30, 5, 5);
 	Prism leg3(Vector(40, 0, 0), 30, 5, 5);
 	Prism leg4(Vector(40, 0, 20), 30, 5, 5);
-	Prism fata(Vector(-25, -15, -25), 5, 50, 70);
+	Prism fata(Vector(-25, -35, -25), 5, 50, 70);
 
 
 	// creaza camera
@@ -570,10 +583,26 @@ int main()
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				window.close();
+
+			//if(event.type == sf::Event::MouseButtonPressed)
+			//{ 
+			//	if (btnAddPrism.isMouseOver(window))
+			//	{
+			//		std::cout << "*";
+			//		/*btnAddPrism.setBackColor(sf::Color::Green);*/
+			//		Prism prisma(Vector(0,0,0), 30,5, 5);
+			//		window.clear();
+			//		prisma.render_solid(window, 1200, 800, camera);
+			//	}
+			//	else
+			//	{
+			//		btnAddPrism.setBackColor(sf::Color::Blue);
+			//	}
+			//}
 		}
 
 		//rotire camera
-		camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window));
+		camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), rotateCamera);
 
 		// misca camera
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
@@ -589,8 +618,54 @@ int main()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 			camera.move(Camera::DIRECTION::DOWN);
 
+		//modul de editare
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
+		{
+			rotateCamera = true;
+			camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), rotateCamera);
+			//btnAddPrism.setBackColor(sf::Color::White);
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::C))
+		{
+			rotateCamera = false;
+			camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), rotateCamera);
+		}
+
+		/*if(event.type == sf::Event::KeyPressed)
+		{
+			std::cout << "*";
+			if (event.key.code == sf::Keyboard::T)
+			{
+				rotateCamera = !rotateCamera;
+				std::cout << rotateCamera;
+				camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), rotateCamera);
+				btnAddPrism.setBackColor(sf::Color::White);
+			}
+		}*/
+
 		//afisare
 		window.clear();
+		if (event.type == sf::Event::MouseButtonPressed)
+		{
+			if (btnAddPrism.isMouseOver(window))
+			{
+				std::cout << "*";
+				/*btnAddPrism.setBackColor(sf::Color::Green);*/
+				ok = true;
+			}
+			else
+			{
+				btnAddPrism.setBackColor(sf::Color::Blue);
+			}
+		}
+
+		if (ok)
+		{
+			Prism prisma(Vector(0, 0, 0), 30, 5, 5);
+			prisma.render_solid(window, 1200, 800, camera);
+
+
+		}
 		//cub.render_solid(window, 1200, 800, camera);
 		//cub1.render_solid(window, 1200, 800, camera);
 		//cub2.render_solid(window, 1200, 800, camera);
@@ -607,6 +682,7 @@ int main()
 		leg3.render_solid(window, 1200, 800, camera);
 		leg4.render_solid(window, 1200, 800, camera);
 		fata.render_solid(window, 1200, 800, camera);
+		//btnAddPrism.drawTo(window);
 
 		window.display();
 	}

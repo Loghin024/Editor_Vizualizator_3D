@@ -67,9 +67,12 @@ void Camera::move(const DIRECTION direction) {
 }
 
 
-void Camera::rotate(const double mouse_move_x, const double mouse_move_y) {
-	theta_x -= as_radians(mouse_move_y) * CAMERA_ROTATION_SENSIBILITY;
-	theta_y += as_radians(mouse_move_x) * CAMERA_ROTATION_SENSIBILITY;
+void Camera::rotate(const double mouse_move_x, const double mouse_move_y, bool state) {
+	if (state)
+	{
+		theta_x -= as_radians(mouse_move_y) * CAMERA_ROTATION_SENSIBILITY;
+		theta_y += as_radians(mouse_move_x) * CAMERA_ROTATION_SENSIBILITY;
+	}
 }
 
 Vector Camera::transform_vector(const Vector& v) const {

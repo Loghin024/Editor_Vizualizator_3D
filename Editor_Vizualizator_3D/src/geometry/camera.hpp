@@ -31,7 +31,7 @@ public:
 	Camera operator+=(const Vector& v);
 
 	//altele
-	void rotate(const double mouse_move_x, const double mouse_move_y);
+	void rotate(const double mouse_move_x, const double mouse_move_y, bool state);
 	void move(const DIRECTION direction);
 	Vector transform_vector(const Vector& v) const;
 	Segment transform_segment(const Segment& s) const;
