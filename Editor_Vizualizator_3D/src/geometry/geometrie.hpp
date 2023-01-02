@@ -18,3 +18,9 @@ class Prism : public Solid3d {
 public:
     Prism(const Vector& _center, const double height, const double lenght, const double width);
 };
+
+class Line : public Solid3d {
+
+public:
+    Line(const Vector& point1, const Vector& point2, int lenght);
+};

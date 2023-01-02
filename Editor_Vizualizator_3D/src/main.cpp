@@ -1,5 +1,4 @@
 #include <SFML\Graphics.hpp>
-#include <SFML\Window.hpp>
 #include "geometry/geometrie.hpp"
 #include "geometry/solid3d.hpp"
 #include "utils/mouse.hpp"
@@ -256,17 +255,18 @@ int main()
 
 
 	//creaza un cub 
-	Cub cub(Vector(0, 0, 0), 40);
-	Cub cub1(Vector(0, -30, 0), 20);
-	Cub cub2(Vector(0, -45, 0), 10);
-	//Cub cub1(Vector(100, 100, 100), 30);
-	Prism prisma1(Vector(0,0,0), 50, 20, 30);
+	//Cub cub(Vector(0, 0, 0), 40);
+	//Cub cub1(Vector(0, -30, 0), 20);
+	//Cub cub2(Vector(0, -45, 0), 10);
+	////Cub cub1(Vector(100, 100, 100), 30);
+	////Prism prisma1(Vector(0,0,0), 50, 20, 30);
 
-	Prism leg1(Vector(0, 0, 0), 30, 5, 5);
-	Prism leg2(Vector(0, 0, 20), 30, 5, 5);
-	Prism leg3(Vector(40, 0, 0), 30, 5, 5);
-	Prism leg4(Vector(40, 0, 20), 30, 5, 5);
-	Prism fata(Vector(-25, -35, -25), 5, 50, 70);
+	///*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
+	//Prism leg2(Vector(0, 0, 20), 30, 5, 5);
+	//Prism leg3(Vector(40, 0, 0), 30, 5, 5);
+	//Prism leg4(Vector(40, 0, 20), 30, 5, 5);
+	//Prism fata(Vector(-25, -35, -25), 5, 50, 70);
+	Line line(Vector(0, 0 ,0), Vector(15, 0, 40), 240);
 
 
 	// creaza camera
@@ -374,11 +374,12 @@ int main()
 
 		//prisma1.render_solid(window, 1200, 800, camera);
 		//prisma1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-		leg1.render_solid(window, 1200, 800, camera);
+	/*	leg1.render_solid(window, 1200, 800, camera);
 		leg2.render_solid(window, 1200, 800, camera);
 		leg3.render_solid(window, 1200, 800, camera);
 		leg4.render_solid(window, 1200, 800, camera);
-		fata.render_solid(window, 1200, 800, camera);
+		fata.render_solid(window, 1200, 800, camera);*/
+		line.render_solid(window, 1200, 800, camera);
 		//btnAddPrism.drawTo(window);
 
 		window.display();

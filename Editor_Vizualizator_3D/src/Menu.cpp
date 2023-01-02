@@ -8,8 +8,7 @@
 #include "geometry/geometrie.hpp"
 #include "geometry/solid3d.hpp"
 #include "utils/mouse.hpp"
-#include <filesystem>
-
+#include "utils/figuresInfo.hpp"
 int language = 1, line = 0, nivel = 0, nivel2, nrProiecte = 0, scrool = 0;
 int curentWindow = 0;
 char sir[100], proiect[100];
@@ -18,75 +17,75 @@ char stergere[200];
 bool maximLength;
 int pozMx, pozMy;
 
-//void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
-//{
-//	sf::ContextSettings window_settings;
-//	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
-//	window.setVerticalSyncEnabled(true);
-//	//Mouse::setPosition(sf::Vector2i(1200 / 2, 800 / 2), window);
-//
-//	//creaza un cub 
-//	Cub cub(Vector(x, y, z), h);
-//	
-//	//Cub cub1(Vector(100, 100, 100), 30);
-//
-//
-//	// creaza camera
-//	
-//	Camera camera(Vector(0, -100, -230), -30, 0, 0, 1200, 800);
-//
-//	while (window.isOpen() && !edit)
-//	{
-//		
-//			sf::Event event;
-//
-//			while (window.pollEvent(event))
-//			{
-//				if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-//					window.close();
-//				if (event.type == sf::Event::TextEntered)
-//					if(event.text.unicode == 97)
-//					edit = 1;
-//			}
-//
-//			//rotire camera
-//			camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window));
-//
-//			// misca camera
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-//				camera.move(Camera::DIRECTION::FRONT);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-//				camera.move(Camera::DIRECTION::BACK);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-//				camera.move(Camera::DIRECTION::RIGHT);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-//				camera.move(Camera::DIRECTION::LEFT);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-//				camera.move(Camera::DIRECTION::UP);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-//				camera.move(Camera::DIRECTION::DOWN);
-//
-//			//afisare
-//			window.clear();
-//			cub.render_solid(window, 1200, 800, camera);
-//			//cub1.render_solid(window, 1200, 800, camera);
-//			//cub2.render_solid(window, 1200, 800, camera);
-//			//platou.render_solid(window, 1200, 800, camera);
-//			//cub1.render_solid(window, 1200, 800, camera);
-//			//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
-//			//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-//			//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-//
-//			window.display();
-//		
-//	}
-//	
-//	//window.clear();
-//		cub.render_solid(window, 1200, 800, camera);
-//	//window.display();
-//	
-//
-//}
+void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
+{
+	sf::ContextSettings window_settings;
+	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
+	window.setVerticalSyncEnabled(true);
+	//Mouse::setPosition(sf::Vector2i(1200 / 2, 800 / 2), window);
+
+	//creaza un cub 
+	Prism cub(Vector(x, y, z), h, h, h);
+	
+	//Cub cub1(Vector(100, 100, 100), 30);
+
+
+	// creaza camera
+	
+	Camera camera(Vector(0, -100, -230), -30, 0, 0, 1200, 800);
+
+	while (window.isOpen() && !edit)
+	{
+		
+			sf::Event event;
+
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+					window.close();
+				if (event.type == sf::Event::TextEntered)
+					if(event.text.unicode == 97)
+					edit = 1;
+			}
+
+			//rotire camera
+			camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), edit);
+
+			// misca camera
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				camera.move(Camera::DIRECTION::FRONT);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+				camera.move(Camera::DIRECTION::BACK);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				camera.move(Camera::DIRECTION::RIGHT);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				camera.move(Camera::DIRECTION::LEFT);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+				camera.move(Camera::DIRECTION::UP);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				camera.move(Camera::DIRECTION::DOWN);
+
+			//afisare
+			window.clear();
+			cub.render_solid(window, 1200, 800, camera);
+			//cub1.render_solid(window, 1200, 800, camera);
+			//cub2.render_solid(window, 1200, 800, camera);
+			//platou.render_solid(window, 1200, 800, camera);
+			//cub1.render_solid(window, 1200, 800, camera);
+			//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
+			//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+			//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+
+			window.display();
+		
+	}
+	
+	//window.clear();
+		cub.render_solid(window, 1200, 800, camera);
+	//window.display();
+	
+
+}
 
 void getOutText(char principalScreen[100][100], char viewerScreen[100][100], char createScreen[100][100])
 {
@@ -208,7 +207,7 @@ void deleteDirectory(std::string path)
 	copyPath += "\\";
 	path += "\\name.txt";
 	std::cout << path;
-
+	
 	FILE* DELETE = fopen(path.c_str(), "r");
 	char temp[100]{};//temp -> temporary
 	if (!feof(DELETE))
@@ -221,7 +220,7 @@ void deleteDirectory(std::string path)
 			strncpy(sir, temp, strlen(temp) - 1);
 			pathTxt += sir;
 			pathTxt += ".txt";
-			std::cout << pathTxt << " ";
+			//std::cout << pathTxt << " ";
 			remove(pathTxt.c_str());
 			fgets(temp, 100, DELETE);
 		}
@@ -436,7 +435,7 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nrFigure, int coordonates, int nextInput, char indexAndCoordonates[200][10], int down, std::string playerText, int index)
 {
 	//std::cout << playerText << std::endl;
-	//5std::cout << index << " ";
+	//std::cout << index << " ";
 	using namespace sf;
 	Font font;
 	if (!font.loadFromFile("Fonts/calibri.ttf"));
@@ -452,51 +451,59 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 	window.clear();
 
 	window.draw(sprite);
+	//numele figurii
 	detail.draw(window);
+
+	//minus pt engleza
 	int minus;
 	if (language == 2) minus = 10;
 	else minus = 0;
 
+
 	playerText2.setPosition(10 + 16 * strlen(output3[3]) + minus, 50);
-	detail.draw(window);
 	if (coordonates == 0)
 	{
 		window.draw(playerText2);
 	}
 
-	if (coordonates > 0)
-	{
-		detail.PositionSizeString(indexAndCoordonates[0], 10 + 16 * strlen(output3[3]) + minus, 50, 40);
-		detail.draw(window);
-		detail.changeTheText(output3[1]);
-		detail.changePosition(10, 100);
-		detail.draw(window);
-		playerText2.setPosition(10 + 16 * strlen(output3[1]) + 100 * (coordonates - 1) + 25 + minus, 100);
+	figuresInfo figura;
+	figura.cub(window, output3, playerText, indexAndCoordonates, coordonates, minus);
+		//if (coordonates > 0)
+		//{
+		//	//afisarea intodeauna a numelui proiectului si coordonatelor
+		//	detail.PositionSizeString(indexAndCoordonates[0], 10 + 16 * strlen(output3[3]) + minus, 50, 40);
+		//	detail.draw(window);
+		//	detail.changeTheText(output3[1]);
+		//	std::cout << output3[1] << std::endl;
+		//	detail.changePosition(10, 100);
+		//	detail.draw(window);
+		//	playerText2.setPosition(10 + 16 * strlen(output3[1]) + 100 * (coordonates - 1) + 25 + minus, 100);
 
-		for (int i = 1; i <= coordonates;i++)
-		{
-			if (i == 1) { detail.PositionSizeString("x:", 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + minus, 100, 40); } detail.draw(window);
-			if (i == 2) { detail.PositionSizeString("y:", 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + minus, 100, 40); } detail.draw(window);
-			if (i == 3) { detail.PositionSizeString("z:", 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + minus, 100, 40); } detail.draw(window);
+		//	for (int i = 1; i <= coordonates;i++)
+		//	{
+		//		if (i == 1) { detail.PositionSizeString("x:", 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + minus, 100, 40); } detail.draw(window);
+		//		if (i == 2) { detail.PositionSizeString("y:", 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + minus, 100, 40); } detail.draw(window);
+		//		if (i == 3) { detail.PositionSizeString("z:", 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + minus, 100, 40); } detail.draw(window);
 
-			for (int i = 1; i < coordonates;i++)
-			{
-				detail.PositionSizeString(indexAndCoordonates[i], 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + 25 - minus, 100, 40);
-				detail.draw(window);
-			}
-		}
-		if (coordonates == 4)
-		{
-			//std::cout << output3[2] << " ";
-			detail.PositionSizeString(output3[2], 10, 150, 40);
-			detail.draw(window);
-			playerText2.setPosition(10 + 16 * strlen(output3[2]) + minus - 18, 150);
-			playerText2.setString(playerText);
-			window.draw(playerText2);
-		}
-	}
+		//		for (int i = 1; i < coordonates;i++)
+		//		{
+		//			detail.PositionSizeString(indexAndCoordonates[i], 10 + 16 * strlen(output3[1]) + 100 * (i - 1) + 25 - minus, 100, 40);
+		//			detail.draw(window);
+		//		}
+		//	}
+		//	if (coordonates == 4)
+		//	{
+		//		//std::cout << output3[2] << " ";
+		//		detail.PositionSizeString(output3[2], 10, 150, 40);
+		//		detail.draw(window);
+		//		playerText2.setPosition(10 + 16 * strlen(output3[2]) + minus - 18, 150);
+		//		playerText2.setString(playerText);
+		//		window.draw(playerText2);
+		//	}
+		//}
 
-	window.draw(playerText2);
+		//window.draw(playerText2);
+	
 
 	texts goBack(output3[0], 20, 1, 0, 0, 30);
 	button line(40 + 10 * strlen(output3[0]), 8, "", 2, 30, 0);
@@ -702,7 +709,7 @@ void viewAndEdit(sf::RenderWindow& window, int getxRightClick, int getyRightClic
 					if (getText[i] == ' ') c++;
 					else
 					{
-						std::cout << getText[i] << " " << c << std::endl;
+						//std::cout << getText[i] << " " << c << std::endl;
 						if (c == 0)
 							if (getText[i] == '-') x = x * -1;
 						if (c == 1)
@@ -746,11 +753,11 @@ void viewAndEdit(sf::RenderWindow& window, int getxRightClick, int getyRightClic
 				bool enter = 1;
 				if (event.type == sf::Event::TextEntered)
 				{
-					std::cout << event.text.unicode << " ";
+					//std::cout << event.text.unicode << " ";
 					if (event.text.unicode == 112)
 						enter = 0;
 				}
-				//littleDraw(window, x, y, z, h, enter);
+				littleDraw(window, x, y, z, h, enter);
 				char coordonates[4][4];
 				_itoa(x, coordonates[0], 10);
 				_itoa(y, coordonates[1], 10);
@@ -761,13 +768,13 @@ void viewAndEdit(sf::RenderWindow& window, int getxRightClick, int getyRightClic
 				edit.divideCoordonates(window, 235 * split, 650);
 				edit.divideSigns(window, 235 * split, 650, 247, 242, 239, 255);
 
-				FILE* newDates = fopen(pathForFigure.c_str(), "w");
-				for (int i = 0; i <= 3; i++)
-				{
-					fprintf(newDates, "%s", coordonates[i]);
-					fprintf(newDates, "%s", " ");
-				}
-				fclose(newDates);
+				//FILE* newDates = fopen(pathForFigure.c_str(), "w");
+				//for (int i = 0; i <= 3; i++)
+				//{
+				//	fprintf(newDates, "%s", coordonates[i]);
+				//	fprintf(newDates, "%s", " ");
+				//}
+				//fclose(newDates);
 
 			}
 			fgets(buff, 100, figuresFromFile);
@@ -793,7 +800,7 @@ void interfata()
 	int down = 0, slide = 0, index = 0, right = 0, sidePress = -1;
 	int getxRightClick = -1, getyRightClick = -1;
 
-	sf::RenderWindow window1(sf::VideoMode(1200, 800), "Editor/Vizualizator 3D");
+	sf::RenderWindow window1(sf::VideoMode(1600, 1000), "Editor/Vizualizator 3D");
 
 	// fontul
 	sf::Font font;
@@ -932,7 +939,7 @@ void interfata()
 						stergere[strlen(stergere) - 1] = NULL;
 						stergere[strlen(stergere) - 1] = NULL;
 						stergere[strlen(stergere) - 1] = NULL;
-						std::cout << stergere<< " ";
+						//std::cout << stergere<< " ";
 						_rmdir(stergere);
 						//std::cout << stergere << std::endl;
 
@@ -970,6 +977,7 @@ void interfata()
 			}
 			else if (curentWindow == 2)
 			{
+				//std::cout << index << " ";
 				char creareFiserTextChar[256]{};
 				if (event.type == sf::Event::TextEntered)
 				{
@@ -1010,21 +1018,17 @@ void interfata()
 								strcpy(sir, project.c_str());
 								strcat(projectFolder, sir);
 								strcat(projectFolder, ".txt");
-								std::cout << projectFolder<< " ";
-								
-							/*	if (coordonate[0] == '-')
-								{
-									std::cout << "cas";
-									fprintf(numeProiect2, "%s", "fhgfgh");
-								}*/
-								FILE* add = fopen(projectFolder, "a");
-								//fprintf(add, "%s", playerInput.c_str());
-								//if(playerInput[0] == '-')
-								//fprintf(add, "%s", "-");
-
+							
+								FILE* add = fopen(projectFolder, "a");								
+								//FILE* add2 = fopen(projectFolder, "r+");
 								fprintf(add, "%s", playerInput.c_str());
 								fprintf(add, "%s", " ");
-
+								if (coordonates == 4)
+								{
+									//fprintf(add, "%s", playerInput.c_str());
+									//_itoa(index, Index, 10);
+									fprintf(add, "%d", index);
+								}
 								fclose(add);
 							}
 							strcpy(indexAndCoordonates[coordonates], playerInput.c_str());
@@ -1034,6 +1038,7 @@ void interfata()
 							{
 								curentWindow = 3;
 								coordonates = 0;
+
 								//window1.close();
 							}
 							playerInput.clear();

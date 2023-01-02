@@ -28,7 +28,7 @@ void createFolderAndTexts()
 	fclose(programUtilities4);
 
 	FILE* programUtilities5 = fopen("src\\programtexts/posibleFigures.txt", "w");
-	fprintf(programUtilities5, "%s", "figura 1\nfigura2\nfigura 3\nfigura4\nfigura 5\nfigura 6\nfigura 7\nfigura 8\nfigura 9");
+	fprintf(programUtilities5, "%s", "Cub\nPrisma\nLinie\nfigura4\nfigura 5\nfigura 6\nfigura 7\nfigura 8\nfigura 9");
 	fclose(programUtilities5);
 
 	FILE* programUtilities6 = fopen("src\\programtexts/giveNameForProject.txt", "w");

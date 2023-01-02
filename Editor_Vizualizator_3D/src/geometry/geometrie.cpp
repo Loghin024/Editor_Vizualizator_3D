@@ -29,6 +29,17 @@ Cub::Cub(const Vector& _center, const double size) : Solid3d() {
     *this += _center;
 }
 
+Line::Line(const Vector& point1, const Vector& point2,  int lenght) : Solid3d() {
+    Vector points[2];
+
+    points[0] = Vector(point1);
+    points[1] = Vector(point2);
+
+    add_segment(Segment(points[0], points[1]));
+
+   // *this += _center;
+}
+
 // ##############################################
 // ### Prisma3d ###################################
 // ##############################################

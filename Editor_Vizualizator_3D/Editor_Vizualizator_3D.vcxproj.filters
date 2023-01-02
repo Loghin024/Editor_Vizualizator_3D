@@ -1,108 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Source Files\utils">
-      <UniqueIdentifier>{e4a16c87-af95-4028-b9f1-60f908735d8e}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="src\geometry\camera.cpp" />
+    <ClCompile Include="src\geometry\geometrie.cpp" />
+    <ClCompile Include="src\geometry\plane3d.cpp" />
+    <ClCompile Include="src\geometry\segment.cpp" />
+    <ClCompile Include="src\geometry\solid3d.cpp" />
+    <ClCompile Include="src\geometry\vector.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\menu\button.cpp" />
+    <ClCompile Include="src\menu\texts.cpp" />
+    <ClCompile Include="src\utils\foldersAndTexts.cpp" />
+    <ClCompile Include="src\utils\mouse.cpp" />
+    <ClCompile Include="src\utils\tools.cpp" />
+    <ClCompile Include="src\utils\figuresInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\geometry\geometrie.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\geometry\segment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utils\tools.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\geometry\vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\geometry\solid3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\geometry\camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\geometry\plane3d.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utils\mouse.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\utils\foldersAndTexts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\menu\button.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\menu\texts.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Menu.cpp">
-      <Filter>Source Files\utils</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\geometry\geometrie.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\geometry\segment.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\geometry\vector.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utils\tools.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\geometry\solid3d.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\geometry\camera.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\geometry\plane3d.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\utils\mouse.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="src\utils\foldersAndTexts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\menu\button.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\menu\texts.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Menu.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-=======
-    <ClInclude Include="src\utils\Button.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClInclude Include="src\Menu.hpp" />
+    <ClInclude Include="src\menu\button.hpp" />
+    <ClInclude Include="src\geometry\camera.hpp" />
+    <ClInclude Include="src\geometry\geometrie.hpp" />
+    <ClInclude Include="src\geometry\plane3d.hpp" />
+    <ClInclude Include="src\geometry\segment.hpp" />
+    <ClInclude Include="src\geometry\solid3d.hpp" />
+    <ClInclude Include="src\geometry\vector.hpp" />
+    <ClInclude Include="src\menu\texts.hpp" />
+    <ClInclude Include="src\utils\foldersAndTexts.hpp" />
+    <ClInclude Include="src\utils\mouse.hpp" />
+    <ClInclude Include="src\utils\tools.hpp" />
+    <ClInclude Include="src\utils\figuresInfo.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="C:\Users\Loghin024\AppData\Local\Temp\Rar$DRa19760.24161\Calibri Regular.ttf" />
->>>>>>> 6f8cb1d725a6ae8ba127b42560d1ba883a5fd09e
   </ItemGroup>
 </Project>

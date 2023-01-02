@@ -149,6 +149,7 @@
     <ClCompile Include="src\Menu.cpp" />
     <ClCompile Include="src\menu\button.cpp" />
     <ClCompile Include="src\menu\texts.cpp" />
+    <ClCompile Include="src\utils\figuresInfo.cpp" />
     <ClCompile Include="src\utils\foldersAndTexts.cpp" />
     <ClCompile Include="src\utils\mouse.cpp" />
     <ClCompile Include="src\utils\tools.cpp" />
@@ -163,6 +164,7 @@
     <ClInclude Include="src\geometry\solid3d.hpp" />
     <ClInclude Include="src\geometry\vector.hpp" />
     <ClInclude Include="src\menu\texts.hpp" />
+    <ClInclude Include="src\utils\figuresInfo.hpp" />
     <ClInclude Include="src\utils\foldersAndTexts.hpp" />
     <ClInclude Include="src\utils\mouse.hpp" />
     <ClInclude Include="src\utils\tools.hpp" />
