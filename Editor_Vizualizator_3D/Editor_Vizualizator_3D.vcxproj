@@ -167,6 +167,9 @@
     <ClInclude Include="src\utils\mouse.hpp" />
     <ClInclude Include="src\utils\tools.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Font Include="C:\Users\Loghin024\AppData\Local\Temp\Rar$DRa19760.24161\Calibri Regular.ttf" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

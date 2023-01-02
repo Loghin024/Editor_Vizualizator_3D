@@ -15,6 +15,7 @@ public:
 	button(int x, int y, std::string textButton, int length, int height, int characterSize, int outlineT, int outLineColorR, int outLineColorG, int outLineColorB, int outLineColorA);
 
 	button(sf::RenderWindow& window, int x, int y, int length, int height, std::string textButton, std::string coordonatesX, std::string coordonatesY, std::string coordonatesZ, int textSize, int coordonatesSize, int outlineT, int outLineColorR, int outLineColorG, int outLineColorB, int outLineColorA);
+	
 	void changeText(std::string theText);
 	
 	void coordonatesText(sf::RenderWindow& window, int x, int y, int coordonatesSize, std::string coordonatesX, std::string coordonatesY, std::string coordonatesZ);
