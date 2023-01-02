@@ -45,6 +45,18 @@
     <ClCompile Include="src\utils\mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\foldersAndTexts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\button.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\texts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\geometry\geometrie.hpp">
@@ -71,11 +83,26 @@
     <ClInclude Include="src\utils\mouse.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="src\utils\foldersAndTexts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\button.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\texts.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Menu.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+=======
     <ClInclude Include="src\utils\Button.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Font Include="C:\Users\Loghin024\AppData\Local\Temp\Rar$DRa19760.24161\Calibri Regular.ttf" />
+>>>>>>> 6f8cb1d725a6ae8ba127b42560d1ba883a5fd09e
   </ItemGroup>
 </Project>
