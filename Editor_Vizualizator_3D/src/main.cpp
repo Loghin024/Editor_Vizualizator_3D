@@ -69,6 +69,14 @@ int main()
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				window.close();
 
+			if (event.type == sf::Event::Resized) {
+				window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
+				WINDOW_WIDTH = event.size.width;
+				WINDOW_HEIGHT = event.size.height;
+				camera.reload_figures(WINDOW_WIDTH, WINDOW_HEIGHT);
+				
+			}
+
 		}
 
 		//rotate camera
