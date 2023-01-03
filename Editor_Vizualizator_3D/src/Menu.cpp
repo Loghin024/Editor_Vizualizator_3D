@@ -18,75 +18,75 @@ char stergere[200];
 bool maximLength;
 int pozMx, pozMy;
 
-//void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
-//{
-//	sf::ContextSettings window_settings;
-//	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
-//	window.setVerticalSyncEnabled(true);
-//	//Mouse::setPosition(sf::Vector2i(1200 / 2, 800 / 2), window);
-//
-//	//creaza un cub 
-//	Cub cub(Vector(x, y, z), h);
-//	
-//	//Cub cub1(Vector(100, 100, 100), 30);
-//
-//
-//	// creaza camera
-//	
-//	Camera camera(Vector(0, -100, -230), -30, 0, 0, 1200, 800);
-//
-//	while (window.isOpen() && !edit)
-//	{
-//		
-//			sf::Event event;
-//
-//			while (window.pollEvent(event))
-//			{
-//				if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-//					window.close();
-//				if (event.type == sf::Event::TextEntered)
-//					if(event.text.unicode == 97)
-//					edit = 1;
-//			}
-//
-//			//rotire camera
-//			camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window));
-//
-//			// misca camera
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-//				camera.move(Camera::DIRECTION::FRONT);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-//				camera.move(Camera::DIRECTION::BACK);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-//				camera.move(Camera::DIRECTION::RIGHT);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-//				camera.move(Camera::DIRECTION::LEFT);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-//				camera.move(Camera::DIRECTION::UP);
-//			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-//				camera.move(Camera::DIRECTION::DOWN);
-//
-//			//afisare
-//			window.clear();
-//			cub.render_solid(window, 1200, 800, camera);
-//			//cub1.render_solid(window, 1200, 800, camera);
-//			//cub2.render_solid(window, 1200, 800, camera);
-//			//platou.render_solid(window, 1200, 800, camera);
-//			//cub1.render_solid(window, 1200, 800, camera);
-//			//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
-//			//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-//			//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-//
-//			window.display();
-//		
-//	}
-//	
-//	//window.clear();
-//		cub.render_solid(window, 1200, 800, camera);
-//	//window.display();
-//	
-//
-//}
+void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
+{
+	sf::ContextSettings window_settings;
+	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
+	window.setVerticalSyncEnabled(true);
+	//Mouse::setPosition(sf::Vector2i(1200 / 2, 800 / 2), window);
+
+	//creaza un cub 
+	Cub cub(Vector(x, y, z), h);
+	
+	//Cub cub1(Vector(100, 100, 100), 30);
+
+
+	// creaza camera
+	
+	Camera camera(Vector(0, -100, -230), -30, 0, 0, 1200, 800);
+
+	while (window.isOpen() && !edit)
+	{
+		
+			sf::Event event;
+
+			while (window.pollEvent(event))
+			{
+				if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+					window.close();
+				if (event.type == sf::Event::TextEntered)
+					if(event.text.unicode == 97)
+					edit = 1;
+			}
+
+			//rotire camera
+			camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), 1);
+
+			// misca camera
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+				camera.move(Camera::DIRECTION::FRONT);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+				camera.move(Camera::DIRECTION::BACK);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				camera.move(Camera::DIRECTION::RIGHT);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				camera.move(Camera::DIRECTION::LEFT);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+				camera.move(Camera::DIRECTION::UP);
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+				camera.move(Camera::DIRECTION::DOWN);
+
+			//afisare
+			window.clear();
+			cub.render_solid(window, 1200, 800, camera);
+			//cub1.render_solid(window, 1200, 800, camera);
+			//cub2.render_solid(window, 1200, 800, camera);
+			//platou.render_solid(window, 1200, 800, camera);
+			//cub1.render_solid(window, 1200, 800, camera);
+			//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
+			//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+			//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+
+			window.display();
+		
+	}
+	
+	//window.clear();
+		cub.render_solid(window, 1200, 800, camera);
+	//window.display();
+	
+
+}
 
 void getOutText(char principalScreen[100][100], char viewerScreen[100][100], char createScreen[100][100])
 {
@@ -750,7 +750,7 @@ void viewAndEdit(sf::RenderWindow& window, int getxRightClick, int getyRightClic
 					if (event.text.unicode == 112)
 						enter = 0;
 				}
-				//littleDraw(window, x, y, z, h, enter);
+				littleDraw(window, x, y, z, h, enter);
 				char coordonates[4][4];
 				_itoa(x, coordonates[0], 10);
 				_itoa(y, coordonates[1], 10);
