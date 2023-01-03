@@ -13,6 +13,10 @@ public:
     Cub(const Vector& _center, const double size);
 };
 
+// ##############################################
+// ### Prism3d ###################################
+// ##############################################
+
 class Prism : public Solid3d {
 
 public:
@@ -56,4 +60,14 @@ public:
         const double height,
         const double radius,
         const unsigned number_of_points_per_circle);
+};
+
+// ##############################################
+// ### Pyramid3d ###################################
+// ##############################################
+
+class Pyramid3d : public Solid3d {
+
+public:
+    Pyramid3d(const Vector& _center, const double height, const double base_lenght, const double base_width);
 };

@@ -50,6 +50,7 @@ int main()
 	Cylinder3d cilindru1(Vector(50, 0, 0), 20, 40, 500);
 
 	Con3d con1(Vector(0, 0, 0), 70, 30, 100);
+	Pyramid3d piramida(Vector(0, 0, 0), 20, 30, 100);
 
 	//////////////////////////////////////////////////
 	/////////////////////////////////////////////////
@@ -123,8 +124,9 @@ int main()
 		//sfera.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 		//cilindru.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 		//cilindru1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-		con1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-		con1.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, false);
+		//con1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+		//con1.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, false);
+		piramida.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 
 		window.display();
 	}

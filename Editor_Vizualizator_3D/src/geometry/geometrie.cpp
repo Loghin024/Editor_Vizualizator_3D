@@ -220,3 +220,35 @@ Con3d::Con3d(const Vector& _center,
 
     *this += _center;
 }
+
+// ##############################################
+// ### Pyramid3d ###################################
+// ##############################################
+
+Pyramid3d::Pyramid3d(const Vector& _center, const double height, const double base_lenght, const double base_width) : Solid3d() {
+    Vector points[8];
+
+    // baza
+    points[0] = Vector(-base_lenght / 2, 0, -base_width/2);
+    points[1] = points[0] + Vector(base_lenght, 0, 0);
+    points[2] = points[0] + Vector(base_lenght, 0, base_width);
+    points[3] = points[0] + Vector(0, 0, base_width);
+
+    for (double j = 0; j <= base_width; j += 0.5)
+    {
+        add_segment(Segment(points[0] + Vector(0, 0, j), points[1] + Vector(0, 0, j)));
+        add_segment(Segment(points[0] + Vector(0, 0, j), Vector(0, -height,0)));
+        add_segment(Segment(points[1] + Vector(0, 0, j), Vector(0, -height,0)));
+    }
+
+    for (double j = 0; j <= base_lenght; j += 0.5)
+    {
+        add_segment(Segment(points[3] + Vector(j, 0, 0), points[0] + Vector(j, 0, 0)));
+        add_segment(Segment(points[3] + Vector(j, 0, 0), Vector(0, -height, 0)));
+        add_segment(Segment(points[0] + Vector(j, 0, 0), Vector(0, -height, 0)));
+    }
+
+    //varf
+
+
+}
