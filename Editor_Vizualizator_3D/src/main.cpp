@@ -24,8 +24,8 @@ int main()
 	createFolderAndTexts();
 
 	//create Interface
-	/*while (1)
-		interfata();*/
+	while (1)
+		interfata();
 
 	///////////////////////////////////////////////
 	//Verificari//////////////////////////////////
@@ -44,13 +44,13 @@ int main()
 	Prism leg4(Vector(40, 0, 20), 30, 5, 5);
 	Prism fata(Vector(-25, -35, -25), 5, 50, 70);
 
-	Sphere3d sfera(Vector(0, 0, 0), 100, 40, 40);
+	Sphere3d sfera(Vector(0, 100, 0), 50, 50, 50);
 
-	Cylinder3d cilindru(Vector(0, 0, 0), 100, 5, 100);
-	Cylinder3d cilindru1(Vector(50, 0, 0), 20, 40, 500);
+	Cylinder3d cilindru(Vector(0, 200, 0), 100, 5, 100);
+	Cylinder3d cilindru1(Vector(50, 250, 0), 20, 40, 500);
 
-	Con3d con1(Vector(0, 0, 0), 70, 30, 100);
-	Pyramid3d piramida(Vector(0, 0, 0), 20, 30, 100);
+	Con3d con1(Vector(0, 300, 0), 70, 30, 100);
+	Pyramid3d piramida(Vector(0, 350, 0), 20, 30, 100);
 
 	//////////////////////////////////////////////////
 	/////////////////////////////////////////////////
@@ -69,6 +69,7 @@ int main()
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				window.close();
 
+			//resize window
 			if (event.type == sf::Event::Resized) {
 				window.setView(sf::View(sf::FloatRect(0, 0, event.size.width, event.size.height)));
 				WINDOW_WIDTH = event.size.width;
@@ -129,11 +130,11 @@ int main()
 		fata.render_solid(window, 1200, 800, camera);*/
 		//btnAddPrism.drawTo(window);
 
-		//sfera.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-		//cilindru.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-		//cilindru1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-		//con1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-		//con1.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, false);
+		sfera.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+		cilindru.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+		cilindru1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+		con1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+		con1.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, true);
 		piramida.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 
 		window.display();
