@@ -66,6 +66,15 @@ void Camera::move(const DIRECTION direction) {
 		*this += -up;
 }
 
+void Camera::reload_figures(const unsigned window_width, const unsigned window_height) {
+	*this = Camera(position,
+		as_degrees(theta_x),
+		as_degrees(theta_y),
+		as_degrees(theta_z),
+		window_width,
+		window_height);
+}
+
 
 void Camera::rotate(const double mouse_move_x, const double mouse_move_y, bool state) {
 	if (state)

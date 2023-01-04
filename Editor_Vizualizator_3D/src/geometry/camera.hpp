@@ -31,6 +31,7 @@ public:
 	Camera operator+=(const Vector& v);
 
 	//altele
+	void reload_figures(const unsigned window_width, const unsigned window_height);
 	void rotate(const double mouse_move_x, const double mouse_move_y, bool state);
 	void move(const DIRECTION direction);
 	Vector transform_vector(const Vector& v) const;

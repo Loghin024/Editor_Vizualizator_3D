@@ -14,8 +14,11 @@
     <ClCompile Include="src\utils\foldersAndTexts.cpp" />
     <ClCompile Include="src\utils\mouse.cpp" />
     <ClCompile Include="src\utils\tools.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="src\utils\figuresInfo.cpp" />
     <ClCompile Include="src\utils\componentsDates.cpp" />
+=======
+>>>>>>> 4667c929177e1b2b7633873b3560215d045c22df
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Menu.hpp" />
@@ -30,7 +33,11 @@
     <ClInclude Include="src\utils\foldersAndTexts.hpp" />
     <ClInclude Include="src\utils\mouse.hpp" />
     <ClInclude Include="src\utils\tools.hpp" />
+<<<<<<< HEAD
     <ClInclude Include="src\utils\figuresInfo.hpp" />
     <ClInclude Include="src\utils\componentsDates.hpp" />
+=======
+    <ClInclude Include="src\utils\parameters.hpp" />
+>>>>>>> 4667c929177e1b2b7633873b3560215d045c22df
   </ItemGroup>
 </Project>
