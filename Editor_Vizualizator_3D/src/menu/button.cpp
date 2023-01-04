@@ -12,7 +12,7 @@ button::button(int x, int y, std::string textButton, int length, int height, int
 	if (!font.loadFromFile("Fonts/calibri.ttf"));
 	text.setFont(font);
 	text.setString(textButton);
-	text.setPosition(x + 10, y);
+	text.setPosition(x + 10, y - 5);
 	text.setCharacterSize(characterSize);
 
 }
@@ -170,6 +170,11 @@ void button::setOutlineThicknesAndColor(float t, int r, int g, int b, int a)
 void button::setOutLineThicknes(float t)
 {
 	rectangle.setOutlineThickness(t);
+}
+
+void button::setTextSize(int x)
+{
+	text.setCharacterSize(x);
 }
 
 void button::changePosition(int x, int y)

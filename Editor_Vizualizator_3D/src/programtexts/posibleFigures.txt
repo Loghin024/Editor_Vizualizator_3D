@@ -1,9 +1,8 @@
+Linie
 Cub
 Prisma
-Linie
-figura4
-figura 5
-figura 6
-figura 7
-figura 8
-figura 9
+Sfera
+Cilindru
+Piramida triunghiulara
+Piramida dreptunghiulara
+Con

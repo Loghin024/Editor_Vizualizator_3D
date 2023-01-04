@@ -1,12 +1,9 @@
 Adaugati figura:
 Add figure:
 Rusa
-Corpurile
-Actual
-Rusa
-Actuale
-Actual
-rusa
+Componente:
+Components:
+Rusa:
 Dati numele proiectului:
 Give the name of the project:
 Rusa:

@@ -58,6 +58,12 @@ void texts::getLocalBounds(int &x, int &y)
 	y = textRect.height / 2;
 }
 
+sf::FloatRect texts::getLocalBoundsAuto()
+{
+	sf::FloatRect textRect = text.getLocalBounds();
+	return textRect;
+}
+
 void texts::PositionSizeString(std::string theText, int x, int y, int size)
 {
 	text.setCharacterSize(size);

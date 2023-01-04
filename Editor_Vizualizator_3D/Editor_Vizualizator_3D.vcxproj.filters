@@ -15,6 +15,7 @@
     <ClCompile Include="src\utils\mouse.cpp" />
     <ClCompile Include="src\utils\tools.cpp" />
     <ClCompile Include="src\utils\figuresInfo.cpp" />
+    <ClCompile Include="src\utils\componentsDates.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Menu.hpp" />
@@ -30,8 +31,6 @@
     <ClInclude Include="src\utils\mouse.hpp" />
     <ClInclude Include="src\utils\tools.hpp" />
     <ClInclude Include="src\utils\figuresInfo.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Font Include="C:\Users\Loghin024\AppData\Local\Temp\Rar$DRa19760.24161\Calibri Regular.ttf" />
+    <ClInclude Include="src\utils\componentsDates.hpp" />
   </ItemGroup>
 </Project>

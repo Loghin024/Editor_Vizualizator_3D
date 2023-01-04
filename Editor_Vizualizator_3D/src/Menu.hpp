@@ -2,4 +2,4 @@
 
 void getOutText(char, char, char);
 
-void interfata();
+void interfata(sf::RenderWindow& window);
