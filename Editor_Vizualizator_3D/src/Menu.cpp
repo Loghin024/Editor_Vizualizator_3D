@@ -16,7 +16,7 @@ int curentWindow = 0;
 char sir[100], proiect[100];
 bool q = 0;
 char stergere[200];
-bool maximLength;
+bool maximLength, moving;
 int pozMx, pozMy;
 int pozX, pozY, cPozX, cPozY;
 
@@ -30,7 +30,8 @@ void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
 
 	//creaza un cub 
 	Prism cub(Vector(x, y, z), h, h, h);
-	
+	Prism cub1(Vector(10, 20 , 30), 12, 23, h);
+
 	//Cub cub1(Vector(100, 100, 100), 30);
 
 
@@ -85,7 +86,8 @@ void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
 	}
 	
 	//window.clear();
-		cub.render_solid(window, 1200, 800, camera);
+		cub.render_solid(window, 1200, 800, camera);		cub1.render_solid(window, 1200, 800, camera);
+
 	//window.display();
 	
 
@@ -395,14 +397,10 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 
 	componentsDates figura;
 	if (index == 1);
-	else if (index == 2) figura.cubAndSfera(window, output3, playerText, indexAndCoordonates, coordonates, minus, index, language);
+	else if (index == 2 || index == 4) figura.cubAndSfera(window, output3, playerText, indexAndCoordonates, coordonates, minus, index, language);
 	else if (index == 3) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language);
-	else if (index == 4) figura.cubAndSfera(window, output3, playerText, indexAndCoordonates, coordonates, minus, index, language);
-	else if (index == 5) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
-	else if (index == 8) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
+	else if (index == 5 || index == 8) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
 	else if (index == 6 || index == 7) figura.piramide(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
-
-
 
 	//figura.cub(window, output3, playerText, indexAndCoordonates, coordonates, minus);
 		
@@ -468,59 +466,89 @@ void giveNameForProject(sf::RenderWindow& window, int language, std::string name
 	window.display();
 }
 
-void viewAndEdit(sf::RenderWindow& window, int xMoved, int yMoved, int language, int scrool, int sideScrool, int sidePress, int PozMx, int PozMy, std::string Name, bool& figureChosed, bool changeUp, bool changeDown, int cpozx, int cpozy)
+void viewAndEdit(sf::RenderWindow& window, int xMoved, int yMoved, int language, int scrool, int sideScrool, int sidePress, int PozMx, int PozMy, std::string Name, bool& figureChosed, bool changeUp, bool changeDown, int cpozx, int cpozy, bool movingScreen)
 {
 	sf::Font font;
 	if (!font.loadFromFile("Fonts/calibri.ttf"));
 
 	sf::Event event{};
 	using namespace sf;
-	window.clear(Color(51, 51, 51, 255));
-	
-	int line = 0;
-	char screen[10][100];
-	char figure[100];
-	Vector2u size = window.getSize();
-
 	figuresInfo a;
-	//std::cout << xMoved << " " << yMoved << std::endl;
-	a.figures(window, size.x, size.y, xMoved, yMoved);
-	a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY);
 
-	//a.figureInfoType(window, "tip:");
-	//a.figureInfoPosition(window, "position:", 1, 1, 1);
-	//a.figureInfoSize(window, "size:", 0, 0, 0);
-
-	FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
-	for (int i = 1; i <= 3; i++)
+	if (!movingScreen)
 	{
-		char temporary[100];
-		fgets(temporary, 100, f);
-		if (i == language) strcpy(screen[0], temporary);
-	}
-	for (int i = 1; i <= 3; i++)
-	{
-		char temporary[100];
-		fgets(temporary, 100, f);
-		if (i == language) strcpy(screen[1], temporary);
-	}
-	//for (int i = 1; i <= 3; i++)
-	//{
-	//	char temporary[100];
-	//	fgets(temporary, 100, f);
-	//	if (i == language) strcpy(screen[2], temporary);
-	//}
+		window.clear(Color(51, 51, 51, 255));
 
-	std::fclose(f);
-	texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
-	text.draw(window);
-	text.PositionSizeString(screen[1], 1380 + 10, 10, 30);
-	text.draw(window);
+		int line = 0;
+		char screen[10][100];
+		char figure[100];
+		Vector2u size = window.getSize();
+
+		std::cout << movingScreen << " ";
+
+		a.figures(window, size.x, size.y, xMoved, yMoved, language);
+		a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY);
+
+
+		FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
+		for (int i = 1; i <= 3; i++)
+		{
+			char temporary[100];
+			fgets(temporary, 100, f);
+			if (i == language) strcpy(screen[0], temporary);
+		}
+		for (int i = 1; i <= 3; i++)
+		{
+			char temporary[100];
+			fgets(temporary, 100, f);
+			if (i == language) strcpy(screen[1], temporary);
+		}
+		for (int i = 1; i <= 3; i++)
+		{
+			char temporary[100];
+			fgets(temporary, 100, f);
+			if (i == language) strcpy(screen[2], temporary);
+		}
+
+		std::fclose(f);
+		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
+		text.draw(window);
+		text.PositionSizeString(screen[1], 1380 + 10, 10, 30);
+		text.draw(window);
+		text.PositionSizeString(screen[2], 260, 10, 15);
+		text.draw(window);
+	}
+	else
+	{
+		//window.clear(Color(51, 51, 51, 255));
+		//std::string pathForProject = "src\\userProjects\\";//; + Name; //+ "nameOfFigures";;
+		//pathForProject += Name + "\\name.txt";
+		//FILE* componentsFromFile;
+		//char buff[100];
+		//std::cout << pathForProject << std::endl;
+		//if (!(componentsFromFile = fopen(pathForProject.c_str(), "a+")));
+		//else
+		//{
+		//	if (std::fgets(buff, 100, componentsFromFile) == 0);
+
+		//	while (!feof(componentsFromFile))
+		//	{
+		//		
+		//		char sir[100]{};
+		//		strncpy(sir, buff, strlen(buff) - 1);
+		//		a.componentsDrawMoving(window, Name, sir);	
+		//		std::fgets(buff, 100, componentsFromFile);
+		//	}
+		//}
+		//std::fclose(componentsFromFile);
+		a.componentsDrawMoving(window, Name, "");
+	}
 	window.display();
 }
 
 void interfata(sf::RenderWindow& window)
 {
+	//littleDraw(window, 10, 20, 30, 30, 1);
 	using namespace sf;
 	componentsDates addAndCreate;
 	char indexAndCoordonates[200][10]{};
@@ -711,7 +739,7 @@ void interfata(sf::RenderWindow& window)
 			}
 			else if (curentWindow == 2)
 			{
-				std::cout << index << " ";
+				//std::cout << index << " ";
 				char creareFiserTextChar[256]{};
 				if (event.type == sf::Event::TextEntered)
 				{
@@ -1185,6 +1213,8 @@ void interfata(sf::RenderWindow& window)
 					{
 						if (event.text.unicode == 73) changeUp = 1;
 						if (event.text.unicode == 74) changeDown = 1;
+						if (event.text.unicode == 58 && !moving) moving = 1;
+						else if (event.text.unicode == 58 && moving) moving = 0;
 
 					}
 				}
@@ -1199,7 +1229,7 @@ void interfata(sf::RenderWindow& window)
 		{
 			if (slide == 0) giveNameForProject(window, language, playerInput, pozMx, pozMy);
 			else
-				viewAndEdit(window, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY);
+				viewAndEdit(window, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY, moving);
 
 		}
 	}

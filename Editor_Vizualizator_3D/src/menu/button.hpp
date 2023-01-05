@@ -9,6 +9,8 @@ public:
 	sf::RectangleShape rectangle;
 	sf::Text text;
 	sf::Font font;
+	sf::Sprite sprite;
+	sf::Texture icon;
 
 	button(int x, int y, std::string textButton, int length, int height, int characterSize);
 
@@ -43,6 +45,14 @@ public:
 	void changeTextPosition(int x, int y);
 
 	void setTextOrigin(int x, int y);
+
+	void centerTextInMidddle();
+
+	void putIcon(sf::RenderWindow& window, std::string path, std::string name);
+
+	void textUpDown(sf::RenderWindow& window, std::string sir);
+
+	void changeFont(sf::Font font);
 
 	int getX();
 	

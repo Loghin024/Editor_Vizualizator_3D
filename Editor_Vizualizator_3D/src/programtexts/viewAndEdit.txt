@@ -4,6 +4,6 @@ Rusa
 Componente:
 Components:
 Rusa:
-Dati numele proiectului:
-Give the name of the project:
-Rusa:
+Apasati enter pentru mod vizualizare
+Press enter for view mode
+Rusa
