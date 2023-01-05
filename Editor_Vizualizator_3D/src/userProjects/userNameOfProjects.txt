@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 test
 12
 qw
@@ -7,4 +9,11 @@ asd
 nume
 fsdfs
 fsdf
+<<<<<<< HEAD
 gdsg
+=======
+>>>>>>> 4667c929177e1b2b7633873b3560215d045c22df
+>>>>>>> a79b03f67a6062cb2fe2373ff530c4ed2f53a55f
+gfdgd\f
+a
+ty

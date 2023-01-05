@@ -1,0 +1,15 @@
+Numele figurii:
+The name of figure:
+rusa
+Introduceti coordonatele lui
+Put the Coordonates of
+Rusa
+Inaltime:
+Height:
+Rusa
+Latime:
+Width:
+Rusa
+Lungime:
+Lenght:
+Rusa

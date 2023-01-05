@@ -28,6 +28,8 @@ public:
 
 	void getLocalBounds(int& x, int& y);
 
+	sf::FloatRect getLocalBoundsAuto();
+
 	int getX();
 
 	void PositionSizeString(std::string theText, int x, int y, int size);

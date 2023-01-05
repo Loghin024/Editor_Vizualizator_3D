@@ -25,7 +25,7 @@ int main()
 
 	//create Interface
 	while (1)
-		interfata();
+		interfata(window);
 
 	///////////////////////////////////////////////
 	//Verificari//////////////////////////////////
@@ -38,11 +38,12 @@ int main()
 	////Cub cub1(Vector(100, 100, 100), 30);
 	//Prism prisma1(Vector(0,0,0), 50, 20, 30);
 
-	Prism leg1(Vector(0, 0, 0), 30, 5, 5);
-	Prism leg2(Vector(0, 0, 20), 30, 5, 5);
-	Prism leg3(Vector(40, 0, 0), 30, 5, 5);
-	Prism leg4(Vector(40, 0, 20), 30, 5, 5);
-	Prism fata(Vector(-25, -35, -25), 5, 50, 70);
+	///*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
+	//Prism leg2(Vector(0, 0, 20), 30, 5, 5);
+	//Prism leg3(Vector(40, 0, 0), 30, 5, 5);
+	//Prism leg4(Vector(40, 0, 20), 30, 5, 5);
+	//Prism fata(Vector(-25, -35, -25), 5, 50, 70);
+	//Line line(Vector(0, 0 ,0), Vector(15, 0, 40), 240);
 
 	Sphere3d sfera(Vector(0, 100, 0), 50, 50, 50);
 

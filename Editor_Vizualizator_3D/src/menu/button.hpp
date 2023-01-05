@@ -34,6 +34,8 @@ public:
 
 	void setOutlineThicknesAndColor(float t, int r, int g, int b, int a);
 
+	void setTextSize(int x);
+
 	void setOutLineThicknes(float t);
 
 	void changePosition(int x, int y);
