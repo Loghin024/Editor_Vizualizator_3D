@@ -28,7 +28,7 @@ void createFolderAndTexts()
 	fclose(programUtilities7);
 
 	FILE* programUtilities4 = fopen("src\\programtexts/viewAndEdit.txt", "w");
-	fprintf(programUtilities4, "%s", "Adaugati figura:\nAdd figure:\nRusa\nComponente:\nComponents:\nRusa:\nDati numele proiectului:\nGive the name of the project:\nRusa:");
+	fprintf(programUtilities4, "%s", "Adaugati figura:\nAdd figure:\nRusa\nComponente:\nComponents:\nRusa:\nApasati enter pentru mod vizualizare\nPress enter for view mode\nRusa");
 	fclose(programUtilities4);
 
 	/*FILE* programUtilities5 = fopen("src\\programtexts/posibleFigures.txt", "w");

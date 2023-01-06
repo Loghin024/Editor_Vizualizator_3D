@@ -1,5 +1,5 @@
 #pragma once
-int WINDOW_WIDTH = 1600;
-int WINDOW_HEIGHT = 900;
+int WINDOW_WIDTH = sf::VideoMode::getDesktopMode().width;
+int WINDOW_HEIGHT = sf::VideoMode::getDesktopMode().height;
 
 bool rotateCamera = true;

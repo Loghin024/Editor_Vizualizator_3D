@@ -26,6 +26,32 @@ Cub::Cub(const Vector& _center, const double size) : Solid3d() {
         add_segment(Segment(points[i], points[i + 4]));               // legaturi fata spate
     }
 
+    for (double j = 0; j <= size; j += 0.9)
+    {
+        add_segment(Segment(points[0] + Vector(0, j, 0), points[1] + Vector(0, j, 0)));//fata
+        add_segment(Segment(points[4] + Vector(0, j, 0), points[5] + Vector(0, j, 0)));//spate
+        add_segment(Segment(points[0] + Vector(0, j, 0), points[4] + Vector(0, j, 0)));//lateral stanga
+        add_segment(Segment(points[1] + Vector(0, j, 0), points[5] + Vector(0, j, 0)));//lateral dreapta
+
+    }
+
+    for (double j = 0; j <= size; j += 0.9)
+    {
+        add_segment(Segment(points[0] + Vector(j, 0, 0), points[3] + Vector(j, 0, 0)));//fata
+        add_segment(Segment(points[4] + Vector(j, 0, 0), points[7] + Vector(j, 0, 0)));//spate
+        add_segment(Segment(points[0] + Vector(j, 0, 0), points[4] + Vector(j, 0, 0)));//sus
+        add_segment(Segment(points[3] + Vector(j, 0, 0), points[7] + Vector(j, 0, 0)));//jos
+
+    }
+
+    for (double j = 0; j <= size; j += 0.9)
+    {
+        add_segment(Segment(points[0] + Vector(0, 0, j), points[3] + Vector(0, 0, j)));//lateral stanga
+        add_segment(Segment(points[1] + Vector(0, 0, j), points[2] + Vector(0, 0, j)));//lateral dreapta
+        add_segment(Segment(points[0] + Vector(0, 0, j), points[1] + Vector(0, 0, j)));//sus
+        add_segment(Segment(points[3] + Vector(0, 0, j), points[2] + Vector(0, 0, j)));//jos
+    }
+
     *this += _center;
 }
 

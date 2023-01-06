@@ -9,7 +9,7 @@ button::button(int x, int y, std::string textButton, int length, int height, int
 	rectangle.setSize(Vector2f(length, height));
 	rectangle.setPosition(x, y);
 
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
 	text.setFont(font);
 	text.setString(textButton);
 	text.setPosition(x + 10, y - 5);
@@ -23,7 +23,7 @@ button::button(int x, int y, std::string textButton, int length, int height, int
 	rectangle.setSize(Vector2f(length, height));
 	rectangle.setPosition(x, y);
 
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
 	text.setFont(font);
 	text.setString(textButton);
 	text.setPosition(x + 10, y);
@@ -40,7 +40,7 @@ button::button(sf::RenderWindow& window, int x, int y,int length, int height, st
 	rectangle.setPosition(x, y);
 	rectangle.setOutlineThickness(outlineT);
 	rectangle.setOutlineColor(sf::Color(outLineColorR, outLineColorG, outLineColorB, outLineColorA));
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
 	text.setFont(font);
 
 	//text.getFillColor()
@@ -181,6 +181,70 @@ void button::changePosition(int x, int y)
 {
 	rectangle.setPosition(x, y);
 	changeTextPosition(x + 10, y);
+}
+
+void button::centerTextInMidddle()
+{
+	sf::FloatRect f = sprite.getLocalBounds();
+	text.setPosition(f.width + 15,
+					rectangle.getPosition().y + rectangle.getSize().y / 2 - text.getLocalBounds().height / 2 - 5);
+}
+
+void button::textUpDown(sf::RenderWindow& window, std::string sir)
+{
+	std::string first = "";
+	std::string second = "";
+	bool t = 0;
+	for (int i = 0; i < sir.size(); i++)
+	{
+		if (sir[i] == ' ') t = 1;
+		if((sir[i] >= 'a' && sir[i] <= 'z') || (sir[i] >= 'A' && sir[i] <= 'Z'))
+		if (t == 0)
+		{
+			first += sir[i];
+		}
+		else
+		{
+			second += sir[i];
+		}
+	}
+	sf::FloatRect f = sprite.getLocalBounds();
+
+	window.draw(rectangle);
+
+	//std::cout  << first << " " << second << std::endl;
+	text.setString(first.c_str());
+	text.setPosition(f.width + 15,
+		rectangle.getPosition().y - 5);
+	window.draw(text);
+	text.setString(second.c_str());
+	text.setPosition(f.width + 15,
+		rectangle.getPosition().y + rectangle.getSize().y / 2 - text.getLocalBounds().height / 2 + 5);
+	window.draw(text);
+}
+
+void button::putIcon(sf::RenderWindow& window, std::string path, std::string name)
+{
+	path = "icons\\";
+	path += name;
+	if (name == "Con")
+		path += "e";
+	path += ".png";
+
+	icon.loadFromFile(path.c_str());
+	sprite.setTexture(icon);
+	float x = 0, y = 0;
+	x = rectangle.getPosition().x;
+	y = rectangle.getPosition().y;
+	//rectangle.getPosition()
+	//std::cout << x << " " << y << std::endl;
+	sprite.setPosition(x + 10, y);
+	window.draw(sprite);
+}
+
+void button::changeFont(sf::Font font)
+{
+	text.setFont(font);
 }
 
 void button::changeTextPosition(int x, int y)

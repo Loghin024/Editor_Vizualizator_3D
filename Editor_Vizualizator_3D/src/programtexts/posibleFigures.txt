@@ -1,8 +1,24 @@
 Linie
+Line
+Rusa
 Cub
+Cube
+Rusa
 Prisma
+Angle
+Rusa
 Sfera
+Sphere
+Rusa
 Cilindru
+Cilinder
+Rusa
 Piramida triunghiulara
+triangular pyramid
+Rusa
 Piramida dreptunghiulara
+rectangular pyramid
+rusa
 Con
+Cone
+Rusa

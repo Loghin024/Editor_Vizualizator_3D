@@ -42,17 +42,30 @@ void Solid3d::set_center(const Vector& _center) {
 }
 
 
-void Solid3d::render_solid(sf::RenderWindow& window, const unsigned window_width, const unsigned window_height, const Camera& camera) {
+void Solid3d::render_solid(sf::RenderWindow& window, const unsigned window_width, const unsigned window_height, const Camera& camera, sf::Color color) {
     figure.clear();
 
     for (auto s : edges) {
 
+        bool outside_frustrum = false;
         //recalculeaza pozitiile segmentului in plan
         s = camera.transform_segment(s);
 
-        //adaug in figura pe care vreau sa o afisez noile pozitii ale segmentului din noul unghi
-        figure.append(camera.frustrum[0].get_projection_on_plane(s.a, window_width, window_height));
-        figure.append(camera.frustrum[0].get_projection_on_plane(s.b, window_width, window_height));
+        for (auto side : camera.frustrum) {
+            outside_frustrum = side.handle_intersection_of_segment_with_plane(s);
+            if (outside_frustrum)
+                break;
+        }
+
+        if (!outside_frustrum) {
+            //adaug in figura pe care vreau sa o afisez noile pozitii ale segmentului din noul unghi
+            figure.append(camera.frustrum[0].get_projection_on_plane(s.a, window_width, window_height, color));
+            figure.append(camera.frustrum[0].get_projection_on_plane(s.b, window_width, window_height, color));
+        }
+
+        ////adaug in figura pe care vreau sa o afisez noile pozitii ale segmentului din noul unghi
+        //figure.append(camera.frustrum[0].get_projection_on_plane(s.a, window_width, window_height, color));
+        //figure.append(camera.frustrum[0].get_projection_on_plane(s.b, window_width, window_height, color));
     }
 
     window.draw(figure);

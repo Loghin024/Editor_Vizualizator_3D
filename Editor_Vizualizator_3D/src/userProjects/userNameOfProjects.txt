@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 test
 12
@@ -17,3 +18,12 @@ gdsg
 gfdgd\f
 a
 ty
+=======
+>>>>>>> 6e8651e263078815c775ec89f180a0a24354adc3
+test1
+test2
+test2
+test3
+test5
+test6
+test8
