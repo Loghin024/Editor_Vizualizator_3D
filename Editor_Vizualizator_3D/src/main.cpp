@@ -8,6 +8,7 @@
 #include <iostream>
 #include "utils/foldersAndTexts.hpp"
 #include "Menu.hpp"
+//#include "utils/figuresInfo.hpp"
 
 int main()
 {
@@ -15,18 +16,18 @@ int main()
 	//f/reastra aplicatiei
 	sf::ContextSettings window_settings;
 	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
-	sf::RenderWindow window(sf::VideoMode(1600, 900), "Editor\Vizualizator 3D", sf::Style::Close | sf::Style::Resize, window_settings);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Editor\Vizualizator 3D", sf::Style::Close | sf::Style::Resize, window_settings);
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(false);
-//	Mouse::setPosition(sf::Vector2i(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), window);
+	//Mouse::setPosition(sf::Vector2i(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), window);
 
 	//create Folders
 	createFolderAndTexts();
-
+	//figuresInfo a;
 	//create Interface
 	while (1)
 		interfata(window);
-
+	
 	///////////////////////////////////////////////
 	//Verificari//////////////////////////////////
 	/////////////////////////////////////////////
@@ -35,7 +36,7 @@ int main()
 	//Cub cub(Vector(0, 0, 0), 40);
 	//Cub cub1(Vector(0, -30, 0), 20);
 	//Cub cub2(Vector(0, -45, 0), 10);
-	////Cub cub1(Vector(100, 100, 100), 30);
+	////Cub cub1(Vector(100, 100, 100), 30
 	//Prism prisma1(Vector(0,0,0), 50, 20, 30);
 
 	///*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
@@ -60,7 +61,7 @@ int main()
 	//////////////////////////////////////////////////
 
 
-	// create camera
+	 //create camera
 	//Camera camera(Vector(0, -100, -230),-30, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	//while (window.isOpen())
@@ -109,12 +110,19 @@ int main()
 	//	{
 	//		rotateCamera = false;
 	//		camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), rotateCamera);
+	//		//a.figures(window, 0, 0, 0, 0, 1);
 	//	}
+	//	
 
-	//	//afisare
-	//	window.clear();
-	//	Cub cub(Vector(0, 0, 0), 40);
-	//	cub.render_solid(window, 1200, 800, camera);
+		//afisare
+		//window.clear();
+		//if (rotateCamera == false) {
+		//	a.figures(window, 0, 0, 0, 0, 1);
+			//a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language);
+
+		//} 
+		//Cub cub(Vector(0, 0, 0), 40);
+		//cub.render_solid(window, 1200, 800, camera);
 	//	//cub1.render_solid(window, 1200, 800, camera);
 	//	//cub2.render_solid(window, 1200, 800, camera);
 	//	////platou.render_solid(window, 1200, 800, camera);
@@ -140,7 +148,7 @@ int main()
 	//	//piramida.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 	//	//figura.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 
-	//	window.display();
+		//window.display();
 	//}
 
 }

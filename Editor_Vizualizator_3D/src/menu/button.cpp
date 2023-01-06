@@ -272,6 +272,16 @@ int button::getLocalBoundsY()
 	return text.getLocalBounds().height;
 }
 
+int button::getPositionX()
+{
+	return rectangle.getPosition().x;
+}
+
+int button::getPositionY()
+{
+	return rectangle.getPosition().y;
+}
+
 void button::setTextOrigin(int x, int y)
 {
 	text.setOrigin(x, y);

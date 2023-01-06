@@ -62,6 +62,10 @@ public:
 
 	int getLocalBoundsY();
 
+	int getPositionX();
+
+	int getPositionY();
+
 	void draw(sf::RenderWindow& window);
 
 	void draw(sf::RenderWindow& window, bool d);
