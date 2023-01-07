@@ -151,6 +151,12 @@ void button::setTextColor(int r, int g, int b, int a)
 	text.setFillColor(sf::Color(r, g, b, a));
 }
 
+void button::setTextFont(std::string pathToFont)
+{
+	if (!font.loadFromFile(pathToFont));
+		text.setFont(font);
+}
+
 void button::changeLengthAndHeight(int length, int height)
 {
 	rectangle.setSize(sf::Vector2f(length, height));
@@ -270,6 +276,16 @@ int button::getLocalBoundsX()
 int button::getLocalBoundsY()
 {
 	return text.getLocalBounds().height;
+}
+
+int button::getPositionX()
+{
+	return rectangle.getPosition().x;
+}
+
+int button::getPositionY()
+{
+	return rectangle.getPosition().y;
 }
 
 void button::setTextOrigin(int x, int y)

@@ -42,7 +42,7 @@ void Solid3d::set_center(const Vector& _center) {
 }
 
 
-void Solid3d::render_solid(sf::RenderWindow& window, const unsigned window_width, const unsigned window_height, const Camera& camera, sf::Color color) {
+void Solid3d::render_solid(sf::RenderWindow& window, const unsigned window_width, const unsigned window_height, const Camera& camera) {
     figure.clear();
 
     for (auto s : edges) {
@@ -59,8 +59,8 @@ void Solid3d::render_solid(sf::RenderWindow& window, const unsigned window_width
 
         if (!outside_frustrum) {
             //adaug in figura pe care vreau sa o afisez noile pozitii ale segmentului din noul unghi
-            figure.append(camera.frustrum[0].get_projection_on_plane(s.a, window_width, window_height, color));
-            figure.append(camera.frustrum[0].get_projection_on_plane(s.b, window_width, window_height, color));
+            figure.append(camera.frustrum[0].get_projection_on_plane(s.a, window_width, window_height));
+            figure.append(camera.frustrum[0].get_projection_on_plane(s.b, window_width, window_height));
         }
 
         ////adaug in figura pe care vreau sa o afisez noile pozitii ale segmentului din noul unghi

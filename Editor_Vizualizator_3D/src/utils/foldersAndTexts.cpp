@@ -10,7 +10,7 @@ void createFolderAndTexts()
 
 	if (_mkdir("src\\programtexts"));
 	FILE* programUtilities1 = fopen("src\\programtexts/textsForPrincipalScreen.txt", "w");
-	fprintf(programUtilities1, "%s", "Editor/Vizualizator 3D\nEDITING / VISUALISATION 3D\nRusa\nRO\nEN\nRU\nProiectele mele\nMy projects\nRusa\nCreeza proiect\nCreate Project\nrusa");
+	fprintf(programUtilities1, "%s", "Editor/Vizualizator 3D\nEDITING / VISUALISATION 3D\nRusa\nRO\nEN\nRU\nProiectele mele\nMy projects\nRusa\nCreeza proiect\nCreate Project\nrusa\nIesire\nExit\nrusa");
 	fclose(programUtilities1);
 
 

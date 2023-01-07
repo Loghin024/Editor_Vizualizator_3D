@@ -10,3 +10,6 @@ Rusa
 Creeza proiect
 Create Project
 rusa
+Iesire
+Exit
+rusa

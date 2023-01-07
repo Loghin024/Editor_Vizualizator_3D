@@ -37,6 +37,8 @@ public:
 	void setOutlineThicknesAndColor(float t, int r, int g, int b, int a);
 
 	void setTextSize(int x);
+	
+	void setTextFont(std::string pathToFont);
 
 	void setOutLineThicknes(float t);
 
@@ -61,6 +63,10 @@ public:
 	int getLocalBoundsX();
 
 	int getLocalBoundsY();
+
+	int getPositionX();
+
+	int getPositionY();
 
 	void draw(sf::RenderWindow& window);
 
