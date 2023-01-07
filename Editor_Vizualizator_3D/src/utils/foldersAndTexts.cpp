@@ -20,7 +20,7 @@ void createFolderAndTexts()
 
 	FILE* programUtilities3 = fopen("src\\programtexts/textsForCreateScreenCub.txt", "w");
 	fprintf(programUtilities3, "%s", "inapoi\nback\nrusa\n");
-	fprintf(programUtilities3, "%s", "Introduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nNumele figurii:\nThe name of figure:\nrusa\nDiametru\nDiameter\nrusa");
+	fprintf(programUtilities3, "%s", "Introduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nNumele figurii:\nThe name of figure:\nrusa\nDiametru:\nDiameter:\nrusa");
 	fclose(programUtilities3);
 
 	FILE* programUtilities7 = fopen("src\\programtexts/textsForCreateScreenPrisma.txt", "w");
@@ -28,7 +28,7 @@ void createFolderAndTexts()
 	fclose(programUtilities7);
 
 	FILE* programUtilities4 = fopen("src\\programtexts/viewAndEdit.txt", "w");
-	fprintf(programUtilities4, "%s", "Adaugati figura : \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasati o pentru mod vizualizare\nPress enter for view mode\nRusa");
+	fprintf(programUtilities4, "%s", "Figuri: \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasati o pentru mod vizualizare\nPress enter for view mode\nRusa");
 	fclose(programUtilities4);
 
 	/*FILE* programUtilities5 = fopen("src\\programtexts/posibleFigures.txt", "w");

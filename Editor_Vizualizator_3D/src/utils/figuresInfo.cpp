@@ -15,12 +15,12 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 	char figure[100];
 	Vector2u size = window.getSize();
 	int line = 0;	
-	Camera camera(Vector(0, -100, -230), -30, 0, 0, 1900, 900);
+	//Camera camera(Vector(0, -100, -230), -30, 0, 0, 1900, 900);
 
-	button figures(0, 50, "",size.x / 7 - 5, 50, 30, 2, 81, 81, 81, 255);
+	button figures(0, 15, "", 195, 56, 20, 2, 81, 81, 81, 255);
 	figures.setButtonColor(81, 81, 81, 255);
 
-	RectangleShape dividerForFigures(Vector2f(size.x / 7, size.y));
+	RectangleShape dividerForFigures(Vector2f(200, size.y));
 	dividerForFigures.setFillColor(Color(81, 81, 81, 255));
 	window.draw(dividerForFigures);
 
@@ -31,9 +31,11 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 	FILE* PosibleFiguresFromFile;
 	if(PosibleFiguresFromFile = fopen("src\\programtexts\\posibleFigures.txt", "r"));
 	{
-		for(int j = 1; j<=8; j++)
+		for(int j = 1; j<=7; j++)
 		{
 			char sir[100]{};
+
+			figures.setTextFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 
 			for (int i = 1; i <= 3; i++)
 			{
@@ -43,22 +45,22 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 			}
 			line++;
 			figures.changeText(sir);
-			figures.changePosition(0, 50 + 60 * line);
+			figures.changePosition(0, 15 + 60 * line);
 
-			if ((PozMx > 0 && PozMx < size.x / 7) && (PozMy > 60 * line + 50 && PozMy < 60 * line + 100))
+			if ((PozMx > 0 && PozMx < 195) && (PozMy > 60 * line + 15 && PozMy < 60 * line + 60))
 				figures.setButtonColor(41, 45, 48, 255);
 			else
 				figures.setButtonColor(81, 81, 81, 255);
 
-			if (line == 6 || line == 7) {
-				figures.setTextSize(20);
-				figures.textUpDown(window, sir);
-			}
-			else figures.setTextSize(25);
+			//if (line == 6 || line == 7) {
+			//	figures.setTextSize(20);
+			//	//figures.textUpDown(window, sir);
+			//}
+			//else figures.setTextSize(25);
 
 			if (line == 1) 	figures.putIcon(window, "", sir);
 			figures.centerTextInMidddle();
-			if(line != 6 && line != 7)
+			/*if(line != 6 && line != 7)*/
 			figures.draw(window);
 			figures.putIcon(window, "", sir);
 
@@ -67,7 +69,7 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 	}
 }
 
-void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, int pozMx, int pozMy, bool changeUp, bool changeDown, int& x, int& y, int language, Camera camera, int& compScroll)
+void figuresInfo::componentsNames(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string Name, int pozMx, int pozMy, bool changeUp, bool changeDown, int& x, int& y, int language, Camera camera, int& compScroll)
 {
 	int copieScroll = compScroll;
 	int compNr = 0;
@@ -159,7 +161,7 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 					{
 						int positionX = components.getPositionX();
 						int positionY = components.getPositionY();
-						deleteComponent(window, sir, Name, x, y, positionX, positionY, camera);
+						deleteComponent(window, WINDOW_WIDTH, WINDOW_HEIGHT, sir, Name, x, y, positionX, positionY, camera);
 						//fseek(componentsFromFile2, SEEK_SET, 0);
 					}
 
@@ -1196,7 +1198,7 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 	
 }
 
-void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::string saveNameOfProject)
+void figuresInfo::simpleChange(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, Camera camera, std::string saveNameOfProject)
 {
 	window.clear();
 	int nothing = 0;
@@ -1410,37 +1412,37 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 			if (index == 2)
 			{
 				Cub cub(Vector(x, y, h), h);
-				cub.render_solid(window, 1600, 900, camera);
+				cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 3)
 			{
 				Prism prisma(Vector(x, y, z), h, l, L);
-				prisma.render_solid(window, 1600, 900, camera);
+				prisma.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 4)
 			{
 				Sphere3d sphere(Vector(x, y, z), h, 100, 20);
-				sphere.render_solid(window, 1600, 900, camera);
+				sphere.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 5)
 			{
 				Cylinder3d cylinder(Vector(x, y, z), h, l, 20);
-				cylinder.render_solid(window, 1600, 900, camera);
+				cylinder.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 6)
 			{
 				Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-				pyramid.render_solid(window, 1600, 900, camera);
+				pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 7)
 			{
 				Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-				pyramid.render_solid(window, 1600, 900, camera);
+				pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 8)
 			{
 				Con3d con(Vector(x, y, z), h, l, 20);
-				con.render_solid(window, 1600, 900, camera);
+				con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 		}
 	}
@@ -1456,7 +1458,7 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 
 }
 
-void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName, std::string projname, int& pozMx, int& pozMy, int x, int y, Camera camera)
+void figuresInfo::deleteComponent(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string compName, std::string projname, int& pozMx, int& pozMy, int x, int y, Camera camera)
 {
 	bool find = 0;
 	std::cout << "compNmae: " << projname << std::endl;
@@ -1530,7 +1532,7 @@ void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName
 		}
 		fclose(temp2);
 		fclose(afterDelete);
-		simpleChange(window, camera, projname);
+		simpleChange(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, projname);
 		//change(window, camera, projname,compName, 1, pozMx, pozMy);
 		pozMx = 0; pozMy = 0;
 

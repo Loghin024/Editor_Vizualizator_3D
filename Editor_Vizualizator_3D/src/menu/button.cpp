@@ -244,7 +244,7 @@ void button::putIcon(sf::RenderWindow& window, std::string path, std::string nam
 	y = rectangle.getPosition().y;
 	//rectangle.getPosition()
 	//std::cout << x << " " << y << std::endl;
-	sprite.setPosition(x + 10, y);
+	sprite.setPosition(x + 10, y + 3);
 	window.draw(sprite);
 }
 

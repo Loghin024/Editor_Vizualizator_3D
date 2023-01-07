@@ -10,6 +10,6 @@ Rusa
 Numele figurii:
 The name of figure:
 rusa
-Diametru
-Diameter
+Diametru:
+Diameter:
 rusa

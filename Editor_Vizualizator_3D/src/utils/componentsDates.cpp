@@ -6,7 +6,7 @@
 #include "../geometry/solid3d.hpp"
 #include "foldersAndTexts.hpp"
 
-void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100], std::string playerText, char indexAndCoordonates[200][10], int coordonates,int minus, int index, int language)
+void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100], std::string playerText, char indexAndCoordonates[200][100], int coordonates,int minus, int index, int language)
 {
 	using namespace sf;
 
@@ -23,44 +23,48 @@ void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100
 	fclose(out);
 
 	Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
-	texts detail(output[3], 10, 50, 0, 0, 40, 0, 0, 0, 255);
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
+	texts detail(output[3], 10, 50, 0, 0, 30, 0, 0, 0, 255);
+	detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	FloatRect nameText = detail.getLocalBoundsAuto();
-	Text playerText2(playerText, font, 40);
-	playerText2.setFillColor(Color(26, 30, 28, 255));
+	Text playerText2(playerText, font, 30);
+	//playerText2.setFillColor(Color(26, 30, 28, 255));
 	FloatRect width = detail.getLocalBoundsAuto();
-	playerText2.setPosition(width.width + 20, 50);
+	playerText2.setPosition(600, 70);
 
 	if (coordonates > 0)
 	{
 		detail.changeTheText(output[1]);
 		std::cout << output[1] << std::endl;
-		detail.changePosition(10, 100);
+		detail.changePosition(45, 120);
 		detail.draw(window);
 		width = detail.getLocalBoundsAuto();
 
 		//playerText2.setPosition(10 + 16 * strlen(output3[1]) + 100 * (coordonates - 1) + 25 + minus, 100);
 
+		sf::FloatRect textWidth = detail.getLocalBoundsAuto();
 		for (int i = 1; i <= coordonates;i++)
 		{
+
 			if (i == 1)
 			{
-				detail.PositionSizeString("x:", 10 + 16 * strlen(output[1]) + 100 * (i - 1) + minus, 100, 40);
-				playerText2.setPosition(width.width + 50, 100);
+				detail.PositionSizeString("x:", 45 + textWidth.width + 10, 120, 30);
+				playerText2.setPosition(45 + textWidth.width + 40, 120);
 			}
+			detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 			detail.draw(window);
 		
 			if (i == 2) 
 			{ 
-				detail.PositionSizeString("y:", 10 + 16 * strlen(output[1]) + 100 * (i - 1) + minus, 100, 40); 
-				playerText2.setPosition(width.width + 150, 100);
+				detail.PositionSizeString("y:", 45 + textWidth.width + 150, 120, 30);
+				playerText2.setPosition(45 + textWidth.width + 180, 120);
 			} 
 			detail.draw(window);
 
 			if (i == 3) 
 			{ 
-				detail.PositionSizeString("z:", 10 + 16 * strlen(output[1]) + 100 * (i - 1) + minus, 100, 40); 
-				playerText2.setPosition(width.width + 250, 100);
+				detail.PositionSizeString("z:", 45 + textWidth.width + 290, 120, 30);
+				playerText2.setPosition(45 + textWidth.width + 320, 120);
 			} 
 			detail.draw(window);
 		}
@@ -68,32 +72,37 @@ void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100
 		{
 			//std::cout << output3[2] << " ";
 			if(index == 2)
-				detail.PositionSizeString(output[2], 10, 150, 40);
+				detail.PositionSizeString(output[2], 45, 170, 30);
 			else if (index == 4)
 			{
-				detail.PositionSizeString(output[4], 10, 150, 40);
+				detail.PositionSizeString(output[4], 45, 170, 30);
 			}
 
 			detail.draw(window);
 			FloatRect width = detail.getLocalBoundsAuto();
-			playerText2.setPosition(width.width + 15, 150);
+			playerText2.setPosition(width.width + 45 + 10, 170);
 			playerText2.setString(playerText);
 			window.draw(playerText2);
 		}
 	}
 	for (int i = 0; i < 4;i++)
 	{
+		detail.changeTheText(output[1]);
+		detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+		detail.changeColor(255, 255, 255, 255);
+		sf::FloatRect textWidth = detail.getLocalBoundsAuto();
+
 		if
-			(i == 0) detail.PositionSizeString(indexAndCoordonates[i], nameText.width + 50, 50, 40);
+			(i == 0) detail.PositionSizeString(indexAndCoordonates[i], 600, 70, 30);
 		else
-			detail.PositionSizeString(indexAndCoordonates[i], 10 + 16 * strlen(output[1]) + 100 * (i - 1) + 25 - minus, 100, 40);
+			detail.PositionSizeString(indexAndCoordonates[i], 45 + textWidth.width + 40 + (i-1)*140, 120, 30);
 		detail.draw(window);
 	}
 	
 	window.draw(playerText2);
 }
 
-void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][10], int coordonates, int minus, int index, int language)
+void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int index, int language)
 {
 	using namespace sf;
 	char output[10][100]{};
@@ -108,44 +117,52 @@ void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playe
 		}
 	fclose(out);
 	Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
-	texts detail(output[3], 10, 50, 0, 0, 40, 0, 0, 0, 255);
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
+	texts detail(output[3], 10, 50, 0, 0, 30, 0, 0, 0, 255);
+	//FloatRect nameText = detail.getLocalBoundsAuto();
+	//Text playerText2(playerText, font, 30);
+	//playerText2.setFillColor(Color(26, 30, 28, 255));
+	//FloatRect width = detail.getLocalBoundsAuto();
+	//playerText2.setPosition(width.width + 50, 50);
+
 	FloatRect nameText = detail.getLocalBoundsAuto();
-	Text playerText2(playerText, font, 40);
-	playerText2.setFillColor(Color(26, 30, 28, 255));
+	Text playerText2(playerText, font, 30);
+	//playerText2.setFillColor(Color(26, 30, 28, 255));
 	FloatRect width = detail.getLocalBoundsAuto();
-	playerText2.setPosition(width.width + 50, 50);
+	playerText2.setPosition(600, 70);
 
 	if (coordonates > 0)
 	{
 		detail.changeTheText(output[1]);
 		std::cout << output[1] << std::endl;
-		detail.changePosition(10, 100);
+		detail.changePosition(45, 120);
 		detail.draw(window);
 		width = detail.getLocalBoundsAuto();
 
 		//playerText2.setPosition(10 + 16 * strlen(output3[1]) + 100 * (coordonates - 1) + 25 + minus, 100);
 
+		sf::FloatRect textWidth = detail.getLocalBoundsAuto();
 		for (int i = 1; i <= coordonates;i++)
 		{
 			if (i == 1)
 			{
-				detail.PositionSizeString("x:", 10 + 16 * strlen(output[1]) + 100 * (i - 1) + minus, 100, 40);
-				playerText2.setPosition(width.width + 50, 100);
+				detail.PositionSizeString("x:", 45 + textWidth.width + 10, 120, 30);
+				playerText2.setPosition(45 + textWidth.width + 40, 120);
 			}
+			detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 			detail.draw(window);
 
 			if (i == 2)
 			{
-				detail.PositionSizeString("y:", 10 + 16 * strlen(output[1]) + 100 * (i - 1) + minus, 100, 40);
-				playerText2.setPosition(width.width + 150, 100);
+				detail.PositionSizeString("y:", 45 + textWidth.width + 150, 120, 30);
+				playerText2.setPosition(45 + textWidth.width + 180, 120);
 			}
 			detail.draw(window);
 
 			if (i == 3)
 			{
-				detail.PositionSizeString("z:", 10 + 16 * strlen(output[1]) + 100 * (i - 1) + minus, 100, 40);
-				playerText2.setPosition(width.width + 250, 100);
+				detail.PositionSizeString("z:", 45 + textWidth.width + 290, 120, 30);
+				playerText2.setPosition(45 + textWidth.width + 320, 120);
 			}
 			detail.draw(window);
 		}
@@ -153,9 +170,10 @@ void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playe
 		{
 			//std::cout << output3[2] << " ";
 			
-			detail.PositionSizeString(output[2], 10, 150, 40);
+			detail.PositionSizeString(output[2], 45, 170, 30);
+			sf::FloatRect textWidth = detail.getLocalBoundsAuto();
 			detail.draw(window);
-			playerText2.setPosition(10 + 16 * strlen(output[2]) + minus - 18, 150);
+			playerText2.setPosition(textWidth.width + 45 + 10, 170);
 			playerText2.setString(playerText);
 			window.draw(playerText2);
 		}
@@ -163,27 +181,44 @@ void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playe
 		if (coordonates == 5)
 		{
 			//std::cout << output3[2] << " ";
-			detail.PositionSizeString(output[4], 10, 150, 40);
-
+			detail.PositionSizeString(output[4], 45, 220, 30);
+			sf::FloatRect textWidth = detail.getLocalBoundsAuto();
 			detail.draw(window);
-			playerText2.setPosition(10 + 16 * strlen(output[2]) + minus - 18, 150);
+			playerText2.setPosition(textWidth.width + 45 + 10, 220);
 			playerText2.setString(playerText);
 			window.draw(playerText2);
+
 		}
 	}
 	for (int i = 0; i < coordonates;i++)
 	{
-		if
-			(i == 0) detail.PositionSizeString(indexAndCoordonates[i], nameText.width + 50, 50, 40);
-		else
-			detail.PositionSizeString(indexAndCoordonates[i], 10 + 16 * strlen(output[1]) + 100 * (i - 1) + 25 - minus, 100, 40);
+		detail.changeTheText(output[1]);
+		detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+		detail.changeColor(255, 255, 255, 255);
+		sf::FloatRect textWidth = detail.getLocalBoundsAuto();
+
+		if(i == 0) detail.PositionSizeString(indexAndCoordonates[i], 600, 70, 30);
+		else if(i >=1 && i <=3)
+			detail.PositionSizeString(indexAndCoordonates[i], 45 + textWidth.width + 40 + (i - 1) * 140, 120, 30);
+		else if (i == 4)
+		{
+			detail.PositionSizeString(output[2], 45, 170, 30);
+			sf::FloatRect textWidth = detail.getLocalBoundsAuto();
+			detail.changeColor(0, 0, 0, 255);
+			detail.draw(window);
+
+			detail.PositionSizeString(indexAndCoordonates[i], 45 + textWidth.width + 40 + (i - 1) * 140, 170, 30);
+			detail.changePosition(textWidth.width + 55, 170);
+			detail.changeColor(255, 255, 255, 255);
+			detail.draw(window);
+		}
 		detail.draw(window);
 	}
 
 	window.draw(playerText2);
 }
 
-void componentsDates::prismaPatratica(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][10], int coordonates, int minus, int language)
+void componentsDates::prismaPatratica(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int language)
 {
 	using namespace sf;
 	char output[10][100]{};
@@ -199,7 +234,7 @@ void componentsDates::prismaPatratica(sf::RenderWindow& window, std::string play
 	using namespace sf;
 	fclose(getText);
 	Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 	texts detail(output[0], 10, 50, 0, 0, 40, 0, 0, 0, 255);
 	FloatRect nameText = detail.getLocalBoundsAuto();
 	Text playerText2(playerText, font, 40);
@@ -279,7 +314,7 @@ void componentsDates::prismaPatratica(sf::RenderWindow& window, std::string play
 	window.draw(playerText2);
 }
 
-void componentsDates::piramide(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][10], int coordonates, int minus, int language, int index)
+void componentsDates::piramide(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int language, int index)
 {
 	using namespace sf;
 	char output[10][100]{};
@@ -295,7 +330,7 @@ void componentsDates::piramide(sf::RenderWindow& window, std::string playerText,
 	using namespace sf;
 	fclose(getText);
 	Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 	texts detail(output[0], 10, 50, 0, 0, 40, 0, 0, 0, 255);
 	FloatRect nameText = detail.getLocalBoundsAuto();
 	Text playerText2(playerText, font, 40);

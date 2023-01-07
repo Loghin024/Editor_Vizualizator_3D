@@ -374,7 +374,7 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 				saveNameOfProject = temp;
 				slide = 1;
 				window.clear();
-				before.simpleChange(window, camera, saveNameOfProject);
+				before.simpleChange(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, saveNameOfProject);
 				//	before.change(window, camera, saveNameOfProject, );
 				break;
 
@@ -405,20 +405,33 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 	window.display();
 }
 
-void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nrFigure, int coordonates, int nextInput, char indexAndCoordonates[200][10], int down, std::string playerText, int index)
+void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nrFigure, int coordonates, int nextInput, char indexAndCoordonates[200][100], int down, std::string playerText, int index)
 {
 	//std::cout << playerText << std::endl;
 	//std::cout << index << " ";
 	using namespace sf;
 	Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 
-	texts detail(output3[3], 10, 50, 0, 0, 40, 0, 0, 0, 255);
+	texts detail(output3[3], 45, 70, 0, 0, 30, 0, 0, 0, 255);
+	detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	Texture texture;
 	//INCARCAREA BACKGROUNDULUI
 	texture.loadFromFile("images/PrincipalBackground2Blur.jpg");
 	Sprite sprite(texture);
-	window.clear();
+	window.clear(sf::Color(37, 150, 190));
+
+	// un patrat de culoare diferita ce va fi pozotionat in partea de sus a ferestrei
+	// ce va fi practic, bara noastra de navigare
+	button bar(0, 0, "", WINDOW_WIDTH, 40, 0);
+	bar.setButtonColor(11, 126, 168, 255);
+	bar.draw(window);
+
+	// linia ce separa bara de navigare de restul programului
+	bar.changeLengthAndHeight(WINDOW_WIDTH, 0);
+	bar.changePosition(0, 40);
+	bar.setOutlineThicknesAndColor(1, 0, 0, 0, 255);
+	bar.draw(window);
 
 	window.draw(sprite);
 	//numele figurii
@@ -439,8 +452,9 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 
 	//figura.cub(window, output3, playerText, indexAndCoordonates, coordonates, minus);
 		
-	texts goBack(output3[0], 20, 1, 0, 0, 30);
-	button line(40 + 10 * strlen(output3[0]), 8, "", 2, 30, 0);
+	texts goBack(output3[0], 20, 5, 0, 0, 25);
+	goBack.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+	button line(40 + 10 * strlen(output3[0]), 4, "", 2, 30, 0);
 	if (pozMx < 111 && pozMy < 40)
 	{
 		goBack.changeColor(203, 55, 23, 255);
@@ -455,9 +469,9 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 	goBack.draw(window);
 
 	line.draw(window);
-	line.changePosition(10, 40);
-	line.changeLengthAndHeight(30 + 10 * strlen(output3[0]), 2);
-	line.draw(window);
+	//line.changePosition(10, 40);
+	/*line.changeLengthAndHeight(30 + 10 * strlen(output3[0]), 2);
+	line.draw(window);*/
 
 	window.display();
 }
@@ -524,7 +538,7 @@ void giveNameForProject(sf::RenderWindow& window, int language, std::string name
 void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved, int language, int scrool, int sideScrool, int sidePress, int PozMx, int PozMy, std::string Name, bool& figureChosed, bool changeUp, bool changeDown, int& cpozx, int& cpozy, bool movingScreen, int& compScroll)
 {
 	sf::Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 
 	sf::Event event{};
 	using namespace sf;
@@ -544,7 +558,7 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 		//std::cout "cpozx" << cpozx << std::endl;
 //
 		a.figures(window, size.x, size.y, xMoved, yMoved, language);
-		a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language, camera, compScroll);
+		a.componentsNames(window, WINDOW_WIDTH, WINDOW_HEIGHT, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language, camera, compScroll);
 
 
 		FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
@@ -570,6 +584,7 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 
 		std::fclose(f);
 		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
+		text.setFont("res/Fonts/Montserrat/static/Montserrat-Bold.ttf");
 		text.draw(window);
 		text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
 		text.draw(window);
@@ -590,7 +605,7 @@ void interfata(sf::RenderWindow& window)
 	Mouse::setPosition(sf::Vector2i(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), window);
 
 	componentsDates addAndCreate;
-	char indexAndCoordonates[200][10]{};
+	char indexAndCoordonates[200][100]{};
 	// selectL --> selectarea limbei 
 	int selectL = 0;
 	// nextInput --> pentru pagina creare, apasand enter trecem la textul urmator si incremantam nextInput pentru a ajuta la salvarea textului
@@ -604,7 +619,7 @@ void interfata(sf::RenderWindow& window)
 	int getxRightClick = -1, getyRightClick = -1;
 	// fontul
 	sf::Font font;
-	if(!font.loadFromFile("Fonts/calibri.ttf"));
+	if(!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 
 	//pentru detaliile unui proiect nou
 	std::string playerInput{};
@@ -1109,7 +1124,7 @@ void interfata(sf::RenderWindow& window)
 				if (event.type == sf::Event::MouseButtonPressed)
 				{
 					//std::cout << event.mouseButton.x << " " << event.mouseButton.y << std::endl;
-					if (event.mouseButton.button == sf::Mouse::Right)
+					if (event.mouseButton.button == sf::Mouse::Left)
 					{
 						if (event.mouseButton.x < 111 && event.mouseButton.y < 40)
 						{
@@ -1219,16 +1234,16 @@ void interfata(sf::RenderWindow& window)
 					}
 					if (event.type == sf::Event::MouseButtonPressed)
 					{
-						if (event.mouseButton.button == sf::Mouse::Right)
+						if (event.mouseButton.button == sf::Mouse::Left)
 						{
 							sf::Vector2u size = window.getSize();
 
-							if (event.mouseButton.x > 0 && event.mouseButton.x < size.x / 7)
+							if (event.mouseButton.x > 0 && event.mouseButton.x < 195)
 							{
 								//70 120 150
-								for (int i = 0; i < 9; i++)
+								for (int i = 0; i < 8; i++)
 								{
-									if (event.mouseButton.y > 50 + i * 60 && event.mouseButton.y < 50 + i * 60 + 50)
+									if (event.mouseButton.y > 15 + i * 60 && event.mouseButton.y < 15 + i * 60 + 50)
 									{
 										curentWindow = 2; index = i;
 									}
@@ -1545,41 +1560,44 @@ void interfata(sf::RenderWindow& window)
 							//std::cout << nr << " " << x << " " << y << " " << z;
 							//std::cout << " " << index << " ";
 							//std::cout << h << " " << l << " " << L << std::endl;
-
-						if (index == 2)
+						if (index == 1)
+						{
+							//addSegment()
+						}
+						else if (index == 2)
 						{
 							Cub cub(Vector(x, y, h), h);
-							cub.render_solid(window, 1600, 900, camera);
+							cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 3)
 						{
 							Prism prisma(Vector(x, y, z), h, l, L);
-							prisma.render_solid(window, 1600, 900, camera);
+							prisma.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 4)
 						{
-							Sphere3d sphere(Vector(x, y, z), h, 100, 100);
-							sphere.render_solid(window, 1600, 900, camera);
+							Sphere3d sphere(Vector(x, y, z), h, 100, 50);
+							sphere.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 5)
 						{
 							Cylinder3d cylinder(Vector(x, y, z), h, l, 100);
-							cylinder.render_solid(window, 1600, 900, camera);
+							cylinder.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 6)
 						{
 							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, 1600, 900, camera);
+							pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 7)
 						{
 							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, 1600, 900, camera);
+							pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 8)
 						{
 							Con3d con(Vector(x, y, z), h, l, 20);
-							con.render_solid(window, 1600, 900, camera);
+							con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 					}
 					//std::cout << everything[i] << std::endl;

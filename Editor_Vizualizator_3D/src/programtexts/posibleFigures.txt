@@ -13,11 +13,8 @@ Rusa
 Cilindru
 Cilinder
 Rusa
-Piramida triunghiulara
-triangular pyramid
-Rusa
-Piramida dreptunghiulara
-rectangular pyramid
+Piramida
+Pyramid
 rusa
 Con
 Cone
