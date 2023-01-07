@@ -80,3 +80,9 @@ void texts::draw(sf::RenderWindow& window)
 {
 	window.draw(text);
 }
+
+void texts::setFont(std::string pathToFont)
+{
+	if (!font.loadFromFile(pathToFont));
+	text.setFont(font);
+}

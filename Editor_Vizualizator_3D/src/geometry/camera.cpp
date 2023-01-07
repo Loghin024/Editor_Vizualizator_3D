@@ -14,19 +14,19 @@ Camera::Camera(const Vector& _position,
 	theta_y(as_radians(_theta_y)),
 	theta_z(as_radians(_theta_z)) {
 
-	//const double horizontal_angle = atan2(window_width / 2.0, PROJECTION_FACTOR) - 0.0001;
-	//const double vertical_angle = atan2(window_height / 2.0, PROJECTION_FACTOR) - 0.0001;
-	//const double ch = cos(horizontal_angle);
-	//const double sh = sin(horizontal_angle);
-	//const double cv = cos(vertical_angle);
-	//const double sv = sin(vertical_angle);
+	const double horizontal_angle = atan2(window_width / 2.0, PROJECTION_FACTOR) - 0.0001;
+	const double vertical_angle = atan2(window_height / 2.0, PROJECTION_FACTOR) - 0.0001;
+	const double ch = cos(horizontal_angle);
+	const double sh = sin(horizontal_angle);
+	const double cv = cos(vertical_angle);
+	const double sv = sin(vertical_angle);
 
-	//frustrum[0] = Plane3d(Vector(0, 0, 0), Vector(0, 0, 1)); // close
-	//frustrum[1] = Plane3d(Vector(0, 0, PROJECTION_MAX_DEPTH), Vector(0, 0, -1)); // far
-	//frustrum[2] = Plane3d(Vector(0, 0, 0), Vector(ch, 0, sh)); // left
-	//frustrum[3] = Plane3d(Vector(0, 0, 0), Vector(-ch, 0, sh)); // right
-	//frustrum[4] = Plane3d(Vector(0, 0, 0), Vector(0, cv, sv)); // top
-	//frustrum[5] = Plane3d(Vector(0, 0, 0), Vector(0, -cv, sv)); // bottom
+	frustrum[0] = Plane3d(Vector(0, 0, 0), Vector(0, 0, 1)); // close
+	frustrum[1] = Plane3d(Vector(0, 0, PROJECTION_MAX_DEPTH), Vector(0, 0, -1)); // far
+	frustrum[2] = Plane3d(Vector(0, 0, 0), Vector(ch, 0, sh)); // left
+	frustrum[3] = Plane3d(Vector(0, 0, 0), Vector(-ch, 0, sh)); // right
+	frustrum[4] = Plane3d(Vector(0, 0, 0), Vector(0, cv, sv)); // top
+	frustrum[5] = Plane3d(Vector(0, 0, 0), Vector(0, -cv, sv)); // bottom
 }
 
 // ##############################################

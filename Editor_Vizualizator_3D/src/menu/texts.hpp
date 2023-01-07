@@ -33,6 +33,11 @@ public:
 	int getX();
 
 	void PositionSizeString(std::string theText, int x, int y, int size);
+
+	void setFont(std::string pathToFont);
+
+
+
 };
 
 

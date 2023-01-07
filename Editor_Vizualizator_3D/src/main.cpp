@@ -12,11 +12,11 @@
 
 int main()
 {
-	
+
 	//f/reastra aplicatiei
 	sf::ContextSettings window_settings;
 	window_settings.antialiasingLevel = 8; // nivelul de distorsionare
-	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Editor\Vizualizator 3D", sf::Style::Close | sf::Style::Resize, window_settings);
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "Editor\Vizualizator 3D", sf::Style::Fullscreen, window_settings);
 	window.setVerticalSyncEnabled(true);
 	window.setKeyRepeatEnabled(false);
 	//Mouse::setPosition(sf::Vector2i(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), window);
@@ -27,7 +27,7 @@ int main()
 	//create Interface
 	while (1)
 		interfata(window);
-	
+
 	///////////////////////////////////////////////
 	//Verificari//////////////////////////////////
 	/////////////////////////////////////////////
