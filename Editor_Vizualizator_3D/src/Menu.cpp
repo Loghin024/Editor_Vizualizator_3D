@@ -348,7 +348,8 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 				saveNameOfProject = temp;
 				slide = 1;
 				window.clear();
-				before.change(window, camera, saveNameOfProject);
+				before.simpleChange(window, camera, saveNameOfProject);
+				//	before.change(window, camera, saveNameOfProject, );
 				break;
 
 			}
@@ -497,12 +498,15 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 		Vector2u size = window.getSize();
 
 		//std::cout << movingScreen << " ";
-
+		//std::cout "cpozx" << cpozx << std::endl;
+		//std::cout "cpozx" << cpozx << std::endl;
+//
 		a.figures(window, size.x, size.y, xMoved, yMoved, language);
 		a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language, camera, compScroll);
 
 
 		FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
+
 		for (int i = 1; i <= 3; i++)
 		{
 			char temporary[100];
@@ -525,9 +529,9 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 		std::fclose(f);
 		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
 		text.draw(window);
-		text.PositionSizeString(screen[1], 1380 + 10, 10, 30);
+		text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
 		text.draw(window);
-		text.PositionSizeString(screen[2], 260, 10, 15);
+		text.PositionSizeString(screen[2], 300, 10, 15);
 		text.draw(window);
 	}
 	
@@ -1102,6 +1106,10 @@ void interfata(sf::RenderWindow& window)
 							fprintf(numeProiect, "%s", "\n");
 							fclose(numeProiect);
 
+						/*	while (proiect[proiect.size() - 1] == ' ')
+							{
+								proiect.pop_back();
+							}*/
 							std::string creareFisierText;
 							creareFisierText = "src\\userProjects\\" + proiect + ".txt";
 							int n = creareFisierText.length();
@@ -1119,6 +1127,15 @@ void interfata(sf::RenderWindow& window)
 								FILE* creareFisier = fopen(creareFiserTextChar, "w");
 								fclose(creareFisier);*/
 
+							while (saveNameOfProject[saveNameOfProject.size() - 1] == ' ')
+							{
+								saveNameOfProject.pop_back();
+							}
+							projectFolder = "src\\userProjects\\";
+							projectFolder += saveNameOfProject;
+							projectFolder += "\\name.txt";		
+							FILE* numeProiect2 = fopen(projectFolder.c_str(), "a");
+							fclose(numeProiect2);
 							playerInput.clear();
 							window.clear();
 						}
@@ -1130,7 +1147,7 @@ void interfata(sf::RenderWindow& window)
 								playerText.setString(playerInput);
 							}
 						}
-						else if (event.text.unicode == 8)
+						if (event.text.unicode == 8)
 						{
 							if (playerInput.length() > 0) {
 								playerInput.pop_back();
@@ -1265,8 +1282,27 @@ void interfata(sf::RenderWindow& window)
 			if (slide == 0) giveNameForProject(window, language, playerInput, pozMx, pozMy);
 			else
 			{
+				while (saveNameOfProject[saveNameOfProject.size() - 1] == ' ')
+				{
+					saveNameOfProject.pop_back();
+				}
+				std::cout << saveNameOfProject << "aa" << std::endl;
+				int nothing = 0;
+				std::string path = "src\\userProjects\\";
+				path += saveNameOfProject;
+				path += "\\";
+				path += "name.txt";
+				FILE* compNames2 = fopen(path.c_str(), "r+");
+				while (!feof(compNames2))
+				{
+					char buff[100];
+					fgets(buff, 100, compNames2);
+					nothing++;
+				}
+				fclose(compNames2);
+				nothing--;
 				//firstEntry.change(window, camera, saveNameOfProject);
-				if (rotateCamera == false) {
+				if (rotateCamera == false || nothing == 0) {
 					viewAndEdit(window, camera, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY, moving, compScroll);
 					std::cout << "view";
 				}
@@ -1274,239 +1310,265 @@ void interfata(sf::RenderWindow& window)
 				{
 					int nr = 0;
 					char everything[100][100];
-					std::string path = "src\\userProjects\\";
-					path += saveNameOfProject;
-					path += "\\";
-					path += "name.txt";
-					FILE* compNames = fopen(path.c_str(), "r+");
-					//std::cout << path << std::endl;
-					//if(!feof)
-					if (!feof(compNames))
+					
+					if (nothing > 0)
 					{
-						//char buff[100];
-						//fgets(buff, 100, compNames);
-						while (!feof(compNames))
+						std::cout << "nothing= " << nothing << std::endl;
+						FILE* compNames = fopen(path.c_str(), "r+");
+						//std::cout << path << std::endl;
+						//if(!feof)
+						if (!feof(compNames))
 						{
-							window.clear();
-							char buff[100];
-							int index = 0;
-							char comp[100]{};
-							fgets(buff, 100, compNames);
-							strncpy(comp, buff, strlen(buff) - 1);
-							std::string pathForDates = "src\\userProjects\\";
-							pathForDates += saveNameOfProject;
-							pathForDates += "\\";
-							pathForDates += comp;
-							pathForDates += ".txt";
-							//std::cout << pathForDates << std::endl;
-							FILE* compDates = fopen(pathForDates.c_str(), "r+");
-							char position[100], sizes[101], Index[10];
-
-							if (!feof(compDates))
+							//char buff[100];
+							//fgets(buff, 100, compNames);
+							while (!feof(compNames))
 							{
-								std::fgets(position, 100, compDates);
-								std::fgets(sizes, 101, compDates);
-								std::fgets(Index, 10, compDates);
-							}
-							char getIndex[100];
-							strncpy(getIndex, Index, strlen(Index) - 1);
-							for (int i = 0; i < strlen(getIndex); i++)
-							{
-								if (getIndex[i] >= '0' && getIndex[i] <= '9')
-									index = index * 10 + int(getIndex[i] - 48);
-							}
-							index /= 10;
+								window.clear();
+								char buff[100];
+								int index = 0;
+								char comp[100]{};
+								fgets(buff, 100, compNames);
+								strncpy(comp, buff, strlen(buff) - 1);
+								std::string pathForDates = "src\\userProjects\\";
+								pathForDates += saveNameOfProject;
+								pathForDates += "\\";
+								pathForDates += comp;
+								pathForDates += ".txt";
+								//std::cout << pathForDates << std::endl;
+								FILE* compDates = fopen(pathForDates.c_str(), "r+");
+								char position[100], sizes[101], Index[10];
 
-							int h = 0, l = 0, L = 0;
-							int x = 0, y = 0, z = 0;
-							//scoatem size - urile din fisier
+								if (!feof(compDates))
+								{
+									std::fgets(position, 100, compDates);
+									std::fgets(sizes, 101, compDates);
+									std::fgets(Index, 10, compDates);
+								}
+								char getIndex[100];
+								strncpy(getIndex, Index, strlen(Index) - 1);
+								for (int i = 0; i < strlen(getIndex); i++)
+								{
+									if (getIndex[i] >= '0' && getIndex[i] <= '9')
+										index = index * 10 + int(getIndex[i] - 48);
+								}
+								index /= 10;
+
+								int h = 0, l = 0, L = 0;
+								int x = 0, y = 0, z = 0;
+								//scoatem size - urile din fisier
+								int c = 0;
+								for (int i = 0; i < strlen(sizes); i++)
+								{
+									if (sizes[i] == ' ') c++;
+									else
+									{
+										if (sizes[i] != '-')
+										{
+											if (c == 0)
+												h = h * 10 + int(sizes[i] - 48);
+											else if (c == 1)
+												l = l * 10 + int(sizes[i] - 48);
+											else if (c == 2)
+												L = L * 10 + int(sizes[i] - 48);
+										}
+									}
+								}
+								c = 0;
+								for (int i = 0; i < strlen(sizes); i++)
+								{
+									if (sizes[i] == ' ') c++;
+									else
+									{
+										//std::cout << getText[i] << " " << c << std::endl;
+										if (c == 0)
+											if (sizes[i] == '-') h = h * -1;
+										if (c == 1)
+											if (sizes[i] == '-') l = l * -1;
+										if (c == 2)
+											if (sizes[i] == '-') L = L * -1;
+									}
+								}
+
+								//scoatem pozitiile din fisier
+								c = 0;
+								char getText[100];
+								strncpy(getText, position, strlen(position) - 1);
+
+								for (int i = 0; i < strlen(getText); i++)
+								{
+									if (getText[i] == ' ') c++;
+									else
+									{
+										if (getText[i] != '-')
+										{
+											if (c == 0)
+												x = x * 10 + int(getText[i] - 48);
+											else if (c == 1)
+												y = y * 10 + int(getText[i] - 48);
+											else if (c == 2)
+												z = z * 10 + int(getText[i] - 48);
+										}
+									}
+								}
+								c = 0;
+								for (int i = 0; i < strlen(getText); i++)
+								{
+									if (getText[i] == ' ') c++;
+									else
+									{
+										//std::cout << getText[i] << " " << c << std::endl;
+										if (c == 0)
+											if (getText[i] == '-') x = x * -1;
+										if (c == 1)
+											if (getText[i] == '-') y = y * -1;
+										if (c == 2)
+											if (getText[i] == '-') z = z * -1;
+									}
+								}
+								fclose(compDates);
+								//std::cout << x << " " << y << " " << z << std::endl;
+								//std::cout << index << std::endl;
+								//std::cout << h << " " << l << " " << L << std::endl;
+								char X[100]{};
+								_itoa(x, X, 10);
+								strcpy(everything[nr], X);
+								strcat(everything[nr], " ");
+								memset(X, 0, sizeof(X));
+								_itoa(y, X, 10);
+								strcat(everything[nr], X);
+								strcat(everything[nr], " ");
+								memset(X, 0, sizeof(X));
+								_itoa(z, X, 10);
+								strcat(everything[nr], X);
+								strcat(everything[nr], " ");
+								memset(X, 0, sizeof(X));
+								_itoa(h, X, 10);
+								strcat(everything[nr], X);
+								strcat(everything[nr], " ");
+								memset(X, 0, sizeof(X));
+								_itoa(l, X, 10);
+								strcat(everything[nr], X);
+								strcat(everything[nr], " ");
+								memset(X, 0, sizeof(X));
+								_itoa(L, X, 10);
+								strcat(everything[nr], X);
+								strcat(everything[nr], " ");
+								memset(X, 0, sizeof(X));
+								_itoa(index, X, 10);
+								strcat(everything[nr], X);
+								strcat(everything[nr], " ");
+								nr++;
+
+							}
+						}
+						else
+							std::cout << "aiurea";
+						fclose(compNames);
+
+						for (int i = 0; i < nr; i++)
+						{
+							int x = 0, y = 0, z = 0, index = 0, h = 0, l = 0, L = 0;
 							int c = 0;
-							for (int i = 0; i < strlen(sizes); i++)
+							for (int j = 0; j < strlen(everything[i]); j++)
 							{
-								if (sizes[i] == ' ') c++;
+								if (everything[i][j] == ' ') c++;
 								else
-								{
-									if (sizes[i] != '-')
-									{
-										if (c == 0)
-											h = h * 10 + int(sizes[i] - 48);
-										else if (c == 1)
-											l = l * 10 + int(sizes[i] - 48);
-										else if (c == 2)
-											L = L * 10 + int(sizes[i] - 48);
-									}
-								}
-							}
-							c = 0;
-							for (int i = 0; i < strlen(sizes); i++)
-							{
-								if (sizes[i] == ' ') c++;
-								else
-								{
-									//std::cout << getText[i] << " " << c << std::endl;
 									if (c == 0)
-										if (sizes[i] == '-') h = h * -1;
-									if (c == 1)
-										if (sizes[i] == '-') l = l * -1;
-									if (c == 2)
-										if (sizes[i] == '-') L = L * -1;
-								}
-							}
-
-							//scoatem pozitiile din fisier
-							c = 0;
-							char getText[100];
-							strncpy(getText, position, strlen(position) - 1);
-
-							for (int i = 0; i < strlen(getText); i++)
-							{
-								if (getText[i] == ' ') c++;
-								else
-								{
-									if (getText[i] != '-')
-									{
-										if (c == 0)
-											x = x * 10 + int(getText[i] - 48);
-										else if (c == 1)
-											y = y * 10 + int(getText[i] - 48);
-										else if (c == 2)
-											z = z * 10 + int(getText[i] - 48);
-									}
-								}
+										x = x * 10 + int(everything[i][j] - 48);
+									else if (c == 1)
+										y = y * 10 + int(everything[i][j] - 48);
+									else if (c == 2)
+										z = z * 10 + int(everything[i][j] - 48);
+									else if (c == 3)
+										h = h * 10 + int(everything[i][j] - 48);
+									else if (c == 4)
+										l = l * 10 + int(everything[i][j] - 48);
+									else if (c == 5)
+										L = L * 10 + int(everything[i][j] - 48);
+									else if (c == 6)
+										index = index * 10 + int(everything[i][j] - 48);
 							}
 							c = 0;
-							for (int i = 0; i < strlen(getText); i++)
+							for (int j = 0; j < strlen(everything[i]); j++)
 							{
-								if (getText[i] == ' ') c++;
+								if (everything[i][j] == ' ') c++;
 								else
-								{
-									//std::cout << getText[i] << " " << c << std::endl;
 									if (c == 0)
-										if (getText[i] == '-') x = x * -1;
-									if (c == 1)
-										if (getText[i] == '-') y = y * -1;
-									if (c == 2)
-										if (getText[i] == '-') z = z * -1;
-								}
+										if (everything[i][j] == '-') x = x * -1;
+								if (c == 1)
+									if (everything[i][j] == '-') y = y * -1;
+								if (c == 2)
+									if (everything[i][j] == '-') z = z * -1;
 							}
-							fclose(compDates);
-							//std::cout << x << " " << y << " " << z << std::endl;
-							//std::cout << index << std::endl;
+							//std::cout << nr << " " << x << " " << y << " " << z;
+							//std::cout << " " << index << " ";
 							//std::cout << h << " " << l << " " << L << std::endl;
-							char X[100]{};
-							_itoa(x, X, 10);
-							strcpy(everything[nr], X);
-							strcat(everything[nr], " ");
-							memset(X, 0, sizeof(X));
-							_itoa(y, X, 10);
-							strcat(everything[nr], X);
-							strcat(everything[nr], " ");
-							memset(X, 0, sizeof(X));
-							_itoa(z, X, 10);
-							strcat(everything[nr], X);
-							strcat(everything[nr], " ");
-							memset(X, 0, sizeof(X));
-							_itoa(h, X, 10);
-							strcat(everything[nr], X);
-							strcat(everything[nr], " ");
-							memset(X, 0, sizeof(X));
-							_itoa(l, X, 10);
-							strcat(everything[nr], X);
-							strcat(everything[nr], " ");
-							memset(X, 0, sizeof(X));
-							_itoa(L, X, 10);
-							strcat(everything[nr], X);
-							strcat(everything[nr], " ");
-							memset(X, 0, sizeof(X));
-							_itoa(index, X, 10);
-							strcat(everything[nr], X);
-							strcat(everything[nr], " ");
-							nr++;
 
+							if (index == 2)
+							{
+								Cub cub(Vector(x, y, h), h);
+								cub.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 3)
+							{
+								Prism prisma(Vector(x, y, z), h, l, L);
+								prisma.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 4)
+							{
+								Sphere3d sphere(Vector(x, y, z), h, 100, 20);
+								sphere.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 5)
+							{
+								Cylinder3d cylinder(Vector(x, y, z), h, l, 20);
+								cylinder.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 6)
+							{
+								Pyramid3d pyramid(Vector(x, y, z), h, l, L);
+								pyramid.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 7)
+							{
+								Pyramid3d pyramid(Vector(x, y, z), h, l, L);
+								pyramid.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 8)
+							{
+								Con3d con(Vector(x, y, z), h, l, 20);
+								con.render_solid(window, 1600, 900, camera);
+							}
 						}
-					}
-					else
-						std::cout << "aiurea";
-					fclose(compNames);
+						//std::cout << everything[i] << std::endl;
 
-					for (int i = 0; i < nr; i++)
+						memset(everything, 0, sizeof(everything));
+					}
+
+					FILE* f = fopen("src\\programtexts/justView.txt", "r");
+					char onlyTextOnViewer[100]{};
+					for (int i = 1; i <= 3; i++)
 					{
-						int x = 0, y = 0, z = 0, index = 0, h = 0, l = 0, L = 0;
-						int c = 0;
-						for (int j = 0; j < strlen(everything[i]); j++)
-						{
-							if (everything[i][j] == ' ') c++;
-							else
-								if (c == 0)
-									x = x * 10 + int(everything[i][j] - 48);
-								else if (c == 1)
-									y = y * 10 + int(everything[i][j] - 48);
-								else if (c == 2)
-									z = z * 10 + int(everything[i][j] - 48);
-								else if (c == 3)
-									h = h * 10 + int(everything[i][j] - 48);
-								else if (c == 4)
-									l = l * 10 + int(everything[i][j] - 48);
-								else if (c == 5)
-									L = L * 10 + int(everything[i][j] - 48);
-								else if (c == 6)
-									index = index * 10 + int(everything[i][j] - 48);
-						}
-						c = 0;
-						for (int j = 0; j < strlen(everything[i]); j++)
-						{
-							if (everything[i][j] == ' ') c++;
-							else
-								if (c == 0)
-									if (everything[i][j] == '-') x = x * -1;
-							if (c == 1)
-								if (everything[i][j] == '-') y = y * -1;
-							if (c == 2)
-								if (everything[i][j] == '-') z = z * -1;
-						}
-						//std::cout << nr << " " << x << " " << y << " " << z;
-						//std::cout << " " << index << " ";
-						//std::cout << h << " " << l << " " << L << std::endl;
-
-						if (index == 2)
-						{
-							Cub cub(Vector(x, y, h), h);
-							cub.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 3)
-						{
-							Prism prisma(Vector(x, y, z), h, l, L);
-							prisma.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 4)
-						{
-							Sphere3d sphere(Vector(x, y, z), h, 100, 20);
-							sphere.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 5)
-						{
-							Cylinder3d cylinder(Vector(x, y, z), h, l, 20);
-							cylinder.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 6)
-						{
-							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 7)
-						{
-							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 8)
-						{
-							Con3d con(Vector(x, y, z), h, l, 20);
-							con.render_solid(window, 1600, 900, camera);
-						}
+						char a[50];
+						fgets(a, 50, f);
+						if (i == language)
+							strncpy(onlyTextOnViewer, a, strlen(a) - 1);
 					}
-					//std::cout << everything[i] << std::endl;
-
-					memset(everything, 0, sizeof(everything));
+					texts press(onlyTextOnViewer, 10, 10, 0, 0, 20);
+					fclose(f);
+					press.draw(window);
+					/*FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
+					char onlyTextOnViewer[100]{};
+					for (int i = 1; i <= 3; i++)
+					{
+						char a[30];
+						fgets(a, 30, f);
+						if (i == language)
+							strncpy(onlyTextOnViewer, a, strlen(a) - 1);
+					}
+					texts press(onlyTextOnViewer, 10, 10, 0, 0, 20);
+					fclose(f);
+					press.draw(window);*/
 					window.display();
 				}
 			}

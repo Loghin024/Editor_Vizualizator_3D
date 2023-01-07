@@ -28,7 +28,7 @@ void createFolderAndTexts()
 	fclose(programUtilities7);
 
 	FILE* programUtilities4 = fopen("src\\programtexts/viewAndEdit.txt", "w");
-	fprintf(programUtilities4, "%s", "Adaugati figura:\nAdd figure:\nRusa\nComponente:\nComponents:\nRusa:\nApasati enter pentru mod vizualizare\nPress enter for view mode\nRusa");
+	fprintf(programUtilities4, "%s", "Adaugati figura : \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasati o pentru mod vizualizare\nPress enter for view mode\nRusa");
 	fclose(programUtilities4);
 
 	/*FILE* programUtilities5 = fopen("src\\programtexts/posibleFigures.txt", "w");
@@ -52,6 +52,11 @@ void createFolderAndTexts()
 	FILE* programUtilities10 = fopen("src\\programtexts/textsForSizes.txt", "w");
 	fprintf(programUtilities10, "%s", "Marime:\nSize:\nRusa\nLungime:\nLenght:\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nDiametru:\nDiameter:\nRusa\nRaza:\nRadius:\nRusa");
 	fclose(programUtilities10);
+
+	FILE* programUtilities11 = fopen("src\\programtexts/justView.txt", "w");
+	fprintf(programUtilities11, "%s", "Apasati c pentru pentru modul editare\nPress c for edit mode\nRusa");
+	fclose(programUtilities11);
+
 
 	if (_mkdir("src\\images"));
 	if (_mkdir("src\\Fonts"));
