@@ -1,5 +1,5 @@
-Dati numle proiectului:
-Give the name of project:
+Numele Proiectului:
+Project Name:
 rusa
 Inapoi
 Back

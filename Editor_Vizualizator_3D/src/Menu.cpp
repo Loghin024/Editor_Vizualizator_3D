@@ -294,16 +294,17 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 
 	// un patrat de culoare diferita ce va fi pozotionat in partea de sus a ferestrei
 	// ce va fi practic, bara noastra de navigare
-	button bar(0, 0, "", 1600, 40, 0);;
+	button bar(0, 0, "", WINDOW_WIDTH, 40, 0);
 	bar.setButtonColor(11, 126, 168, 255);
 	bar.draw(window);
 
 	// textul de dupa are vor fi afisate proiectele mele
-	texts titlu(output2[0], 20, 36, 0, 0, 60, 0, 0, 0, 255);
+	texts titlu(output2[0], 40, 55, 0, 0, 60, 4, 42, 56, 255);
+	titlu.setFont("res/Fonts/Montserrat/static/Montserrat-Bold.ttf");
 	titlu.draw(window);
 
 	// linia ce separa bara de navigare de restul programului
-	bar.changeLengthAndHeight(1600, 0);
+	bar.changeLengthAndHeight(WINDOW_WIDTH, 0);
 	bar.changePosition(0, 40);
 	bar.setOutlineThicknesAndColor(1, 0, 0, 0, 255);
 	bar.draw(window);
@@ -313,15 +314,17 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 	divide.setButtonColor(0, 0, 0, 255);
 	divide.draw(window);
 
-	texts goBack(output2[1], 20, 2, 0, 0, 30);
+	texts goBack(output2[1], 20, 2, 0, 0, 25);
 	if (pozMx < back && pozMy < 40)	goBack.changeColor(203, 55, 23, 255);
 	else goBack.changeColor(0, 0, 0, 255);
+	goBack.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	goBack.draw(window);
 
-	texts newProject(output2[2], divide.getX() + 20, 2, 0, 0, 30);
+	texts newProject(output2[2], divide.getX() + 20, 2, 0, 0, 25);
 	// textul celui de al doilea buton din bara de navigare, de creare a unui proiect nou
 	if (pozMx > back && pozMy < 40) newProject.changeColor(203, 55, 23, 255);
 	else newProject.changeColor(0, 0, 0, 255);
+	newProject.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	newProject.draw(window);
 
 	std::fclose(f2);
@@ -330,8 +333,8 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 
 	line = 0;
 	// afisarea proiectelor pe care le avem salvate pana acum
-	if (pozMx > 500 - 10 * strlen(output2[3]) && pozMx < 500 + 2 * 10 * strlen(output2[3]) && pozMy > 116)	nivel = (pozMy - 116) / 50;
-	if (pozMx > 500 + 2 * 10 * strlen(output2[3]) && pozMx < 500 + 2 * 10 * strlen(output2[1]) + 5 * strlen(output2[4]) + 15 * strlen(output2[4]) && pozMy > 116)	nivel2 = (pozMy - 116) / 50;
+	if (pozMx > WINDOW_WIDTH - 350 && pozMx < WINDOW_WIDTH - 195 && pozMy > 150)	nivel = (pozMy - 150) / 50;
+	if (pozMx > WINDOW_WIDTH - 195 && pozMx < WINDOW_WIDTH && pozMy > 150)	nivel2 = (pozMy - 150) / 50;
 
 	char proiecte[100];
 	fgets(proiecte, 100, f4);
@@ -342,7 +345,7 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 		if (copieScrool > 0) copieScrool--;
 		else
 		{
-			texts out(proiecte, 10, 120 + 50 * line, 0, 0, 30, 0, 0, 0, 255);
+			texts out(proiecte, 55, 150 + 50 * line, 0, 0, 30, 0, 0, 0, 255);
 			out.draw(window);
 			/*text.setString(proiecte);
 			text.setPosition(10, 120 + 50 * line);
@@ -351,14 +354,14 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 			if (!nivel) out.changeColor(203, 55, 23, 255);
 			else out.changeColor(0, 0, 0, 255);
 
-			out.PositionSizeString(output2[3], 500, 130 + 50 * line, 25);
+			out.PositionSizeString(output2[3], WINDOW_WIDTH - 300, 150 + 50 * line, 25);
 			out.draw(window);
 
 			if (!nivel2) out.changeColor(203, 55, 23, 255);
 			else out.changeColor(0, 0, 0, 255);
 			int lungimeSirRemove = strlen(output2[1]);
 
-			out.PositionSizeString(output2[4], 500 + 2 * 10 * lungimeSirRemove + 5 * strlen(output2[4]), 130 + 50 * line, 25);
+			out.PositionSizeString(output2[4], WINDOW_WIDTH - 150, 150 + 50 * line, 25);
 			out.draw(window);
 
 			if (!nivel2 && view == 1)
@@ -377,20 +380,16 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 			}
 			if (!nivel)	divide.setButtonColor(203, 55, 23, 255);
 
-			divide.changePosition(500 - 10 * lungimeSirRemove, 130 + 50 * line);
+			divide.changePosition(WINDOW_WIDTH - 350, 160 + 50 * line);
 			divide.draw(window);
 
 			if (!nivel2) divide.setButtonColor(203, 55, 23, 255);
-			divide.changePosition(500 + 2 * 10 * lungimeSirRemove, 130 + 50 * line);
-			divide.draw(window);
-
-			if (!nivel)	divide.setButtonColor(0, 0, 0, 255);
-			divide.changePosition(500 + 2 * 10 * lungimeSirRemove + 5 * strlen(output2[4]) + 15 * strlen(output2[4]), 130 + 50 * line);
+			divide.changePosition(WINDOW_WIDTH - 195, 160 + 50 * line);
 			divide.draw(window);
 
 			divide.setButtonColor(0, 0, 0, 255);
 
-			bar.changePosition(1, 145 + 50 * line + 20);
+			bar.changePosition(40, 175 + 50 * line + 20);
 			bar.draw(window);
 
 			nivel--;
@@ -464,7 +463,20 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 
 void giveNameForProject(sf::RenderWindow& window, int language, std::string name, int PozMx, int PozMy)
 {
-	window.clear();
+	window.clear(sf::Color(37, 150, 190));
+
+	// un patrat de culoare diferita ce va fi pozotionat in partea de sus a ferestrei
+	// ce va fi practic, bara noastra de navigare
+	button bar(0, 0, "", WINDOW_WIDTH, 40, 0);
+	bar.setButtonColor(11, 126, 168, 255);
+	bar.draw(window);
+
+	// linia ce separa bara de navigare de restul programului
+	bar.changeLengthAndHeight(WINDOW_WIDTH, 0);
+	bar.changePosition(0, 40);
+	bar.setOutlineThicknesAndColor(1, 0, 0, 0, 255);
+	bar.draw(window);
+
 	char sir[100];
 	FILE* theNameTexts = fopen("src\\programtexts/giveNameForProject.txt", "r");
 
@@ -476,9 +488,10 @@ void giveNameForProject(sf::RenderWindow& window, int language, std::string name
 			strcpy(sir, buff);
 	}
 
-	texts text(sir, 20, 50, 0, 0, 50, 234, 235, 229, 255);
+	texts text(sir, 45, 70, 0, 0, 30, 0, 0, 0, 255);
+	text.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	text.draw(window);
-	texts theNmae(name, strlen(sir) * 20 + 15, 54, 0, 0, 50, 234, 235, 229, 255);
+	texts theNmae(name, 600, 70, 0, 0, 30, 234, 235, 229, 255);
 	theNmae.draw(window);
 
 	for (int i = 1; i <= 3; i++)
@@ -493,10 +506,16 @@ void giveNameForProject(sf::RenderWindow& window, int language, std::string name
 
 	int back = 40 + 10 * strlen(sir);
 
-	texts goBack(sir, 20, 2, 0, 0, 30);
+	texts goBack(sir, 20, 2, 0, 0, 25);
 	if (pozMx < back && pozMy < 40)	goBack.changeColor(203, 55, 23, 255);
-	else goBack.changeColor(234, 235, 229, 255);
+	else goBack.changeColor(0, 0, 0, 255);
+	goBack.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	goBack.draw(window);
+
+	// linia ce separa cele doua butoane din bara de navigare
+	button divide(back, 6, "", 2, 30, 0);
+	divide.setButtonColor(0, 0, 0, 255);
+	divide.draw(window);
 
 	window.display();
 }
@@ -666,7 +685,7 @@ void interfata(sf::RenderWindow& window)
 			{
 				if (event.type == sf::Event::MouseButtonPressed)
 				{
-					if (event.mouseButton.button == sf::Mouse::Right)
+					if (event.mouseButton.button == sf::Mouse::Left)
 					{
 						if (event.mouseButton.y < 40 && event.mouseButton.x < back)
 						{
@@ -683,7 +702,7 @@ void interfata(sf::RenderWindow& window)
 						if (event.mouseButton.x > 500 + 2 * 10 * strlen(output2[3]) && event.mouseButton.x < 500 + 2 * 10 * strlen(output2[1]) + 5 * strlen(output2[4]) + 15 * strlen(output2[4]) && event.mouseButton.y > 116) view = 1;
 					}
 					// aici se realizeaza stergerea proiectului dorit
-					if (event.mouseButton.x > 500 - 10 * strlen(output2[3]) && event.mouseButton.x < 500 + 2 * 10 * strlen(output2[3]) && event.mouseButton.y > 116)
+					if (event.mouseButton.x > WINDOW_WIDTH - 300 && event.mouseButton.x < WINDOW_WIDTH - 195 && event.mouseButton.y > 150)
 					{
 						nrProiecte--;
 						char proiect[100];
@@ -740,7 +759,7 @@ void interfata(sf::RenderWindow& window)
 						fclose(f3);
 						//s a terminat stergerea
 					}
-					if (pozMx > 500 + 2 * 10 * strlen(output2[3]) && pozMx < 500 + 2 * 10 * strlen(output2[1]) + 5 * strlen(output2[4]) + 15 * strlen(output2[4]) && pozMy > 116) view = 1;
+					if (pozMx > WINDOW_WIDTH - 195 && pozMx < WINDOW_WIDTH && pozMy > 150) view = 1;
 
 				}
 
@@ -1163,7 +1182,7 @@ void interfata(sf::RenderWindow& window)
 					}
 					if (event.type == sf::Event::MouseButtonPressed)
 					{
-						if (event.mouseButton.button == sf::Mouse::Right)
+						if (event.mouseButton.button == sf::Mouse::Left)
 						{
 							if (event.mouseButton.y < 40 && event.mouseButton.x < back) curentWindow = 0;
 
