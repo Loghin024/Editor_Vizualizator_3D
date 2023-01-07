@@ -1,9 +1,9 @@
-Adaugati figura:
-Add figure:
+Adaugati figura : 
+Add figure : 
 Rusa
 Componente:
-Components:
-Rusa:
-Apasati enter pentru mod vizualizare
+Components : 
+Rusa : 
+Apasati o pentru mod vizualizare
 Press enter for view mode
 Rusa
