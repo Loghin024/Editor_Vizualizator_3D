@@ -9,7 +9,7 @@ public:
 
 	void conAndCilinder(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int index, int language);
 
-	void prismaPatratica(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int language);
+	void prismaPatratica(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int language, int index);
 
 	void piramide(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int language, int index);
 

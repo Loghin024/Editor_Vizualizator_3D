@@ -443,12 +443,12 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 	else minus = 0;
 
 	componentsDates figura;
-	//std::cout << "eeeeeeee" << index << "err";
+	std::cout << "eeeeeeee" << index << "\n";
 	if (index == 1);
 	else if (index == 2 || index == 4) figura.cubAndSfera(window, output3, playerText, indexAndCoordonates, coordonates, minus, index, language);
-	else if (index == 3) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language);
-	else if (index == 5 || index == 8) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
-	else if (index == 6 || index == 7) figura.piramide(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
+	else if (index == 3) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
+	else if (index == 5 || index == 7) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
+	else if (index == 6) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
 
 	//figura.cub(window, output3, playerText, indexAndCoordonates, coordonates, minus);
 		
@@ -584,12 +584,13 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 
 		std::fclose(f);
 		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
-		text.setFont("res/Fonts/Montserrat/static/Montserrat-Bold.ttf");
+		text.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 		text.draw(window);
-		text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
+		text.PositionSizeString(screen[1], window.getSize().x - 350 + 10, 10, 30);
 		text.draw(window);
-		text.PositionSizeString(screen[2], 300, 10, 15);
+		text.PositionSizeString(screen[2], 215, 20, 20);
 		text.draw(window);
+
 	}
 	
 	window.display();
@@ -953,7 +954,7 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 					}
-					else if (index == 5 || index == 8)
+					else if (index == 5 || index == 7)
 					{
 						if (event.text.unicode == 13)
 						{
@@ -1030,7 +1031,7 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 					}
-					else if (index == 6 || index == 7)
+					else if (index == 6)
 					{
 						if (event.text.unicode == 13)
 						{
@@ -1042,16 +1043,10 @@ void interfata(sf::RenderWindow& window)
 							strcpy(indexAndCoordonates[coordonates], playerInput.c_str());
 
 							coordonates++;
-							if (coordonates == 6 && index == 6)
+							/*if (coordonates == 6)
 							{
 								addAndCreate.addIndex(saveNameOfProject, project, index);
-								memset(indexAndCoordonates, 0, sizeof(indexAndCoordonates));
-								curentWindow = 3;
-								rotateCamera = true;
-
-								window.clear();
-								coordonates = 0;
-							}
+							}*/
 							if (coordonates == 7)
 							{
 								addAndCreate.addIndex(saveNameOfProject, project, index);
@@ -1591,11 +1586,6 @@ void interfata(sf::RenderWindow& window)
 						}
 						else if (index == 7)
 						{
-							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-						}
-						else if (index == 8)
-						{
 							Con3d con(Vector(x, y, z), h, l, 20);
 							con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
@@ -1614,9 +1604,10 @@ void interfata(sf::RenderWindow& window)
 						if (i == language)
 							strncpy(onlyTextOnViewer, a, strlen(a) - 1);
 					}
-					texts press(onlyTextOnViewer, 10, 10, 0, 0, 20);
+					texts press(onlyTextOnViewer, WINDOW_WIDTH - 340, 10, 0, 0, 20);
 					fclose(f);
-					press.draw(window);
+					if(rotateCamera)
+						press.draw(window);
 					/*FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
 					char onlyTextOnViewer[100]{};
 					for (int i = 1; i <= 3; i++)

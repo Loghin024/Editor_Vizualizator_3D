@@ -24,11 +24,11 @@ void createFolderAndTexts()
 	fclose(programUtilities3);
 
 	FILE* programUtilities7 = fopen("src\\programtexts/textsForCreateScreenPrisma.txt", "w");
-	fprintf(programUtilities7, "%s", "Numele figurii:\nThe name of figure:\nrusa\nIntroduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nLungime:\nLenght:\nRusa");
+	fprintf(programUtilities7, "%s", "Numele figurii:\nThe name of figure:\nrusa\nIntroduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nLatimea:\nWidth:\nRusa\nLungime:\nLenght:\nRusa\nLungimea bazei:\nLatimea bazei:");
 	fclose(programUtilities7);
 
 	FILE* programUtilities4 = fopen("src\\programtexts/viewAndEdit.txt", "w");
-	fprintf(programUtilities4, "%s", "Figuri: \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasati o pentru mod vizualizare\nPress enter for view mode\nRusa");
+	fprintf(programUtilities4, "%s", "Figuri: \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasa butonul O pentru mod vizualizare\nPress enter for view mode\nRusa");
 	fclose(programUtilities4);
 
 	/*FILE* programUtilities5 = fopen("src\\programtexts/posibleFigures.txt", "w");
@@ -54,7 +54,7 @@ void createFolderAndTexts()
 	fclose(programUtilities10);
 
 	FILE* programUtilities11 = fopen("src\\programtexts/justView.txt", "w");
-	fprintf(programUtilities11, "%s", "Apasati c pentru pentru modul editare\nPress c for edit mode\nRusa");
+	fprintf(programUtilities11, "%s", "Apasa C pentru modul editare\nPress c for edit mode\nRusa");
 	fclose(programUtilities11);
 
 

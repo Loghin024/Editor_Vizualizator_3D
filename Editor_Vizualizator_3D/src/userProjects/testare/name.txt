@@ -1,13 +1,5 @@
 prisma1
-prisma2
-prisma3
-prisma4
 pir1
 cilindru1
 gdfgds
-fdsfdf
-yuit
-hgh
-gdfgd
-hfghfgh
-trac
+con
