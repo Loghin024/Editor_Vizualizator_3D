@@ -7,10 +7,10 @@
 #include "menu/button.hpp"
 #include "geometry/geometrie.hpp"
 #include "geometry/solid3d.hpp"
-//#include "utils/mouse.hpp"
+#include "utils/mouse.hpp"
 #include "utils/figuresInfo.hpp"
 #include "utils/componentsDates.hpp"
-#include "../src/utils/mouse.hpp"
+//#include "../src/utils/mouse.hpp"
 #include "utils/parameters.hpp"
 
 int language = 1, line = 0, nivel = 0, nivel2, nrProiecte = 0, scrool = 0;
@@ -443,7 +443,6 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 	else minus = 0;
 
 	componentsDates figura;
-	std::cout << "eeeeeeee" << index << "\n";
 	if (index == 1);
 	else if (index == 2 || index == 4) figura.cubAndSfera(window, output3, playerText, indexAndCoordonates, coordonates, minus, index, language);
 	else if (index == 3) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
@@ -1233,6 +1232,13 @@ void interfata(sf::RenderWindow& window)
 						{
 							sf::Vector2u size = window.getSize();
 
+							//intoarcere in meniul principal din modul de editare
+							if (event.mouseButton.y > window.getSize().y - 30 && event.mouseButton.x < 180 && event.mouseButton.y > window.getSize().y - 30 && event.mouseButton.x > 20)
+							{
+								curentWindow = 0;
+								window.clear();
+							}
+
 							if (event.mouseButton.x > 0 && event.mouseButton.x < 195)
 							{
 								//70 120 150
@@ -1338,7 +1344,6 @@ void interfata(sf::RenderWindow& window)
 				{
 					saveNameOfProject.pop_back();
 				}
-				std::cout << saveNameOfProject << "aa" << std::endl;
 				int nothing = 0;
 				std::string path = "src\\userProjects\\";
 				path += saveNameOfProject;
@@ -1356,7 +1361,6 @@ void interfata(sf::RenderWindow& window)
 				//firstEntry.change(window, camera, saveNameOfProject);
 				if (rotateCamera == false || nothing == 0) {
 					viewAndEdit(window, camera, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY, moving, compScroll);
-					std::cout << "view";
 				}
 				else
 				{
@@ -1365,7 +1369,6 @@ void interfata(sf::RenderWindow& window)
 					
 					if (nothing > 0)
 					{
-						std::cout << "nothing= " << nothing << std::endl;
 						FILE* compNames = fopen(path.c_str(), "r+");
 						//std::cout << path << std::endl;
 						//if(!feof)
@@ -1414,7 +1417,7 @@ void interfata(sf::RenderWindow& window)
 									if (sizes[i] == ' ') c++;
 									else
 									{
-										if (sizes[i] != '-')
+										if (sizes[i] >= '0' && sizes[i] <= '9')
 										{
 											if (c == 0)
 												h = h * 10 + int(sizes[i] - 48);
@@ -1451,7 +1454,7 @@ void interfata(sf::RenderWindow& window)
 									if (getText[i] == ' ') c++;
 									else
 									{
-										if (getText[i] != '-')
+										if (getText[i] >= '0' && getText[i] <= '9')
 										{
 											if (c == 0)
 												x = x * 10 + int(getText[i] - 48);
@@ -1524,7 +1527,7 @@ void interfata(sf::RenderWindow& window)
 							for (int j = 0; j < strlen(everything[i]); j++)
 							{
 								if (everything[i][j] == ' ') c++;
-								else
+								if (everything[i][j] >= '0' && everything[i][j] <= '9')
 									if (c == 0)
 										x = x * 10 + int(everything[i][j] - 48);
 									else if (c == 1)
@@ -1544,13 +1547,15 @@ void interfata(sf::RenderWindow& window)
 							for (int j = 0; j < strlen(everything[i]); j++)
 							{
 								if (everything[i][j] == ' ') c++;
-								else
+								if (everything[i][j] >= '0' && everything[i][j] <= '9')
+								{
 									if (c == 0)
 										if (everything[i][j] == '-') x = x * -1;
-								if (c == 1)
-									if (everything[i][j] == '-') y = y * -1;
-								if (c == 2)
-									if (everything[i][j] == '-') z = z * -1;
+									if (c == 1)
+										if (everything[i][j] == '-') y = y * -1;
+									if (c == 2)
+										if (everything[i][j] == '-') z = z * -1;
+								}
 							}
 							//std::cout << nr << " " << x << " " << y << " " << z;
 							//std::cout << " " << index << " ";
@@ -1563,15 +1568,17 @@ void interfata(sf::RenderWindow& window)
 						{
 							Cub cub(Vector(x, y, h), h);
 							cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							//cub.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, true);
 						}
 						else if (index == 3)
 						{
 							Prism prisma(Vector(x, y, z), h, l, L);
 							prisma.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							prisma.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, false);
 						}
 						else if (index == 4)
 						{
-							Sphere3d sphere(Vector(x, y, z), h, 100, 50);
+							Sphere3d sphere(Vector(x, y, z), h, 100, 40);
 							sphere.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 						else if (index == 5)
@@ -1586,7 +1593,7 @@ void interfata(sf::RenderWindow& window)
 						}
 						else if (index == 7)
 						{
-							Con3d con(Vector(x, y, z), h, l, 20);
+							Con3d con(Vector(x, y, z), h, l, 100);
 							con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 						}
 					}

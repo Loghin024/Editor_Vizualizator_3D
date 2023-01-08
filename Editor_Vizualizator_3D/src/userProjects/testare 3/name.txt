@@ -1,7 +1,3 @@
-cub1
-cilindru1
-con1
-cub3
 cub4
 cub5
 cub6
@@ -13,3 +9,8 @@ cub12
 cub13
 cub14
 cub16
+cub17
+prisma1
+cilindru1
+piramida1
+con1

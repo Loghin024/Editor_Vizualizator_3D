@@ -177,7 +177,6 @@ Cylinder3d::Cylinder3d(const Vector& _center,
         double theta = map(i, 0, 5 - 1, -90, 90);
         for (unsigned j = 0; j < number_of_points_per_circle; ++j) {
             double phi = map(j, 0, number_of_points_per_circle, -180, 180);
-            std::cout << "*";
 
             points1.push_back(Vector(radius * cos(as_radians(theta)) * cos(as_radians(phi)),
                 radius * cos(as_radians(theta)) * sin(as_radians(phi)), -height/2));
@@ -226,7 +225,6 @@ Con3d::Con3d(const Vector& _center,
         double theta = map(i, 0, 5 - 1, -90, 90);
         for (unsigned j = 0; j < number_of_points_per_circle; ++j) {
             double phi = map(j, 0, number_of_points_per_circle, -180, 180);
-            std::cout << "*";
 
             points1.push_back(Vector(radius * cos(as_radians(theta)) * cos(as_radians(phi)),
                 radius * cos(as_radians(theta)) * sin(as_radians(phi)), -height / 2));

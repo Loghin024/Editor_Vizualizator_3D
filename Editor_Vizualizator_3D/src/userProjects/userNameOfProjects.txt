@@ -5,3 +5,7 @@ testare
 proiect testare
 testare2
 testare 3
+testare editor
+rotiri
+ertert
+rotiri2

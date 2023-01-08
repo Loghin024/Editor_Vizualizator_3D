@@ -6,6 +6,7 @@
 #include <cstring>
 #include <string>
 #include <iostream>
+#include <vector>
 #include "utils/foldersAndTexts.hpp"
 #include "Menu.hpp"
 //#include "utils/figuresInfo.hpp"
@@ -32,36 +33,38 @@ int main()
 	//Verificari//////////////////////////////////
 	/////////////////////////////////////////////
 
-	////creaza un cub 
-	//Cub cub(Vector(0, 0, 0), 40);
-	//Cub cub1(Vector(0, -30, 0), 20);
-	//Cub cub2(Vector(0, -45, 0), 10);
-	////Cub cub1(Vector(100, 100, 100), 30
-	//Prism prisma1(Vector(0,0,0), 50, 20, 30);
+	//////creaza un cub 
+	//Cub cub(Vector(0, 0, 0), 10);
+	//Cub cub1(Vector(0, -10, 0), 10);
+	////Cub cub2(Vector(0, -45, 0), 10);
+	//////Cub cub1(Vector(100, 100, 100), 30
+	////Prism prisma1(Vector(0,0,0), 50, 20, 30);
 
-	///*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
-	//Prism leg2(Vector(0, 0, 20), 30, 5, 5);
-	//Prism leg3(Vector(40, 0, 0), 30, 5, 5);
-	//Prism leg4(Vector(40, 0, 20), 30, 5, 5);
-	//Prism fata(Vector(-25, -35, -25), 5, 50, 70);
-	//Line line(Vector(0, 0 ,0), Vector(15, 0, 40), 240);
+	/////*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
+	////Prism leg2(Vector(0, 0, 20), 30, 5, 5);
+	////Prism leg3(Vector(40, 0, 0), 30, 5, 5);
+	////Prism leg4(Vector(40, 0, 20), 30, 5, 5);
+	////Prism fata(Vector(-25, -35, -25), 5, 50, 70);
+	////Line line(Vector(0, 0 ,0), Vector(15, 0, 40), 240);
 
-	//char figura[100];
-	//Con3d figura(Vector(0, 0, 0), 70, 30, 100);
-	//Sphere3d sfera(Vector(0, 0, 0), 100, 40, 40);
+	////char figura[100];
+	////Con3d figura(Vector(0, 0, 0), 70, 30, 100);
+	////Sphere3d sfera(Vector(0, 0, 0), 100, 40, 40);
 
-	//Cylinder3d cilindru(Vector(0, 0, 0), 100, 5, 100);
-	//Cylinder3d cilindru1(Vector(50, 0, 0), 20, 40, 500);
+	////Cylinder3d cilindru(Vector(0, 0, 0), 100, 5, 100);
+	////Cylinder3d cilindru1(Vector(50, 0, 0), 20, 40, 500);
 
-	//Con3d con1(Vector(0, 0, 0), 70, 30, 100);
-	//Pyramid3d piramida(Vector(0, 0, 0), 20, 30, 100);
+	////Con3d con1(Vector(0, 0, 0), 70, 30, 100);
+	////Pyramid3d piramida(Vector(0, 0, 0), 20, 30, 100);
 
+	//////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////
 	////////////////////////////////////////////////////
-	///////////////////////////////////////////////////
-	//////////////////////////////////////////////////
 
+	//std::vector<Cub>cubes;
+	//cubes.push_back(cub);
 
-	 //create camera
+	// //create camera
 	//Camera camera(Vector(0, -100, -230),-30, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	//while (window.isOpen())
@@ -82,10 +85,10 @@ int main()
 
 	//	}
 
-	//	//rotate camera
+	////	//rotate camera
 	//	camera.rotate(Mouse::get_move_x(window), Mouse::get_move_y(window), rotateCamera);
 
-	//	// move camera
+	////	// move camera
 	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	//		camera.move(Camera::DIRECTION::FRONT);
 	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -99,7 +102,7 @@ int main()
 	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
 	//		camera.move(Camera::DIRECTION::DOWN);
 
-	//	//modul de editare
+	////	//modul de editare
 	//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	//	{
 	//		rotateCamera = true;
@@ -114,41 +117,46 @@ int main()
 	//	}
 	//	
 
-		//afisare
-		//window.clear();
-		//if (rotateCamera == false) {
-		//	a.figures(window, 0, 0, 0, 0, 1);
-			//a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language);
+	//	//afisare
+	//	window.clear();
+	//	//Cub cub(Vector(0, 0, 0), 10);
+	//	//cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	//	cubes[0].render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	//	cubes[0].rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, false);
+	//	//cub1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	//	//if (rotateCamera == false) {
+	//	//	a.figures(window, 0, 0, 0, 0, 1);
+	//		//a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language);
 
-		//} 
-		//Cub cub(Vector(0, 0, 0), 40);
-		//cub.render_solid(window, 1200, 800, camera);
-	//	//cub1.render_solid(window, 1200, 800, camera);
-	//	//cub2.render_solid(window, 1200, 800, camera);
-	//	////platou.render_solid(window, 1200, 800, camera);
-	//	////cub1.render_solid(window, 1200, 800, camera);
-	//	//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
-	//	//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-	//	//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+	//	//} 
+	//	//Cub cub(Vector(0, 0, 0), 40);
+	//	//cub.render_solid(window, 1200, 800, camera);
+	////	//cub1.render_solid(window, 1200, 800, camera);
+	////	//cub2.render_solid(window, 1200, 800, camera);
+	////	////platou.render_solid(window, 1200, 800, camera);
+	////	////cub1.render_solid(window, 1200, 800, camera);
+	////	//cub.rotate(Vector(50,0,0), Vector(0,1,0), 1, true);
+	////	//cub1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+	////	//cub2.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
 
-	//	//prisma1.render_solid(window, 1200, 800, camera);
-	//	//prisma1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
-	//	/*leg1.render_solid(window, 1200, 800, camera);
-	//	leg2.render_solid(window, 1200, 800, camera);
-	//	leg3.render_solid(window, 1200, 800, camera);
-	//	leg4.render_solid(window, 1200, 800, camera);
-	//	fata.render_solid(window, 1200, 800, camera);*/
-	//	//btnAddPrism.drawTo(window);
+	////	//prisma1.render_solid(window, 1200, 800, camera);
+	////	//prisma1.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+	////	/*leg1.render_solid(window, 1200, 800, camera);
+	////	leg2.render_solid(window, 1200, 800, camera);
+	////	leg3.render_solid(window, 1200, 800, camera);
+	////	leg4.render_solid(window, 1200, 800, camera);
+	////	fata.render_solid(window, 1200, 800, camera);*/
+	////	//btnAddPrism.drawTo(window);
 
-	//	//sfera.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	//cilindru.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	//cilindru1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	//con1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	//con1.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, false);
-	//	//piramida.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	//figura.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	////	//sfera.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	////	//cilindru.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	////	//cilindru1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	////	//con1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	////	//con1.rotate(Vector(50, 0, 0), Vector(1, 0, 0), 1, false);
+	////	//piramida.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	////	//figura.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 
-		//window.display();
+	//	window.display();
 	//}
 
 }
