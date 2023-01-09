@@ -1139,10 +1139,20 @@ void figuresInfo::change(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_
 			std::cout << "l =" << l << std::endl;
 			std::cout << "L =" << L << std::endl;
 			std::cout << std::endl;
-			if (index == 2)
+			if (index == 1)
+			{
+				Line line(Vector(x, y, z), Vector(h, l, L));
+				line.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+			}
+			else if (index == 2)
 			{
 				Cub cub(Vector(x, y, z), h);
 				cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+				/*for (int i = 0; i < cubes.size(); ++i)
+				{
+					cubes[i].render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+					cubes[i].rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);
+				}*/
 			}
 			else if (index == 3)
 			{
@@ -1438,7 +1448,14 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, int WINDOW_WIDTH, int W
 			std::cout << "l =" << l << std::endl;
 			std::cout << "L =" << L << std::endl;
 			std::cout<<std::endl;*/
-			if (index == 2)
+			//if (index == 2)
+
+			if (index == 1)
+			{
+				Line line(Vector(x, y, z), Vector(h, l, L));
+				line.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+			}
+			else if (index == 2)
 			{
 				Cub cub(Vector(x, y, z), h);
 				cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);

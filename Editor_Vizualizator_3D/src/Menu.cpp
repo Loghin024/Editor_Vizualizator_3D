@@ -12,6 +12,8 @@
 #include "utils/componentsDates.hpp"
 //#include "../src/utils/mouse.hpp"
 #include "utils/parameters.hpp"
+#include <vector>
+#include <map>
 
 int language = 1, line = 0, nivel = 0, nivel2, nrProiecte = 0, scrool = 0;
 int curentWindow = 0;
@@ -21,6 +23,9 @@ char stergere[200];
 bool maximLength, moving;
 int pozMx, pozMy;
 int pozX, pozY, cPozX, cPozY;
+
+int nrCubes;
+std::map<std::string, Cub>cubes;
 
 void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
 
@@ -477,10 +482,11 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 
 void giveNameForProject(sf::RenderWindow& window, int language, std::string name, int PozMx, int PozMy)
 {
-	//window.clear(sf::Color(37, 150, 190));
+	window.clear(sf::Color(37, 150, 190));
 
 	// un patrat de culoare diferita ce va fi pozotionat in partea de sus a ferestrei
 	// ce va fi practic, bara noastra de navigare
+	//window.clear();
 	button bar(0, 0, "", WINDOW_WIDTH, 40, 0);
 	bar.setButtonColor(11, 126, 168, 255);
 	bar.draw(window);
@@ -691,7 +697,7 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 						if (event.mouseButton.x > WINDOW_WIDTH - 650 && event.mouseButton.x < WINDOW_WIDTH - 150 && event.mouseButton.y > 350 && event.mouseButton.y < 420)	curentWindow = 1;
-						if (event.mouseButton.x > WINDOW_WIDTH - 650 && event.mouseButton.x < WINDOW_WIDTH - 150 && event.mouseButton.y > 440 && event.mouseButton.y < 510) { curentWindow = 3; window.clear(); }
+						if (event.mouseButton.x > WINDOW_WIDTH - 650 && event.mouseButton.x < WINDOW_WIDTH - 150 && event.mouseButton.y > 440 && event.mouseButton.y < 510) { curentWindow = 3; slide = 0; window.clear(); }
 						if (event.mouseButton.x > WINDOW_WIDTH - 650 && event.mouseButton.x < WINDOW_WIDTH - 150 && event.mouseButton.y > 530 && event.mouseButton.y < 600) window.close();
 					}
 				}
@@ -713,6 +719,7 @@ void interfata(sf::RenderWindow& window)
 						{
 							//daca apasam pe butonul de proiect nou ne ducem pe urmatoarea pagina
 							curentWindow = 3;
+							slide = 0;
 							window.clear();
 						}
 						if (event.mouseButton.x > 500 + 2 * 10 * strlen(output2[3]) && event.mouseButton.x < 500 + 2 * 10 * strlen(output2[1]) + 5 * strlen(output2[4]) + 15 * strlen(output2[4]) && event.mouseButton.y > 116) {

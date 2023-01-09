@@ -4,6 +4,16 @@
 #include "solid3d.hpp"
 
 // ##############################################
+// ### Line3d ###################################
+// ##############################################
+
+//class Line : public Solid3d {
+//
+//public:
+//    Line(const Vector& point1, const Vector& point2);
+//};
+
+// ##############################################
 // ### Cub3d ###################################
 // ##############################################
 
@@ -70,4 +80,10 @@ class Pyramid3d : public Solid3d {
 
 public:
     Pyramid3d(const Vector& _center, const double height, const double base_lenght, const double base_width);
+};
+
+class Line : public Solid3d {
+
+public:
+    Line(const Vector& point1, const Vector& point2);
 };
