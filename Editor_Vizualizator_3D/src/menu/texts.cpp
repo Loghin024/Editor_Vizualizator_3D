@@ -4,7 +4,7 @@
 
 texts::texts(std::string theText,int x, int y, int originX, int originY, int characterSize, int r, int g, int b, int a)
 {
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 	text.setFont(font);
 	text.setString(theText);
 	text.setPosition(x, y);
@@ -15,7 +15,7 @@ texts::texts(std::string theText,int x, int y, int originX, int originY, int cha
 
 texts::texts(std::string theText, int x, int y, int originX, int originY, int characterSize)
 {
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 	text.setFont(font);
 	text.setString(theText);
 	text.setPosition(x, y);
@@ -25,7 +25,7 @@ texts::texts(std::string theText, int x, int y, int originX, int originY, int ch
 
 texts::texts(int size, int r, int g, int b, int a, std::string theText)
 {
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 	text.setFont(font);
 	text.setString(theText);
 	text.setFillColor(sf::Color(r, g, b, a));
@@ -67,6 +67,7 @@ sf::FloatRect texts::getLocalBoundsAuto()
 void texts::PositionSizeString(std::string theText, int x, int y, int size)
 {
 	text.setCharacterSize(size);
+	text.setFont(font);
 	text.setString(theText);
 	text.setPosition(x, y);
 }

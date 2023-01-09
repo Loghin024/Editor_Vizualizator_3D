@@ -7,9 +7,11 @@ Rusa
 Inaltime:
 Height:
 Rusa
-Latime:
+Latimea:
 Width:
 Rusa
 Lungime:
 Lenght:
 Rusa
+Lungimea bazei:
+Latimea bazei:

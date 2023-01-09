@@ -1,0 +1,16 @@
+cub4
+cub5
+cub6
+cub8
+cub9
+cub10
+cub11
+cub12
+cub13
+cub14
+cub16
+cub17
+prisma1
+cilindru1
+piramida1
+con1

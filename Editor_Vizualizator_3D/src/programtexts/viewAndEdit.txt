@@ -1,9 +1,9 @@
-Adaugati figura : 
+Figuri: 
 Add figure : 
 Rusa
 Componente:
 Components : 
 Rusa : 
-Apasati o pentru mod vizualizare
+Apasa butonul O pentru mod vizualizare
 Press enter for view mode
 Rusa

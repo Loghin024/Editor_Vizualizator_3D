@@ -20,15 +20,15 @@ void createFolderAndTexts()
 
 	FILE* programUtilities3 = fopen("src\\programtexts/textsForCreateScreenCub.txt", "w");
 	fprintf(programUtilities3, "%s", "inapoi\nback\nrusa\n");
-	fprintf(programUtilities3, "%s", "Introduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nNumele figurii:\nThe name of figure:\nrusa\nDiametru\nDiameter\nrusa");
+	fprintf(programUtilities3, "%s", "Introduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nNumele figurii:\nThe name of figure:\nrusa\nDiametru:\nDiameter:\nrusa");
 	fclose(programUtilities3);
 
 	FILE* programUtilities7 = fopen("src\\programtexts/textsForCreateScreenPrisma.txt", "w");
-	fprintf(programUtilities7, "%s", "Numele figurii:\nThe name of figure:\nrusa\nIntroduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nLungime:\nLenght:\nRusa");
+	fprintf(programUtilities7, "%s", "Numele figurii:\nThe name of figure:\nrusa\nIntroduceti coordonatele lui\nPut the Coordonates of\nRusa\nInaltime:\nHeight:\nRusa\nLatimea:\nWidth:\nRusa\nLungime:\nLenght:\nRusa\nLungimea bazei:\nLatimea bazei:");
 	fclose(programUtilities7);
 
 	FILE* programUtilities4 = fopen("src\\programtexts/viewAndEdit.txt", "w");
-	fprintf(programUtilities4, "%s", "Adaugati figura : \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasati o pentru mod vizualizare\nPress enter for view mode\nRusa");
+	fprintf(programUtilities4, "%s", "Figuri: \nAdd figure : \nRusa\nComponente:\nComponents : \nRusa : \nApasa butonul O pentru mod vizualizare\nPress enter for view mode\nRusa");
 	fclose(programUtilities4);
 
 	/*FILE* programUtilities5 = fopen("src\\programtexts/posibleFigures.txt", "w");
@@ -50,12 +50,20 @@ void createFolderAndTexts()
 	fclose(programUtilities9);
 
 	FILE* programUtilities10 = fopen("src\\programtexts/textsForSizes.txt", "w");
-	fprintf(programUtilities10, "%s", "Marime:\nSize:\nRusa\nLungime:\nLenght:\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nDiametru:\nDiameter:\nRusa\nRaza:\nRadius:\nRusa");
+	fprintf(programUtilities10, "%s", "Marimi:\nSize:\nRusa\nLungime:\nLenght:\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nDiametru:\nDiameter:\nRusa\nRaza:\nRadius:\nRusa");
 	fclose(programUtilities10);
 
 	FILE* programUtilities11 = fopen("src\\programtexts/justView.txt", "w");
-	fprintf(programUtilities11, "%s", "Apasati c pentru pentru modul editare\nPress c for edit mode\nRusa");
+	fprintf(programUtilities11, "%s", "Apasa C pentru modul editare\nPress c for edit mode\nRusa");
 	fclose(programUtilities11);
+
+	FILE* programUtilities12 = fopen("src\\programtexts/positionText.txt", "w");
+	fprintf(programUtilities12, "%s", "Pozitii:\nPosition:\nRusa");
+	fclose(programUtilities12);
+
+	FILE* programUtilities13 = fopen("src\\programtexts/Line.txt", "w");
+	fprintf(programUtilities13, "%s", "Coordonatele primului punct\nPut the Coordonates of\nRusa\nCoordonatele celeui de al doilea punct\nSecond point coordonates\nRusa");
+	fclose(programUtilities13);
 
 
 	if (_mkdir("src\\images"));

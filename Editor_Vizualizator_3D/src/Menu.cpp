@@ -7,10 +7,10 @@
 #include "menu/button.hpp"
 #include "geometry/geometrie.hpp"
 #include "geometry/solid3d.hpp"
-//#include "utils/mouse.hpp"
+#include "utils/mouse.hpp"
 #include "utils/figuresInfo.hpp"
 #include "utils/componentsDates.hpp"
-#include "../src/utils/mouse.hpp"
+//#include "../src/utils/mouse.hpp"
 #include "utils/parameters.hpp"
 
 int language = 1, line = 0, nivel = 0, nivel2, nrProiecte = 0, scrool = 0;
@@ -21,14 +21,6 @@ char stergere[200];
 bool maximLength, moving;
 int pozMx, pozMy;
 int pozX, pozY, cPozX, cPozY;
-
-void posi(int x, int y, int z)
-
-{
-	std::cout<<"yeyeyeyeyye";
-	std::cout << x << " " << y << " " << z;
-
-}
 
 void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
 
@@ -382,7 +374,7 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 				saveNameOfProject = temp;
 				slide = 1;
 				window.clear();
-				before.simpleChange(window, camera, saveNameOfProject);
+				before.simpleChange(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, saveNameOfProject);
 				//	before.change(window, camera, saveNameOfProject, );
 				break;
 
@@ -413,20 +405,33 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 	window.display();
 }
 
-void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nrFigure, int coordonates, int nextInput, char indexAndCoordonates[200][10], int down, std::string playerText, int index)
+void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nrFigure, int coordonates, int nextInput, char indexAndCoordonates[200][100], int down, std::string playerText, int index)
 {
 	//std::cout << playerText << std::endl;
 	//std::cout << index << " ";
 	using namespace sf;
 	Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 
-	texts detail(output3[3], 10, 50, 0, 0, 40, 0, 0, 0, 255);
+	texts detail(output3[3], 45, 70, 0, 0, 30, 0, 0, 0, 255);
+	detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 	Texture texture;
 	//INCARCAREA BACKGROUNDULUI
 	texture.loadFromFile("images/PrincipalBackground2Blur.jpg");
 	Sprite sprite(texture);
-	window.clear();
+	window.clear(sf::Color(37, 150, 190));
+
+	// un patrat de culoare diferita ce va fi pozotionat in partea de sus a ferestrei
+	// ce va fi practic, bara noastra de navigare
+	button bar(0, 0, "", WINDOW_WIDTH, 40, 0);
+	bar.setButtonColor(11, 126, 168, 255);
+	bar.draw(window);
+
+	// linia ce separa bara de navigare de restul programului
+	bar.changeLengthAndHeight(WINDOW_WIDTH, 0);
+	bar.changePosition(0, 40);
+	bar.setOutlineThicknesAndColor(1, 0, 0, 0, 255);
+	bar.draw(window);
 
 	window.draw(sprite);
 	//numele figurii
@@ -438,17 +443,17 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 	else minus = 0;
 
 	componentsDates figura;
-	//std::cout << "eeeeeeee" << index << "err";
-	if (index == 1);
+	if (index == 1) figura.Line(window, playerText, indexAndCoordonates, coordonates, index, language);
 	else if (index == 2 || index == 4) figura.cubAndSfera(window, output3, playerText, indexAndCoordonates, coordonates, minus, index, language);
-	else if (index == 3) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language);
-	else if (index == 5 || index == 8) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
-	else if (index == 6 || index == 7) figura.piramide(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
+	else if (index == 3) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
+	else if (index == 5 || index == 7) figura.conAndCilinder(window, playerText, indexAndCoordonates, coordonates, minus, index, language);
+	else if (index == 6) figura.prismaPatratica(window, playerText, indexAndCoordonates, coordonates, minus, language, index);
 
 	//figura.cub(window, output3, playerText, indexAndCoordonates, coordonates, minus);
 		
-	texts goBack(output3[0], 20, 1, 0, 0, 30);
-	button line(40 + 10 * strlen(output3[0]), 8, "", 2, 30, 0);
+	texts goBack(output3[0], 20, 5, 0, 0, 25);
+	goBack.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+	button line(40 + 10 * strlen(output3[0]), 4, "", 2, 30, 0);
 	if (pozMx < 111 && pozMy < 40)
 	{
 		goBack.changeColor(203, 55, 23, 255);
@@ -463,16 +468,16 @@ void detailsAboutProject(sf::RenderWindow& window, char output3[10][100], int nr
 	goBack.draw(window);
 
 	line.draw(window);
-	line.changePosition(10, 40);
-	line.changeLengthAndHeight(30 + 10 * strlen(output3[0]), 2);
-	line.draw(window);
+	//line.changePosition(10, 40);
+	/*line.changeLengthAndHeight(30 + 10 * strlen(output3[0]), 2);
+	line.draw(window);*/
 
 	window.display();
 }
 
 void giveNameForProject(sf::RenderWindow& window, int language, std::string name, int PozMx, int PozMy)
 {
-	window.clear(sf::Color(37, 150, 190));
+	//window.clear(sf::Color(37, 150, 190));
 
 	// un patrat de culoare diferita ce va fi pozotionat in partea de sus a ferestrei
 	// ce va fi practic, bara noastra de navigare
@@ -532,7 +537,7 @@ void giveNameForProject(sf::RenderWindow& window, int language, std::string name
 void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved, int language, int scrool, int sideScrool, int sidePress, int PozMx, int PozMy, std::string Name, bool& figureChosed, bool changeUp, bool changeDown, int& cpozx, int& cpozy, bool movingScreen, int& compScroll)
 {
 	sf::Font font;
-	if (!font.loadFromFile("Fonts/calibri.ttf"));
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 
 	sf::Event event{};
 	using namespace sf;
@@ -547,12 +552,8 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 		char figure[100];
 		Vector2u size = window.getSize();
 
-		//std::cout << movingScreen << " ";
-		//std::cout "cpozx" << cpozx << std::endl;
-		//std::cout "cpozx" << cpozx << std::endl;
-//
 		a.figures(window, size.x, size.y, xMoved, yMoved, language);
-		a.componentsNames(window, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language, camera, compScroll);
+		a.componentsNames(window, WINDOW_WIDTH, WINDOW_HEIGHT, Name, PozMx, PozMy, changeUp, changeDown, cPozX, cPozY, language, camera, compScroll);
 
 
 		FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
@@ -578,11 +579,13 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 
 		std::fclose(f);
 		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
-		/*text.draw(window);*/
-		/*text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
-		text.draw(window);*/
-		text.PositionSizeString(screen[2], 300, 10, 15);
+		text.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 		text.draw(window);
+		text.PositionSizeString(screen[1], window.getSize().x - 350 + 10, 10, 30);
+		text.draw(window);
+		text.PositionSizeString(screen[2], 215, 20, 20);
+		text.draw(window);
+
 	}
 	
 	window.display();
@@ -598,7 +601,7 @@ void interfata(sf::RenderWindow& window)
 	Mouse::setPosition(sf::Vector2i(WINDOW_WIDTH / 2, WINDOW_HEIGHT / 2), window);
 
 	componentsDates addAndCreate;
-	char indexAndCoordonates[200][10]{};
+	char indexAndCoordonates[200][100]{};
 	// selectL --> selectarea limbei 
 	int selectL = 0;
 	// nextInput --> pentru pagina creare, apasand enter trecem la textul urmator si incremantam nextInput pentru a ajuta la salvarea textului
@@ -612,7 +615,7 @@ void interfata(sf::RenderWindow& window)
 	int getxRightClick = -1, getyRightClick = -1;
 	// fontul
 	sf::Font font;
-	if(!font.loadFromFile("Fonts/calibri.ttf"));
+	if(!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
 
 	//pentru detaliile unui proiect nou
 	std::string playerInput{};
@@ -676,13 +679,15 @@ void interfata(sf::RenderWindow& window)
 								if (language == 1) language = 2;
 								else if (language == 2) language = 3;
 								else if (language == 3) language = 1;
-								//window.close();
+								window.clear();
+								interfata(window);
 							}
 							else if (event.mouseButton.y > 90 && event.mouseButton.y < 120) {
 								if (language == 1) language = 3;
 								else if (language == 2) language = 1;
 								else if (language == 3) language = 2;
-								//window.close();
+								window.clear();
+								interfata(window);
 							}
 						}
 						if (event.mouseButton.x > WINDOW_WIDTH - 650 && event.mouseButton.x < WINDOW_WIDTH - 150 && event.mouseButton.y > 350 && event.mouseButton.y < 420)	curentWindow = 1;
@@ -690,8 +695,7 @@ void interfata(sf::RenderWindow& window)
 						if (event.mouseButton.x > WINDOW_WIDTH - 650 && event.mouseButton.x < WINDOW_WIDTH - 150 && event.mouseButton.y > 530 && event.mouseButton.y < 600) window.close();
 					}
 				}
-				//if (event.type == sf::Event::TextEntered)
-				//	std::cout << event.text.unicode << " ";
+				
 			}
 			else if (curentWindow == 1)
 			{
@@ -711,7 +715,10 @@ void interfata(sf::RenderWindow& window)
 							curentWindow = 3;
 							window.clear();
 						}
-						if (event.mouseButton.x > 500 + 2 * 10 * strlen(output2[3]) && event.mouseButton.x < 500 + 2 * 10 * strlen(output2[1]) + 5 * strlen(output2[4]) + 15 * strlen(output2[4]) && event.mouseButton.y > 116) view = 1;
+						if (event.mouseButton.x > 500 + 2 * 10 * strlen(output2[3]) && event.mouseButton.x < 500 + 2 * 10 * strlen(output2[1]) + 5 * strlen(output2[4]) + 15 * strlen(output2[4]) && event.mouseButton.y > 116) {
+							view = 1;figuresInfo a;
+							a.simpleChange(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, saveNameOfProject);
+						}
 					}
 					// aici se realizeaza stergerea proiectului dorit
 					if (event.mouseButton.x > WINDOW_WIDTH - 300 && event.mouseButton.x < WINDOW_WIDTH - 195 && event.mouseButton.y > 150)
@@ -754,7 +761,7 @@ void interfata(sf::RenderWindow& window)
 						//std::cout << stergere << std::endl;
 
 						//filesystem::	
-						
+
 
 						fclose(f2);
 						FILE* g = fopen("src\\userProjects/userNameOfProjects.txt", "w");
@@ -788,10 +795,87 @@ void interfata(sf::RenderWindow& window)
 			}
 			else if (curentWindow == 2)
 			{
-				//std::cout << index << " ";
 				char creareFiserTextChar[256]{};
 				if (event.type == sf::Event::TextEntered)
 				{
+					if (index == 1)
+					{
+						if (event.text.unicode == 13)
+						{
+							if (coordonates == 0)
+								addAndCreate.createTxtForComponent(saveNameOfProject, project, playerInput);
+							else
+								addAndCreate.addCoordonates(saveNameOfProject, project, playerInput, coordonates);
+
+							strcpy(indexAndCoordonates[coordonates], playerInput.c_str());
+
+							coordonates++;
+							if (coordonates == 7)
+							{
+
+								addAndCreate.addIndex(saveNameOfProject, project, index);
+								memset(indexAndCoordonates, 0, sizeof(indexAndCoordonates));
+								curentWindow = 3;
+								rotateCamera = true;
+								window.clear();
+								coordonates = 0;
+
+								//window1.close();
+							}
+							playerInput.clear();
+							playerText2.setString("");
+
+						}
+						else if (coordonates > 0) {
+							if ((event.text.unicode >= 48 && event.text.unicode <= 57) || event.text.unicode == 8 || event.text.unicode == 45)
+							{
+								if (playerInput.length() < 3)
+								{
+									if (event.text.unicode == 8)
+									{
+										//aici daca apasam stergere din tastatura se sterge ultima litera
+										if (playerInput.length() > 0)
+										{
+											playerInput.pop_back();
+											playerText2.setString(playerInput);
+										}
+									}
+									else
+									{
+										//aici modificam textul la fiecare litara apasata
+										playerInput += event.text.unicode;
+										playerText2.setString(playerInput);
+									}
+								}
+								else
+								{
+									if (event.text.unicode == 8)
+									{
+										//aici daca apasam stergere din tastatura se sterge ultima litera
+										playerInput.pop_back();
+										playerText2.setString(playerInput);
+									}
+								}
+							}
+						}
+						else if (coordonates == 0)
+						{
+							if (event.text.unicode == 8)
+							{
+								if (playerInput.length() > 0)
+								{
+									playerInput.pop_back();
+									playerText2.setString(playerInput);
+								}
+							}
+							else
+							{
+								playerInput += event.text.unicode;
+								playerText2.setString(playerInput);
+
+							}
+						}
+					}
 					if (index == 2 || index == 4)
 					{
 						if (event.text.unicode == 13)
@@ -800,17 +884,13 @@ void interfata(sf::RenderWindow& window)
 								addAndCreate.createTxtForComponent(saveNameOfProject, project, playerInput);
 							else
 								addAndCreate.addCoordonates(saveNameOfProject, project, playerInput, coordonates);
-								
+
 							strcpy(indexAndCoordonates[coordonates], playerInput.c_str());
 
 							coordonates++;
 							if (coordonates == 5)
 							{
-								std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaas" << std::endl;
-								for (int i = 0; i <= 4; i++)
-								{
-									std::cout << indexAndCoordonates[i] << std::endl;
-								}
+								
 								addAndCreate.addIndex(saveNameOfProject, project, index);
 								memset(indexAndCoordonates, 0, sizeof(indexAndCoordonates));
 								curentWindow = 3;
@@ -951,7 +1031,7 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 					}
-					else if (index == 5 || index == 8)
+					else if (index == 5 || index == 7)
 					{
 						if (event.text.unicode == 13)
 						{
@@ -1028,7 +1108,7 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 					}
-					else if (index == 6 || index == 7)
+					else if (index == 6)
 					{
 						if (event.text.unicode == 13)
 						{
@@ -1040,16 +1120,10 @@ void interfata(sf::RenderWindow& window)
 							strcpy(indexAndCoordonates[coordonates], playerInput.c_str());
 
 							coordonates++;
-							if (coordonates == 6 && index == 6)
+							/*if (coordonates == 6)
 							{
 								addAndCreate.addIndex(saveNameOfProject, project, index);
-								memset(indexAndCoordonates, 0, sizeof(indexAndCoordonates));
-								curentWindow = 3;
-								rotateCamera = true;
-
-								window.clear();
-								coordonates = 0;
-							}
+							}*/
 							if (coordonates == 7)
 							{
 								addAndCreate.addIndex(saveNameOfProject, project, index);
@@ -1116,16 +1190,14 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 					}
-
-
 				}
 				if (event.type == sf::Event::MouseButtonPressed)
 				{
-					//std::cout << event.mouseButton.x << " " << event.mouseButton.y << std::endl;
-					if (event.mouseButton.button == sf::Mouse::Right)
+					if (event.mouseButton.button == sf::Mouse::Left)
 					{
 						if (event.mouseButton.x < 111 && event.mouseButton.y < 40)
 						{
+							figuresInfo a;
 							curentWindow = 3;
 							playerInput.clear();
 							playerText.setString("");
@@ -1161,10 +1233,10 @@ void interfata(sf::RenderWindow& window)
 							fprintf(numeProiect, "%s", "\n");
 							fclose(numeProiect);
 
-						/*	while (proiect[proiect.size() - 1] == ' ')
-							{
-								proiect.pop_back();
-							}*/
+							/*	while (proiect[proiect.size() - 1] == ' ')
+								{
+									proiect.pop_back();
+								}*/
 							std::string creareFisierText;
 							creareFisierText = "src\\userProjects\\" + proiect + ".txt";
 							int n = creareFisierText.length();
@@ -1188,7 +1260,7 @@ void interfata(sf::RenderWindow& window)
 							}
 							projectFolder = "src\\userProjects\\";
 							projectFolder += saveNameOfProject;
-							projectFolder += "\\name.txt";		
+							projectFolder += "\\name.txt";
 							FILE* numeProiect2 = fopen(projectFolder.c_str(), "a");
 							fclose(numeProiect2);
 							playerInput.clear();
@@ -1232,16 +1304,23 @@ void interfata(sf::RenderWindow& window)
 					}
 					if (event.type == sf::Event::MouseButtonPressed)
 					{
-						if (event.mouseButton.button == sf::Mouse::Right)
+						if (event.mouseButton.button == sf::Mouse::Left)
 						{
 							sf::Vector2u size = window.getSize();
 
-							if (event.mouseButton.x > 0 && event.mouseButton.x < size.x / 7)
+							//intoarcere in meniul principal din modul de editare
+							if (event.mouseButton.y > window.getSize().y - 30 && event.mouseButton.x < 180 && event.mouseButton.y > window.getSize().y - 30 && event.mouseButton.x > 20)
+							{
+								curentWindow = 0;
+								window.clear();
+							}
+
+							if (event.mouseButton.x > 0 && event.mouseButton.x < 195)
 							{
 								//70 120 150
-								for (int i = 0; i < 9; i++)
+								for (int i = 0; i < 8; i++)
 								{
-									if (event.mouseButton.y > 50 + i * 60 && event.mouseButton.y < 50 + i * 60 + 50)
+									if (event.mouseButton.y > 15 + i * 60 && event.mouseButton.y < 15 + i * 60 + 50)
 									{
 										curentWindow = 2; index = i;
 									}
@@ -1287,7 +1366,7 @@ void interfata(sf::RenderWindow& window)
 					}
 					if (event.type == sf::Event::MouseWheelScrolled)
 					{
-						if (event.mouseWheelScroll.delta > 0) {  compScroll--; }
+						if (event.mouseWheelScroll.delta > 0) { compScroll--; }
 						else {
 							compScroll++;
 						}
@@ -1333,7 +1412,7 @@ void interfata(sf::RenderWindow& window)
 		else if (curentWindow == 2)	detailsAboutProject(window, output3, nrFigure, coordonates, nextInput, indexAndCoordonates, down, playerInput, index);
 		else if (curentWindow == 3)
 		{
-			//window.clear();
+			////window.clear();
 			if (slide == 0) giveNameForProject(window, language, playerInput, pozMx, pozMy);
 			else
 			{
@@ -1341,7 +1420,6 @@ void interfata(sf::RenderWindow& window)
 				{
 					saveNameOfProject.pop_back();
 				}
-			//	std::cout << saveNameOfProject << "aa" << std::endl;
 				int nothing = 0;
 				std::string path = "src\\userProjects\\";
 				path += saveNameOfProject;
@@ -1358,31 +1436,32 @@ void interfata(sf::RenderWindow& window)
 				nothing--;
 				//firstEntry.change(window, camera, saveNameOfProject);
 				if (rotateCamera == false || nothing == 0) {
+					figuresInfo a;
+					//a.simpleChange(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, saveNameOfProject);
 					viewAndEdit(window, camera, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY, moving, compScroll);
-				//	std::cout << "view";
 				}
 				else
 				{
 					int nr = 0;
 					char everything[100][100];
 					
+
+					window.clear();
+
 					if (nothing > 0)
 					{
-					//	std::cout << "nothing= " << nothing << std::endl;
+
 						FILE* compNames = fopen(path.c_str(), "r+");
 						//std::cout << path << std::endl;
 						//if(!feof)
 						if (!feof(compNames))
 						{
-							//char buff[100];
-							//fgets(buff, 100, compNames);
+							char buff[100];
+							fgets(buff, 100, compNames);
 							while (!feof(compNames))
 							{
-								window.clear();
-								char buff[100];
 								int index = 0;
 								char comp[100]{};
-								fgets(buff, 100, compNames);
 								strncpy(comp, buff, strlen(buff) - 1);
 								std::string pathForDates = "src\\userProjects\\";
 								pathForDates += saveNameOfProject;
@@ -1417,7 +1496,7 @@ void interfata(sf::RenderWindow& window)
 									if (sizes[i] == ' ') c++;
 									else
 									{
-										if(sizes[i] >= '0' && sizes[i] <= '9')
+										if (sizes[i] >= '0' && sizes[i] <= '9')
 										{
 											if (c == 0)
 												h = h * 10 + int(sizes[i] - 48);
@@ -1454,7 +1533,7 @@ void interfata(sf::RenderWindow& window)
 									if (getText[i] == ' ') c++;
 									else
 									{
-										if(getText[i] >= '0' && getText[i] <= '9')
+										if (getText[i] >= '0' && getText[i] <= '9')
 										{
 											if (c == 0)
 												x = x * 10 + int(getText[i] - 48);
@@ -1513,12 +1592,12 @@ void interfata(sf::RenderWindow& window)
 								strcat(everything[nr], X);
 								strcat(everything[nr], " ");
 								nr++;
+								fgets(buff, 100, compNames);
 
 							}
 						}
-						else
 							//std::cout << "aiurea";
-						fclose(compNames);
+							fclose(compNames);
 
 						for (int i = 0; i < nr; i++)
 						{
@@ -1527,7 +1606,7 @@ void interfata(sf::RenderWindow& window)
 							for (int j = 0; j < strlen(everything[i]); j++)
 							{
 								if (everything[i][j] == ' ') c++;
-								else
+								if (everything[i][j] >= '0' && everything[i][j] <= '9')
 									if (c == 0)
 										x = x * 10 + int(everything[i][j] - 48);
 									else if (c == 1)
@@ -1543,103 +1622,77 @@ void interfata(sf::RenderWindow& window)
 									else if (c == 6)
 										index = index * 10 + int(everything[i][j] - 48);
 							}
-							
+
 							c = 0;
 							for (int j = 0; j < strlen(everything[i]); j++)
 							{
 								if (everything[i][j] == ' ') c++;
-								else
+								else	
 								{
-									if (everything[i][j] >= '0' && everything[i][j] <= '9')
-									{
-										if (c == 0) {
-											if (everything[i][j] == '-') x = x * -1;
-											std::cout << "minus";
-										}
-										if (c == 1)
-											if (everything[i][j] == '-') y = y * -1;
-										if (c == 2)
-											if (everything[i][j] == '-') z = z * -1;
-									}
+									if (c == 0)
+										if (everything[i][j] == '-') x = x * -1;
+									if (c == 1)
+										if (everything[i][j] == '-') y = y * -1;
+									if (c == 2)
+										if (everything[i][j] == '-') z = z * -1;
 								}
 							}
-							//std::cout << "asssssssssssssssss" << std::endl;
+							std::cout<<"aaaaaaaaaaaaaaaaa" << std::endl;
+							std::cout << "x =" << x << std::endl;
+							std::cout << "y =" << y << std::endl;
+							std::cout << "z =" << z << std::endl;
+							std::cout << "h =" << h << std::endl;
+							std::cout << "l =" << l << std::endl;
+							std::cout << "L =" << L << std::endl;
+
+
+
 							//std::cout << nr << " " << x << " " << y << " " << z;
 							//std::cout << " " << index << " ";
 							//std::cout << h << " " << l << " " << L << std::endl;
+							if (index == 1)
+							{
+								//addSegment()
+							}
+							else if (index == 2)
+							{
+								Cub cub(Vector(x, y, z), h);
+								cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							}
 
+							else if (index == 3)
+							{
+								Prism prisma(Vector(x, y, z), h, l, L);
+								prisma.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 
-
-						if (index == 2)
-						{
-							Cub cub(Vector(x, y, z), h);
-							cub.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);					
-							cub.render_solid(window, 1600, 900, camera);
+							}
+							else if (index == 4)
+							{
+								Sphere3d sphere(Vector(x, y, z), h, 100, 40);
+								sphere.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							}
+							else if (index == 5)
+							{
+								Cylinder3d cylinder(Vector(x, y, z), h, l, 100);
+								cylinder.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							}
+							else if (index == 6)
+							{
+								Pyramid3d pyramid(Vector(x, y, z), h, l, L);
+								pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							}
+							else if (index == 7)
+							{
+								Con3d con(Vector(x, y, z), h, l, 100);
+								con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+							}
 						}
-
-						else if (index == 3)
-						{
-							Prism prisma(Vector(x, y, z), h, l, L);
-							prisma.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 4)
-						{
-							Sphere3d sphere(Vector(x, y, z), h, 100, 100);
-							sphere.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 5)
-						{
-							Cylinder3d cylinder(Vector(x, y, z), h, l, 100);
-							cylinder.render_solid(window, 1600, 900, camera);
-						}
-						else if (index == 6)
-						{
-							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, 1600, 900, camera);
-						}
-						/*else if (index == 7)
-						{
-							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-							pyramid.render_solid(window, 1600, 900, camera);
-						}*/
-						else if (index == 8)
-						{
-							Con3d con(Vector(x, y, z), h, l, 20);
-							con.render_solid(window, 1600, 900, camera);
-						}
-					}
-					//std::cout << everything[i] << std::endl;
-
+						window.display();
 						memset(everything, 0, sizeof(everything));
 					}
 
-					FILE* f = fopen("src\\programtexts/justView.txt", "r");
-					char onlyTextOnViewer[100]{};
-					for (int i = 1; i <= 3; i++)
-					{
-						char a[50];
-						fgets(a, 50, f);
-						if (i == language)
-							strncpy(onlyTextOnViewer, a, strlen(a) - 1);
-					}
-					texts press(onlyTextOnViewer, 10, 10, 0, 0, 20);
-					fclose(f);
-					press.draw(window);
-					/*FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
-					char onlyTextOnViewer[100]{};
-					for (int i = 1; i <= 3; i++)
-					{
-						char a[30];
-						fgets(a, 30, f);
-						if (i == language)
-							strncpy(onlyTextOnViewer, a, strlen(a) - 1);
-					}
-					texts press(onlyTextOnViewer, 10, 10, 0, 0, 20);
-					fclose(f);
-					press.draw(window);*/
-					window.display();
 				}
-			}
 			}
 		}
 	}
+}

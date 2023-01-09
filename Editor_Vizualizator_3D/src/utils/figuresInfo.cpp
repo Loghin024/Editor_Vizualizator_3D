@@ -5,7 +5,6 @@
 #include "../geometry/geometrie.hpp"
 #include "../geometry/solid3d.hpp"
 #include <iostream>
-#include "../Menu.hpp"
 //#include "parameters.hpp"
 //#include "mouse.hpp"
 //#include "..\\utils\mouse.hpp"
@@ -16,12 +15,12 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 	char figure[100];
 	Vector2u size = window.getSize();
 	int line = 0;	
-	Camera camera(Vector(0, -100, -230), -30, 0, 0, 1900, 900);
+	//Camera camera(Vector(0, -100, -230), -30, 0, 0, 1900, 900);
 
-	button figures(0, 50, "",size.x / 7 - 5, 50, 30, 2, 81, 81, 81, 255);
+	button figures(0, 15, "", 195, 56, 20, 2, 81, 81, 81, 255);
 	figures.setButtonColor(81, 81, 81, 255);
 
-	RectangleShape dividerForFigures(Vector2f(size.x / 7, size.y));
+	RectangleShape dividerForFigures(Vector2f(200, size.y));
 	dividerForFigures.setFillColor(Color(81, 81, 81, 255));
 	window.draw(dividerForFigures);
 
@@ -32,9 +31,11 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 	FILE* PosibleFiguresFromFile;
 	if(PosibleFiguresFromFile = fopen("src\\programtexts\\posibleFigures.txt", "r"));
 	{
-		for(int j = 1; j<=8; j++)
+		for(int j = 1; j<=7; j++)
 		{
 			char sir[100]{};
+
+			figures.setTextFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 
 			for (int i = 1; i <= 3; i++)
 			{
@@ -44,31 +45,41 @@ void figuresInfo::figures(sf::RenderWindow& window, int height, int width, int P
 			}
 			line++;
 			figures.changeText(sir);
-			figures.changePosition(0, 50 + 60 * line);
+			figures.changePosition(0, 15 + 60 * line);
 
-			if ((PozMx > 0 && PozMx < size.x / 7) && (PozMy > 60 * line + 50 && PozMy < 60 * line + 100))
+			if ((PozMx > 0 && PozMx < 195) && (PozMy > 60 * line + 15 && PozMy < 60 * line + 60))
 				figures.setButtonColor(41, 45, 48, 255);
 			else
 				figures.setButtonColor(81, 81, 81, 255);
 
-			if (line == 6 || line == 7) {
-				figures.setTextSize(20);
-				figures.textUpDown(window, sir);
-			}
-			else figures.setTextSize(25);
+			//if (line == 6 || line == 7) {
+			//	figures.setTextSize(20);
+			//	//figures.textUpDown(window, sir);
+			//}
+			//else figures.setTextSize(25);
 
 			if (line == 1) 	figures.putIcon(window, "", sir);
 			figures.centerTextInMidddle();
-			if(line != 6 && line != 7)
+			/*if(line != 6 && line != 7)*/
 			figures.draw(window);
 			figures.putIcon(window, "", sir);
 
 		}
 		std::fclose(PosibleFiguresFromFile);
 	}
+
+	texts goToMainMenu("Meniu Principal", 20, window.getSize().y - 30, 0, 0, 20);
+
+	if (PozMy > window.getSize().y - 30 && PozMx < 180 && PozMy > window.getSize().y - 30 && PozMx > 20)
+	{
+		goToMainMenu.changeColor(203, 55, 23, 255);
+	}
+	else
+		goToMainMenu.changeColor(255, 255, 255, 255);
+	goToMainMenu.draw(window);
 }
 
-void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, int pozMx, int pozMy, bool changeUp, bool changeDown, int& x, int& y, int language, Camera camera, int& compScroll)
+void figuresInfo::componentsNames(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string Name, int pozMx, int pozMy, bool changeUp, bool changeDown, int& x, int& y, int language, Camera camera, int& compScroll)
 {
 	int copieScroll = compScroll;
 	int compNr = 0;
@@ -84,12 +95,12 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 	Vector2u size = window.getSize();
 	RectangleShape spaceForComponents(Vector2f(size.x, size.y));
 	//Vector2f sizeSpace = spaceForComponents.getSize();
-	spaceForComponents.setPosition(size.x - 220, 0);
+	spaceForComponents.setPosition(size.x - 350, 0);
 	//cout << size.x - (size.x / 7) << endl;
 	spaceForComponents.setFillColor(Color(81, 81, 81, 255));
 	window.draw(spaceForComponents);
 
-	RectangleShape Line(Vector2f(220, 2));
+	RectangleShape Line(Vector2f(350, 2));
 	Line.setFillColor(Color(204, 224, 228, 255));
 
 	std::string pathForProject = "src\\userProjects\\";//; + Name; //+ "nameOfFigures";;
@@ -98,9 +109,10 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 	FILE* componentsFromFile2;
 
 	texts text(20, 51, 51, 51, 255, "");
-	button components(0, 0, "", 220, 30, 25);
+	button components(0, 0, "", 350, 40, 25);
 	components.setButtonColor(81, 81, 81, 255);
 	components.setTextColor(234, 235, 229, 255);
+	components.setTextFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 
 	if (!(componentsFromFile = fopen(pathForProject.c_str(), "a+")));
 	while (!feof(componentsFromFile))
@@ -110,10 +122,10 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 	}
 	std::fclose(componentsFromFile);
 
-	if (numberOfComponents < 14) copieScroll = 0;
+	if (numberOfComponents < 11) copieScroll = 0;
 	else
 	{
-		if (copieScroll > (numberOfComponents - 15)) { copieScroll = numberOfComponents - 15; std::cout << "as= " << (numberOfComponents - 14)<<std::endl; }
+		if (copieScroll > (numberOfComponents - 12)) { copieScroll = numberOfComponents - 12; std::cout << "as= " << (numberOfComponents - 11)<<std::endl; }
 	}
 
 	//if (scrollBar > numberOfComponents - 14) scrollBar = (numberOfComponents - 14);
@@ -132,7 +144,7 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 			//std::cout << copieScroll << std::endl;
 			if (copieScroll <= 0)
 			{
-				if (maximComponents2 < 14)
+				if (maximComponents2 < 11)
 				{
 					char sir[100]{};
 					std::strncpy(sir, buff, strlen(buff) - 1);
@@ -140,27 +152,27 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 
 						//std::cout << sir << std::endl;
 					components.changeText(sir);
-					components.changePosition(window.getSize(). x - 220, 50 + 30 * line + 5 + 2);
-					if (pozMx > 1390 && pozMy > 50 + 30 * (line) + 5 + 2 && pozMy < 50 + 30 * (line) + 5 + 2 + 30)
+					components.changePosition(window.getSize(). x -350, 50 + 40 * line + 5 + 2);
+					if (pozMx > WINDOW_WIDTH - 350 && pozMy > 50 + 40 * (line) + 5 + 2 && pozMy < 50 + 40 * (line) + 5 + 2 + 40)
 					{
 						std::strcpy(saveSir, sir);
 						components.setButtonColor(49, 51, 49, 255);
-						figureInfoPosition(window, "pozitie:", Name, sir, changeUp, changeDown, x, y, camera, compScroll, compNr);
-						figureInfoSize(window, "size:", Name, sir, 1, changeUp, changeDown, x, y, camera, compScroll, compNr);
-						figureInfoType(window, "tip:", Name, sir, language, compNr);
+						figureInfoPosition(window, WINDOW_WIDTH, WINDOW_HEIGHT, "Pozitii:", Name, sir, changeUp, changeDown, x, y, camera, compScroll, compNr, language);
+						figureInfoSize(window, WINDOW_WIDTH, WINDOW_HEIGHT, "Marimi:", Name, sir, language, changeUp, changeDown, x, y, camera, compScroll, compNr);
+						figureInfoType(window, "Tip:", Name, sir, language, compNr);
 					}
 					else
 						components.setButtonColor(81, 81, 81, 255);
 
 					components.draw(window);
-					Line.setPosition(size.x - 220, 50 + 30 * (line + 1) + 5);
+					Line.setPosition(size.x - 350, 50 + 40 * (line + 1) + 5);
 					window.draw(Line);
 
-					if (pozMx > 1390 && pozMy > 50 + 30 * line + 5 + 2 && pozMy < 50 + 30 * line + 5 + 2 + 30)
+					if (pozMx > 1390 && pozMy > 50 + 40 * line + 5 + 2 && pozMy < 50 + 40 * line + 5 + 2 + 30)
 					{
 						int positionX = components.getPositionX();
 						int positionY = components.getPositionY();
-						deleteComponent(window, sir, Name, x, y, positionX, positionY, camera);
+						deleteComponent(window, WINDOW_WIDTH, WINDOW_HEIGHT, sir, Name, x, y, positionX, positionY, camera);
 						//fseek(componentsFromFile2, SEEK_SET, 0);
 					}
 
@@ -181,10 +193,9 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 	//scrollBar(window, numberOfComponents, 0, compScroll);
 }
 
-void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name, int& compScroll,int compNr)
+void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name, int& compScroll,int compNr, int language)
 {
 	int copieScroll = compScroll;
-
 	using namespace sf;
 	using namespace std;
 	int line = 0;
@@ -197,12 +208,12 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 	Vector2u size = window.getSize();
 	RectangleShape spaceForComponents(Vector2f(size.x, size.y));
 	//Vector2f sizeSpace = spaceForComponents.getSize();
-	spaceForComponents.setPosition(size.x - 220, 0);
+	spaceForComponents.setPosition(size.x - 350, 0);
 	//cout << size.x - (size.x / 7) << endl;
 	spaceForComponents.setFillColor(Color(81, 81, 81, 255));
 	window.draw(spaceForComponents);
 
-	RectangleShape Line(Vector2f(220, 2));
+	RectangleShape Line(Vector2f(350, 2));
 	Line.setFillColor(Color(204, 224, 228, 255));
 
 	std::string pathForProject = "src\\userProjects\\";//; + Name; //+ "nameOfFigures";;
@@ -211,9 +222,10 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 	FILE* componentsFromFile2;
 
 	texts text(20, 51, 51, 51, 255, "");
-	button components(0, 0, "", 220, 30, 25);
+	button components(0, 0, "", 350, 40, 25);
 	components.setButtonColor(81, 81, 81, 255);
 	components.setTextColor(234, 235, 229, 255);
+	components.setTextFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 
 	if (!(componentsFromFile = fopen(pathForProject.c_str(), "a+")));
 	while (!feof(componentsFromFile))
@@ -223,11 +235,17 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 	}
 	std::fclose(componentsFromFile);
 
-	if (numberOfComponents < 14) copieScroll = 0;
+	if (numberOfComponents < 11) copieScroll = 0;
 	else
 	{
-		if (copieScroll > (numberOfComponents - 15)) { copieScroll = numberOfComponents - 15; std::cout << "as= " << (numberOfComponents - 14) << std::endl; }
+		if (copieScroll > (numberOfComponents - 12)) { copieScroll = numberOfComponents - 12; std::cout << "as= " << (numberOfComponents - 11) << std::endl; }
 	}
+
+	//if (scrollBar > numberOfComponents - 14) scrollBar = (numberOfComponents - 14);
+
+	//std::cout << "poz cl x: " << x << std::endl;
+	//std::cout << "poz cl y: " << y << std::endl;
+	//std::cout << "scro= " << copieScroll << std::endl;
 
 	if (!(componentsFromFile2 = fopen(pathForProject.c_str(), "a+")));
 	else
@@ -236,11 +254,10 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 
 		while (!feof(componentsFromFile2))
 		{
-		//	std::cout << copieScroll << std::endl;
+			//std::cout << copieScroll << std::endl;
 			if (copieScroll <= 0)
 			{
-				
-				if (maximComponents2 < 14)
+				if (maximComponents2 < 11)
 				{
 					char sir[100]{};
 					std::strncpy(sir, buff, strlen(buff) - 1);
@@ -248,52 +265,30 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 
 						//std::cout << sir << std::endl;
 					components.changeText(sir);
-					components.changePosition(window.getSize().x - 220, 50 + 30 * line + 5 + 2);
-			
-					if (compNr == 0)
-					{
-						sf::Font font;
-						if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
-						sf::Text text("X", font, 22);
-						text.setPosition(window.getSize().x - 40, components.getPositionX());
-						window.draw(text);
-						components.setButtonColor(49, 51, 49, 255);
-					}
+					components.changePosition(window.getSize().x - 350, 50 + 40 * line + 5 + 2);
+					
+					if(!compNr)
+						components.setButtonColor(49, 51, 49, 255);				
 					else
 						components.setButtonColor(81, 81, 81, 255);
 
-				//	std::cout << "compNr= " << compNr << std::endl;
 					components.draw(window);
-					Line.setPosition(size.x - 220, 50 + 30 * (line + 1) + 5);
+					Line.setPosition(size.x - 350, 50 + 40 * (line + 1) + 5);
 					window.draw(Line);
+
 					line++;
 					maximComponents2++;
-
-					if (compNr == 0)
-					{
-						sf::Font font;
-						if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
-						sf::Text text("X", font, 22);
-						text.setPosition(window.getSize().x - 40, components.getPositionY());
-						window.draw(text);
-
-						sf::RectangleShape divider(sf::Vector2f(2, 24));
-						divider.setPosition(window.getSize().x - 50, components.getPositionY() + 2);
-						window.draw(divider);
-					}
 					compNr--;
-
 				}
-
 			}
 			else copieScroll--;
 			std::fgets(buff, 100, componentsFromFile2);
 
 		}
 	}
-	scrollBar(window, numberOfComponents, 0, compScroll);
-		
 	std::fclose(componentsFromFile2);
+	scrollBar(window, numberOfComponents, 0, compScroll);
+
 }
 
 void figuresInfo::scrollBar(sf::RenderWindow& window, int numberOfComponents, int howMuch, int& scrollBar)
@@ -305,20 +300,20 @@ void figuresInfo::scrollBar(sf::RenderWindow& window, int numberOfComponents, in
 
 	RectangleShape scroll(Vector2f(0, 0));
 	scroll.setPosition(window.getSize().x - 15, 57);
-	if (numberOfComponents <= 14)
+	if (numberOfComponents <= 11)
 	{
-		scroll.setSize(Vector2f(15, 30 * (numberOfComponents)));
+		scroll.setSize(Vector2f(15, 40 * (numberOfComponents)));
 		scrollBar = 0;
 	}
 	else
 	{
-		scroll.setSize(Vector2f(15, 30 * 14));
-		int resize = scroll.getSize().y - ((numberOfComponents - 14) * 5);
+		scroll.setSize(Vector2f(15, 40 * 11));
+		int resize = scroll.getSize().y - ((numberOfComponents - 11) * 10);
 		scroll.setSize(Vector2f(15, resize));
-		if (scrollBar > numberOfComponents - 14) scrollBar = (numberOfComponents - 14);
+		if (scrollBar > numberOfComponents - 11) scrollBar = (numberOfComponents - 11);
 		//std::cout << "r " << numberOfComponents << " " << scrollBar << " q ";
 		//if (!(scrollBar == numberOfComponents - 14))
-		scroll.setPosition(window.getSize().x - 15, 57 + 5 * scrollBar);
+		scroll.setPosition(window.getSize().x - 15, 57 + 10 * scrollBar);
 		
 	}
 
@@ -330,9 +325,11 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 	int index = 0;
 	using namespace sf;
 	Vector2u size = window.getSize();
-	texts Type(4, 51, 51, 51, 255, type);
-	//Type.PositionSizeString(type, )
-	Type.changePosition(window.getSize().x - 220, 500);
+	texts Type(15, 51, 51, 51, 255, type);
+	//Type.changePosition(window.getSize().x - 340, 500);
+	Type.PositionSizeString(type, window.getSize().x - 340, 510, 25);
+	Type.changeColor(255, 255, 255, 255);
+	Type.setFont("res/Fonts/Montserrat/static/Montserrat-Light.ttf");
 	Type.draw(window);
 	FloatRect textwidht = Type.getLocalBoundsAuto();
 
@@ -363,10 +360,15 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 	fclose(figuresfromfile);
 
 
-	button figuretype(window.getSize().x - 220 + textwidht.width + 10, 510, "", 150, 24, 24);
+	button figuretype(window.getSize().x - 230, 515, "", 220, 24, 24);
 
 	FILE* typetext;
 	if (typetext = fopen("src\\programtexts\\posiblefigures.txt", "r"));
+
+	//if (index == 6 || index == 7)
+	//	figuretype.setTextSize(15);
+	//else
+		figuretype.setTextSize(24);
 
 	char Typename[100]{};
 	while (!feof(typetext) && index)
@@ -391,7 +393,7 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 	figuretype.draw(window);
 }
 
-void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string position, std::string Name, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy,  Camera camera, int compScroll, int compNr)
+void figuresInfo::figureInfoPosition(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string position, std::string Name, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy,  Camera camera, int compScroll, int compNr, int language)
 {
 	//if (changeUp > 0) std::cout<<"dadasdasdasdasd";
 	using namespace sf;
@@ -400,8 +402,21 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 	int x = 0, y = 0, z = 0;
 	//Vector2u size = window.getSize();
 	//std::cout << changeUp << " " << changeDown << std::endl;
-	texts type(15, 51, 51, 51, 255, position);
-	type.changePosition(window.getSize().x - 220, 540);
+
+	char Position[100]{};
+	FILE* programUtilities11 = fopen("src\\programtexts/positionText.txt", "r");
+	for (int i = 1; i <= 3; i++)
+	{
+		char buff[100];
+		fgets(buff, 100, programUtilities11);
+		if (i == language)
+			strncpy(Position, buff, strlen(buff) - 1);
+	}
+	fclose(programUtilities11);
+	texts type(15, 51, 51, 51, 255, Position);
+	type.PositionSizeString(Position, window.getSize().x - 340, 540, 25);
+	type.changeColor(255, 255, 255, 255);
+	type.setFont("res/Fonts/Montserrat/static/Montserrat-Light.ttf");
 	type.draw(window);
 
 	FloatRect l = type.getLocalBoundsAuto();
@@ -411,10 +426,10 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 	pathForProject += "\\";
 	pathForProject += componentName;
 	pathForProject += ".txt";
-	
-	button forX(window.getSize().x - 220 + l.width, 548, "", 100, 24, 24);
-	button forY(window.getSize().x - 220 + l.width, 578, "", 100, 24, 24);
-	button forZ(window.getSize().x - 220 + l.width, 608, "", 100, 24, 24);
+	//window.getSize().x - 230, 515, "", 220, 24, 24
+	button forX(window.getSize().x - 230, 548, "", 220, 24, 24);
+	button forY(window.getSize().x - 230, 578, "", 220, 24, 24);
+	button forZ(window.getSize().x - 230, 608, "", 220, 24, 24);
 
 	FILE* compALL;
 	if(compALL = fopen(pathForProject.c_str(), "r"));
@@ -434,7 +449,7 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 			if (getText[i] == ' ') c++;
 			else
 			{
-				if(getText[i] >= '0' && getText[i] <= '9')
+				if (getText[i] >= '0' && getText[i] <= '9')
 				{
 				if (c == 0)
 					x = x * 10 + int(getText[i] - 48);
@@ -463,44 +478,42 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 	}
 	std::fclose(compALL);
 	
-	if (pozMx > window.getSize().x - 220 + l.width && pozMx < window.getSize().x - 120 + l.width && pozMy > 548 && pozMy < 548 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 548 && pozMy < 548 + 24)
 	{
 		forX.setButtonColor(244, 207, 137, 255);
-		if (changeDown) { x--; change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);}
+		if (changeDown) { x--; }
 		if (changeUp) {
-			x++;change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+			x++;
 	}
 	}
 	else
 		forX.setButtonColor(132, 125, 120, 255);
 
-	if (pozMx > window.getSize().x - 220 + l.width && pozMx < window.getSize().x - 120 + l.width && pozMy > 578 && pozMy < 578 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 578 && pozMy < 578 + 24)
 	{
 		forY.setButtonColor(244, 207, 137, 255);
 		if (changeDown) 
 		{
-			y--; change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+			y--; 
 		}
 		if (changeUp)
 		{
-			y++;change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+			y++;
 		}
 	}
 	else
 		forY.setButtonColor(132, 125, 120, 255);
 
-	if (pozMx > window.getSize().x - 220 + l.width && pozMx < window.getSize().x - 120 + l.width && pozMy > 608 && pozMy < 608 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 608 && pozMy < 608 + 24)
 	{
 		forZ.setButtonColor(244, 207, 137, 255);
 		if (changeDown) 
 		{
 			z--; 
-			change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
 		}
 		if (changeUp) 
 		{
 		z++;
-		change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
 		}
 	}
 	else
@@ -509,8 +522,6 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 	_itoa(x, X, 10); xCoordonate += X;
 	_itoa(y, Y, 10); yCoordonate += Y;
 	_itoa(z, Z, 10); zCoordonate += Z;
-	posi(x, y, z);
-	//std::cout << xCoordonate << " " << yCoordonate << " " << zCoordonate << std::endl;
 	forX.changeText(xCoordonate);
 	forX.setTextColor(51, 51, 51, 255);
 	
@@ -536,10 +547,12 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 	fprintf(newCordonates, "%s", size);
 	fprintf(newCordonates, "%s", index);
 	fclose(newCordonates);
+	if(changeDown || changeUp)
+	change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 
 }
 
-void figuresInfo::figureInfoSize(sf::RenderWindow& window, std::string _size, std::string Name, std::string componentName, int language, bool changeUp, bool changeDown, int pozMx, int pozMy, Camera camera, int compScroll, int compNr)
+void figuresInfo::figureInfoSize(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string _size, std::string Name, std::string componentName, int language, bool changeUp, bool changeDown, int pozMx, int pozMy, Camera camera, int compScroll, int compNr)
 {
 	int index = 0;
 	using namespace sf;
@@ -559,7 +572,9 @@ void figuresInfo::figureInfoSize(sf::RenderWindow& window, std::string _size, st
 	std::fclose(Texts);
 
 	texts size(15, 51, 51, 51, 255, output[0]);
-	size.changePosition(window.getSize().x - 220, 630);
+	size.PositionSizeString(output[0], window.getSize().x - 340, 630, 25);
+	size.changeColor(255, 255, 255, 255);
+	size.setFont("res/Fonts/Montserrat/static/Montserrat-Light.ttf");
 	size.draw(window);
 
 	FloatRect textWidht = size.getLocalBoundsAuto();
@@ -572,10 +587,10 @@ void figuresInfo::figureInfoSize(sf::RenderWindow& window, std::string _size, st
 
 	FILE* sizeDates = fopen(pathForProject.c_str(), "r");
 	char position[100], sizes[101], Index[10];
-
-	button forH(window.getSize().x - 220 + textWidht.width, 640, "", 100, 24, 24);
-	button forlen(window.getSize().x - 220 + textWidht.width, 670, "", 100, 24, 24);
-	button forW(window.getSize().x - 220 + textWidht.width, 700, "", 100, 24, 24);
+		//window.getSize().x - 230, 515, "", 220, 24, 24
+	button forH(window.getSize().x - 230, 640, "", 220, 24, 24);
+	button forlen(window.getSize().x - 230, 670, "", 220, 24, 24);
+	button forW(window.getSize().x - 230, 700, "", 220, 24, 24);
 
 	if (!feof(sizeDates))
 	{
@@ -629,35 +644,35 @@ void figuresInfo::figureInfoSize(sf::RenderWindow& window, std::string _size, st
 	}
 	std::fclose(sizeDates);
 
-	if (pozMx > window.getSize().x - 220 + textWidht.width && pozMx < window.getSize().x - 120 + textWidht.width && pozMy > 640 && pozMy < 640 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 640 && pozMy < 640 + 24)
 	{
 		forH.setButtonColor(244, 207, 137, 255);
-		if (changeDown){ h--; change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+		if (changeDown){ h--; change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 		int a = 0;
 	}
-		if (changeUp){ h++;change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+		if (changeUp){ h++;change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 	}
 	}
 	else
 		forH.setButtonColor(132, 125, 120, 255);
 
-	if (pozMx > window.getSize().x - 220 + textWidht.width && pozMx < window.getSize().x - 120 + textWidht.width && pozMy > 670 && pozMy < 670 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 670 && pozMy < 670 + 24)
 	{
 		forlen.setButtonColor(244, 207, 137, 255);
-		if (changeDown){ l--;change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+		if (changeDown){ l--;change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 	}
-		if (changeUp) {l++; change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+		if (changeUp) {l++; change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 	}
 	}
 	else
 		forlen.setButtonColor(132, 125, 120, 255);
 
-	if (pozMx > window.getSize().x - 220 + textWidht.width && pozMx < window.getSize().x - 120 + textWidht.width && pozMy > 700 && pozMy < 700 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 700 && pozMy < 700 + 24)
 	{
 		forW.setButtonColor(244, 207, 137, 255);
-		if (changeDown){ L--; change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+		if (changeDown){ L--; change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 	}
-		if (changeUp){ L++;change(window, camera, Name, componentName, 1, pozMx, pozMy, compScroll, compNr);
+		if (changeUp){ L++;change(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, Name, componentName, language, pozMx, pozMy, compScroll, compNr);
 	}
 	}
 	else
@@ -743,7 +758,9 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 	std::fclose(Texts);
 
 	texts size(15, 51, 51, 51, 255, output[0]);
-	size.changePosition(window.getSize().x - 220, 630);
+	size.PositionSizeString(output[0], window.getSize().x - 340, 630, 25);
+	size.changeColor(255, 255, 255, 255);
+	size.setFont("res/Fonts/Montserrat/static/Montserrat-Light.ttf");
 	size.draw(window);
 
 	FloatRect textWidht = size.getLocalBoundsAuto();
@@ -756,10 +773,10 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 
 	FILE* sizeDates = fopen(pathForProject.c_str(), "r");
 	char position[100], sizes[101], Index[10];
-
-	button forH(window.getSize().x - 220 + textWidht.width, 640, "", 100, 24, 24);
-	button forlen(window.getSize().x - 220 + textWidht.width, 670, "", 100, 24, 24);
-	button forW(window.getSize().x - 220 + textWidht.width, 700, "", 100, 24, 24);
+	//window.getSize().x - 230, 515, "", 220, 24, 24
+	button forH(window.getSize().x - 230, 640, "", 220, 24, 24);
+	button forlen(window.getSize().x - 230, 670, "", 220, 24, 24);
+	button forW(window.getSize().x - 230, 700, "", 220, 24, 24);
 
 	if (!feof(sizeDates))
 	{
@@ -768,8 +785,9 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 		std::fgets(Index, 10, sizeDates);
 
 	}
-	char getIndex[100];
+	char getIndex[100]{};
 	std::strncpy(getIndex, Index, strlen(Index) - 1);
+	//std::cout << "getIndex= " << getIndex << std::endl;
 	for (int i = 0; i < strlen(getIndex); i++)
 	{
 		if (getIndex[i] >= '0' && getIndex[i] <= '9')
@@ -812,15 +830,14 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 	}
 	std::fclose(sizeDates);
 
-	if (pozMx > window.getSize().x - 220 + textWidht.width && pozMx < window.getSize().x - 120 + textWidht.width && pozMy > 640 && pozMy < 640 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 640 && pozMy < 640 + 24)
 	{
 		forH.setButtonColor(244, 207, 137, 255);
-		
 	}
 	else
 		forH.setButtonColor(132, 125, 120, 255);
 
-	if (pozMx > window.getSize().x - 220 + textWidht.width && pozMx < window.getSize().x - 120 + textWidht.width && pozMy > 670 && pozMy < 670 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 670 && pozMy < 670 + 24)
 	{
 		forlen.setButtonColor(244, 207, 137, 255);
 		
@@ -828,7 +845,7 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 	else
 		forlen.setButtonColor(132, 125, 120, 255);
 
-	if (pozMx > window.getSize().x - 220 + textWidht.width && pozMx < window.getSize().x - 120 + textWidht.width && pozMy > 700 && pozMy < 700 + 24)
+	if (pozMx > window.getSize().x - 230 && pozMx < window.getSize().x - 230 + 220 && pozMy > 700 && pozMy < 700 + 24)
 	{
 		forW.setButtonColor(244, 207, 137, 255);
 		
@@ -850,7 +867,7 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 
 	forW.changeText(wSize);//
 	forW.setTextColor(51, 51, 51, 255);
-	//std::cout << index << "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+	//std::cout << "index = " << index << std::endl;
 
 	if (index == 2)
 	{
@@ -893,10 +910,9 @@ void figuresInfo::figureInfoSize2(sf::RenderWindow& window, std::string _size, s
 	std::fprintf(newSize, "%s", " \n");
 	std::fprintf(newSize, "%s", Index);
 	std::fclose(newSize);
-
 }
 
-void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string saveNameOfProject, std::string componentName, int language, int pozMx, int pozMy, int compScroll, int compNr)
+void figuresInfo::change(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, Camera camera, std::string saveNameOfProject, std::string componentName, int language, int pozMx, int pozMy, int compScroll, int compNr)
 {
 	window.clear();
 	int nothing = 0;
@@ -967,7 +983,7 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 					if (sizes[i] == ' ') c++;
 					else
 					{
-						if (sizes[i] != '-')
+						if (sizes[i] >= '0' && sizes[i] <= '9')
 						{
 							if (c == 0)
 								h = h * 10 + int(sizes[i] - 48);
@@ -1004,7 +1020,7 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 					if (getText[i] == ' ') c++;
 					else
 					{
-						if (getText[i] != '-')
+						if(getText[i] >= '0' && getText[i] <= '9')
 						{
 							if (c == 0)
 								x = x * 10 + int(getText[i] - 48);
@@ -1078,8 +1094,7 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 			for (int j = 0; j < strlen(everything[i]); j++)
 			{
 				if (everything[i][j] == ' ') c++;
-
-				if(everything[i][j] >='0' && everything[i][j] <= '9')
+				else if (everything[i][j] >= '0' && everything[i][j] <= '9')
 				{
 					if (c == 0)
 						x = x * 10 + int(everything[i][j] - 48);
@@ -1097,6 +1112,7 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 						index = index * 10 + int(everything[i][j] - 48);
 				}
 			}
+
 			c = 0;
 			for (int j = 0; j < strlen(everything[i]); j++)
 			{
@@ -1114,41 +1130,44 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 			//std::cout << nr << " " << x << " " << y << " " << z;
 			//std::cout << " " << index << " ";
 			//std::cout << h << " " << l << " " << L << std::endl;
-			
+			std::cout << "aici" << std::endl;
+			std::cout << everything[i] << std::endl;
+			std::cout << "x =" << x << std::endl;
+			std::cout << "y =" << y << std::endl;
+			std::cout << "z =" << z << std::endl;
+			std::cout << "h =" << h << std::endl;
+			std::cout << "l =" << l << std::endl;
+			std::cout << "L =" << L << std::endl;
+			std::cout << std::endl;
 			if (index == 2)
 			{
 				Cub cub(Vector(x, y, z), h);
-				cub.render_solid(window, 1600, 900, camera);
+				cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 3)
 			{
 				Prism prisma(Vector(x, y, z), h, l, L);
-				prisma.render_solid(window, 1600, 900, camera);
+				prisma.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 4)
 			{
-				Sphere3d sphere(Vector(x, y, z), h, 100, 20);
-				sphere.render_solid(window, 1600, 900, camera);
+				Sphere3d sphere(Vector(x, y, z), h, 100, 40);
+				sphere.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 5)
 			{
-				Cylinder3d cylinder(Vector(x, y, z), h, l, 20);
-				cylinder.render_solid(window, 1600, 900, camera);
+				Cylinder3d cylinder(Vector(x, y, z), h, l, 100);
+				cylinder.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 6)
 			{
 				Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-				pyramid.render_solid(window, 1600, 900, camera);
+				pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 7)
 			{
-				Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-				pyramid.render_solid(window, 1600, 900, camera);
-			}
-			else if (index == 8)
-			{
-				Con3d con(Vector(x, y, z), h, l, 20);
-				con.render_solid(window, 1600, 900, camera);
+				Con3d con(Vector(x, y, z), h, l, 100);
+				con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 		}
 		//std::cout << everything[i] << std::endl;
@@ -1160,13 +1179,13 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 		//spaceForComponents.setFillColor(sf::Color(81, 81, 81, 255));
 		//window.draw(spaceForComponents);
 		//memset(everything, 0, sizeof(everything));
-		justComponentsNmaes(window, saveNameOfProject, compScroll, compNr);
+		justComponentsNmaes(window, saveNameOfProject, compScroll, compNr, language);
 		bool a = 0, b = 0;
-		figureInfoType(window, "tip:", saveNameOfProject, componentName, language, compNr);
-		figureInfoPosition(window, "pozitie:", saveNameOfProject, componentName, a, b, pozMx, pozMy, camera, compScroll, compNr);
+		figureInfoType(window, "Tip:", saveNameOfProject, componentName, language, compNr);
+		figureInfoPosition(window, WINDOW_WIDTH, WINDOW_HEIGHT, "Pozitii:", saveNameOfProject, componentName, a, b, pozMx, pozMy, camera, compScroll, compNr, language);
 		figureInfoSize2(window, "Marime:", saveNameOfProject, componentName, language, a, b, pozMx, pozMy, compScroll);
 		//componentsNames(window, saveNameOfProject, 0, 0, 0, 0, x, y, 1, camera, 0);
-		figures(window, 1920, 1080, 0, 0, 1);
+		figures(window, 1920, 1080, 0, 0, language);
 
 		char screen[10][20];
 		FILE* f = fopen("src\\programtexts/viewAndEdit.txt", "r");
@@ -1191,17 +1210,18 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 
 		std::fclose(f);
 		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
+		text.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
 		text.draw(window);
-		text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
+		text.PositionSizeString(screen[1], window.getSize().x - 350 + 10, 10, 30);
 		text.draw(window);
-		text.PositionSizeString(screen[2], 300, 10, 15);
+		text.PositionSizeString(screen[2], 215, 20, 20);
 		text.draw(window);
-	}
 		window.display();
-	
+
+	}
 }
 
-void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::string saveNameOfProject)
+void figuresInfo::simpleChange(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, Camera camera, std::string saveNameOfProject)
 {
 	window.clear();
 	int nothing = 0;
@@ -1383,7 +1403,7 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 			for (int j = 0; j < strlen(everything[i]); j++)
 			{
 				if (everything[i][j] == ' ') c++;
-				else
+				else if(everything[i][j] >= '0' && everything[i][j] <= '9')
 					if (c == 0)
 						x = x * 10 + int(everything[i][j] - 48);
 					else if (c == 1)
@@ -1411,41 +1431,42 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 				if (c == 2)
 					if (everything[i][j] == '-') z = z * -1;
 			}
-
+			/*std::cout << "x =" << x << std::endl;
+			std::cout << "y =" << y << std::endl;
+			std::cout << "z =" << z << std::endl;
+			std::cout << "h =" << h << std::endl;
+			std::cout << "l =" << l << std::endl;
+			std::cout << "L =" << L << std::endl;
+			std::cout<<std::endl;*/
 			if (index == 2)
 			{
-				Cub cub(Vector(x, y, h), h);
-				cub.render_solid(window, 1600, 900, camera);
+				Cub cub(Vector(x, y, z), h);
+				cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 3)
 			{
 				Prism prisma(Vector(x, y, z), h, l, L);
-				prisma.render_solid(window, 1600, 900, camera);
+				prisma.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 4)
 			{
-				Sphere3d sphere(Vector(x, y, z), h, 100, 20);
-				sphere.render_solid(window, 1600, 900, camera);
+				Sphere3d sphere(Vector(x, y, z), h, 100, 40);
+				sphere.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 5)
 			{
-				Cylinder3d cylinder(Vector(x, y, z), h, l, 20);
-				cylinder.render_solid(window, 1600, 900, camera);
+				Cylinder3d cylinder(Vector(x, y, z), h, l, 100);
+				cylinder.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 6)
 			{
 				Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-				pyramid.render_solid(window, 1600, 900, camera);
+				pyramid.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 			else if (index == 7)
 			{
-				Pyramid3d pyramid(Vector(x, y, z), h, l, L);
-				pyramid.render_solid(window, 1600, 900, camera);
-			}
-			else if (index == 8)
-			{
-				Con3d con(Vector(x, y, z), h, l, 20);
-				con.render_solid(window, 1600, 900, camera);
+				Con3d con(Vector(x, y, z), h, l, 100);
+				con.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 			}
 		}
 	}
@@ -1453,30 +1474,32 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 	sf::Vector2u size = window.getSize();
 	sf::RectangleShape spaceForComponents(sf::Vector2f(size.x, size.y));
 	//Vector2f sizeSpace = spaceForComponents.getSize();
-	spaceForComponents.setPosition(size.x - 220, 0);
+	spaceForComponents.setPosition(size.x - 350, 0);
 	//cout << size.x - (size.x / 7) << endl;
 	spaceForComponents.setFillColor(sf::Color(81, 81, 81, 255));
+	int a = 0;
+	justComponentsNmaes(window, saveNameOfProject, a, 0,  1);
 	window.draw(spaceForComponents);
+
 	window.display();
 
 }
 
-void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName, std::string projname, int& pozMx, int& pozMy, int x, int y, Camera camera)
+void figuresInfo::deleteComponent(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string compName, std::string projname, int& pozMx, int& pozMy, int x, int y, Camera camera)
 {
 	bool find = 0;
 	//std::cout << "compNmae: " << projname << std::endl;
 	sf::Font font;
 	if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
-	sf::Text text("X", font, 22);
-	text.setPosition(window.getSize().x - 40, y);
+	sf::Text text("X", font, 24);
+	text.setPosition(window.getSize().x - 40, y + 3);
 
-	sf::RectangleShape divider(sf::Vector2f(2, 24));
-	divider.setPosition(window.getSize().x - 50, y + 2);
+	sf::RectangleShape divider(sf::Vector2f(2, 30));
+	divider.setPosition(window.getSize().x - 50, y + 4);
 	window.draw(text);
 	window.draw(divider);
 
-	//std::cout << "x:" << pozMx << " y:" << pozMy << std::endl;
-	if (pozMx >= window.getSize().x - 50 && pozMx <= window.getSize().x - 10 && pozMy >= y && pozMy <= y + 30)
+	if (pozMx >= window.getSize().x - 50 && pozMx <= window.getSize().x - 10 && pozMy >= y && pozMy <= y + 40)
 	{
 		std::string path = "src\\userProjects\\";
 		path += projname;
@@ -1535,7 +1558,7 @@ void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName
 		}
 		fclose(temp2);
 		fclose(afterDelete);
-		simpleChange(window, camera, projname);
+		simpleChange(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera, projname);
 		//change(window, camera, projname,compName, 1, pozMx, pozMy);
 		pozMx = 0; pozMy = 0;
 
