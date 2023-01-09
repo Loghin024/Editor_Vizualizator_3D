@@ -22,6 +22,14 @@ bool maximLength, moving;
 int pozMx, pozMy;
 int pozX, pozY, cPozX, cPozY;
 
+void posi(int x, int y, int z)
+
+{
+	std::cout<<"yeyeyeyeyye";
+	std::cout << x << " " << y << " " << z;
+
+}
+
 void littleDraw(sf::RenderWindow& window, int x, int y, int z, int h, bool edit)
 
 {
@@ -367,7 +375,7 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 			if (!nivel2 && view == 1)
 			{
 				clear = 1;
-				std::cout << saveNameOfProject << "eheheh ";
+				//std::cout << saveNameOfProject << "eheheh ";
 				curentWindow = 3;
 				char temp[100]{};
 				strncpy(temp, proiecte, strlen(proiecte) - 1);
@@ -570,9 +578,9 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 
 		std::fclose(f);
 		texts text(screen[0], 10, 10, 0, 0, 30, 234, 235, 229, 255);
-		text.draw(window);
-		text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
-		text.draw(window);
+		/*text.draw(window);*/
+		/*text.PositionSizeString(screen[1], window.getSize().x - 220 + 10, 10, 30);
+		text.draw(window);*/
 		text.PositionSizeString(screen[2], 300, 10, 15);
 		text.draw(window);
 	}
@@ -798,6 +806,11 @@ void interfata(sf::RenderWindow& window)
 							coordonates++;
 							if (coordonates == 5)
 							{
+								std::cout << "aaaaaaaaaaaaaaaaaaaaaaaaas" << std::endl;
+								for (int i = 0; i <= 4; i++)
+								{
+									std::cout << indexAndCoordonates[i] << std::endl;
+								}
 								addAndCreate.addIndex(saveNameOfProject, project, index);
 								memset(indexAndCoordonates, 0, sizeof(indexAndCoordonates));
 								curentWindow = 3;
@@ -1328,7 +1341,7 @@ void interfata(sf::RenderWindow& window)
 				{
 					saveNameOfProject.pop_back();
 				}
-				std::cout << saveNameOfProject << "aa" << std::endl;
+			//	std::cout << saveNameOfProject << "aa" << std::endl;
 				int nothing = 0;
 				std::string path = "src\\userProjects\\";
 				path += saveNameOfProject;
@@ -1346,7 +1359,7 @@ void interfata(sf::RenderWindow& window)
 				//firstEntry.change(window, camera, saveNameOfProject);
 				if (rotateCamera == false || nothing == 0) {
 					viewAndEdit(window, camera, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY, moving, compScroll);
-					std::cout << "view";
+				//	std::cout << "view";
 				}
 				else
 				{
@@ -1355,7 +1368,7 @@ void interfata(sf::RenderWindow& window)
 					
 					if (nothing > 0)
 					{
-						std::cout << "nothing= " << nothing << std::endl;
+					//	std::cout << "nothing= " << nothing << std::endl;
 						FILE* compNames = fopen(path.c_str(), "r+");
 						//std::cout << path << std::endl;
 						//if(!feof)
@@ -1404,7 +1417,7 @@ void interfata(sf::RenderWindow& window)
 									if (sizes[i] == ' ') c++;
 									else
 									{
-										if (sizes[i] != '-')
+										if(sizes[i] >= '0' && sizes[i] <= '9')
 										{
 											if (c == 0)
 												h = h * 10 + int(sizes[i] - 48);
@@ -1441,7 +1454,7 @@ void interfata(sf::RenderWindow& window)
 									if (getText[i] == ' ') c++;
 									else
 									{
-										if (getText[i] != '-')
+										if(getText[i] >= '0' && getText[i] <= '9')
 										{
 											if (c == 0)
 												x = x * 10 + int(getText[i] - 48);
@@ -1504,7 +1517,7 @@ void interfata(sf::RenderWindow& window)
 							}
 						}
 						else
-							std::cout << "aiurea";
+							//std::cout << "aiurea";
 						fclose(compNames);
 
 						for (int i = 0; i < nr; i++)
@@ -1530,27 +1543,40 @@ void interfata(sf::RenderWindow& window)
 									else if (c == 6)
 										index = index * 10 + int(everything[i][j] - 48);
 							}
+							
 							c = 0;
 							for (int j = 0; j < strlen(everything[i]); j++)
 							{
 								if (everything[i][j] == ' ') c++;
 								else
-									if (c == 0)
-										if (everything[i][j] == '-') x = x * -1;
-								if (c == 1)
-									if (everything[i][j] == '-') y = y * -1;
-								if (c == 2)
-									if (everything[i][j] == '-') z = z * -1;
+								{
+									if (everything[i][j] >= '0' && everything[i][j] <= '9')
+									{
+										if (c == 0) {
+											if (everything[i][j] == '-') x = x * -1;
+											std::cout << "minus";
+										}
+										if (c == 1)
+											if (everything[i][j] == '-') y = y * -1;
+										if (c == 2)
+											if (everything[i][j] == '-') z = z * -1;
+									}
+								}
 							}
+							//std::cout << "asssssssssssssssss" << std::endl;
 							//std::cout << nr << " " << x << " " << y << " " << z;
 							//std::cout << " " << index << " ";
 							//std::cout << h << " " << l << " " << L << std::endl;
 
+
+
 						if (index == 2)
 						{
-							Cub cub(Vector(x, y, h), h);
+							Cub cub(Vector(x, y, z), h);
+							cub.rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, true);					
 							cub.render_solid(window, 1600, 900, camera);
 						}
+
 						else if (index == 3)
 						{
 							Prism prisma(Vector(x, y, z), h, l, L);
@@ -1571,11 +1597,11 @@ void interfata(sf::RenderWindow& window)
 							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
 							pyramid.render_solid(window, 1600, 900, camera);
 						}
-						else if (index == 7)
+						/*else if (index == 7)
 						{
 							Pyramid3d pyramid(Vector(x, y, z), h, l, L);
 							pyramid.render_solid(window, 1600, 900, camera);
-						}
+						}*/
 						else if (index == 8)
 						{
 							Con3d con(Vector(x, y, z), h, l, 20);

@@ -34,7 +34,7 @@ void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100
 	if (coordonates > 0)
 	{
 		detail.changeTheText(output[1]);
-		std::cout << output[1] << std::endl;
+		//std::cout << output[1] << std::endl;
 		detail.changePosition(10, 100);
 		detail.draw(window);
 		width = detail.getLocalBoundsAuto();
@@ -81,6 +81,7 @@ void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100
 			window.draw(playerText2);
 		}
 	}
+
 	for (int i = 0; i < 4;i++)
 	{
 		if
@@ -119,7 +120,7 @@ void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playe
 	if (coordonates > 0)
 	{
 		detail.changeTheText(output[1]);
-		std::cout << output[1] << std::endl;
+		//std::cout << output[1] << std::endl;
 		detail.changePosition(10, 100);
 		detail.draw(window);
 		width = detail.getLocalBoundsAuto();

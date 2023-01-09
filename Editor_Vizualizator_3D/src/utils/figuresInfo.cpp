@@ -5,6 +5,7 @@
 #include "../geometry/geometrie.hpp"
 #include "../geometry/solid3d.hpp"
 #include <iostream>
+#include "../Menu.hpp"
 //#include "parameters.hpp"
 //#include "mouse.hpp"
 //#include "..\\utils\mouse.hpp"
@@ -117,9 +118,9 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 
 	//if (scrollBar > numberOfComponents - 14) scrollBar = (numberOfComponents - 14);
 
-	std::cout << "poz cl x: " << x << std::endl;
-	std::cout << "poz cl y: " << y << std::endl;
-	std::cout << "scro= " << copieScroll << std::endl;
+	//std::cout << "poz cl x: " << x << std::endl;
+	//std::cout << "poz cl y: " << y << std::endl;
+	//std::cout << "scro= " << copieScroll << std::endl;
 
 	if (!(componentsFromFile2 = fopen(pathForProject.c_str(), "a+")));
 	else
@@ -128,7 +129,7 @@ void figuresInfo::componentsNames(sf::RenderWindow& window, std::string Name, in
 
 		while (!feof(componentsFromFile2))
 		{
-			std::cout << copieScroll << std::endl;
+			//std::cout << copieScroll << std::endl;
 			if (copieScroll <= 0)
 			{
 				if (maximComponents2 < 14)
@@ -235,7 +236,7 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 
 		while (!feof(componentsFromFile2))
 		{
-			std::cout << copieScroll << std::endl;
+		//	std::cout << copieScroll << std::endl;
 			if (copieScroll <= 0)
 			{
 				
@@ -261,7 +262,7 @@ void figuresInfo::justComponentsNmaes(sf::RenderWindow& window, std::string Name
 					else
 						components.setButtonColor(81, 81, 81, 255);
 
-					std::cout << "compNr= " << compNr << std::endl;
+				//	std::cout << "compNr= " << compNr << std::endl;
 					components.draw(window);
 					Line.setPosition(size.x - 220, 50 + 30 * (line + 1) + 5);
 					window.draw(Line);
@@ -299,8 +300,8 @@ void figuresInfo::scrollBar(sf::RenderWindow& window, int numberOfComponents, in
 {
 	using namespace sf;
 	numberOfComponents--;
-	std::cout << "scroll= " << scrollBar<<std::endl;
-	std::cout << "nr= " << numberOfComponents << std::endl;
+	//std::cout << "scroll= " << scrollBar<<std::endl;
+	//std::cout << "nr= " << numberOfComponents << std::endl;
 
 	RectangleShape scroll(Vector2f(0, 0));
 	scroll.setPosition(window.getSize().x - 15, 57);
@@ -315,7 +316,7 @@ void figuresInfo::scrollBar(sf::RenderWindow& window, int numberOfComponents, in
 		int resize = scroll.getSize().y - ((numberOfComponents - 14) * 5);
 		scroll.setSize(Vector2f(15, resize));
 		if (scrollBar > numberOfComponents - 14) scrollBar = (numberOfComponents - 14);
-		std::cout << "r " << numberOfComponents << " " << scrollBar << " q ";
+		//std::cout << "r " << numberOfComponents << " " << scrollBar << " q ";
 		//if (!(scrollBar == numberOfComponents - 14))
 		scroll.setPosition(window.getSize().x - 15, 57 + 5 * scrollBar);
 		
@@ -329,7 +330,8 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 	int index = 0;
 	using namespace sf;
 	Vector2u size = window.getSize();
-	texts Type(15, 51, 51, 51, 255, type);
+	texts Type(4, 51, 51, 51, 255, type);
+	//Type.PositionSizeString(type, )
 	Type.changePosition(window.getSize().x - 220, 500);
 	Type.draw(window);
 	FloatRect textwidht = Type.getLocalBoundsAuto();
@@ -343,7 +345,7 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 	FILE* figuresfromfile = fopen(pathforproject.c_str(), "r");
 	char buff[100];
 
-	std::cout <<"eroare= " << pathforproject << std::endl;
+	//std::cout <<"eroare= " << pathforproject << std::endl;
 	if (!feof(figuresfromfile))
 	{
 		std::fgets(buff, 100, figuresfromfile);
@@ -366,19 +368,16 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 	FILE* typetext;
 	if (typetext = fopen("src\\programtexts\\posiblefigures.txt", "r"));
 
-	if (index == 6 || index == 7)
-		figuretype.setTextSize(15);
-	else
-		figuretype.setTextSize(24);
-
 	char Typename[100]{};
 	while (!feof(typetext) && index)
 	{
+		memset(Typename, 0, sizeof(Typename));
 		for (int i = 1; i <= 3; i++)
 		{
 			fgets(buff, 100, typetext);
 			if(i == language)
 			strncpy(Typename, buff, strlen(buff) - 1);
+			//std::cout << "nume fig =" << Typename << std::endl;
 
 		}
 		index--;
@@ -394,7 +393,7 @@ void figuresInfo::figureInfoType(sf::RenderWindow& window, std::string type, std
 
 void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string position, std::string Name, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy,  Camera camera, int compScroll, int compNr)
 {
-	if (changeUp > 0) std::cout<<"dadasdasdasdasd";
+	//if (changeUp > 0) std::cout<<"dadasdasdasdasd";
 	using namespace sf;
 	std::string xCoordonate ="x: ", yCoordonate = "y: ", zCoordonate = "z: ";
 	char X[20]{}, Y[20]{}, Z[20]{};
@@ -435,7 +434,7 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 			if (getText[i] == ' ') c++;
 			else
 			{
-				if (getText[i] != '-')
+				if(getText[i] >= '0' && getText[i] <= '9')
 				{
 				if (c == 0)
 					x = x * 10 + int(getText[i] - 48);
@@ -510,7 +509,8 @@ void figuresInfo::figureInfoPosition(sf::RenderWindow& window, std::string posit
 	_itoa(x, X, 10); xCoordonate += X;
 	_itoa(y, Y, 10); yCoordonate += Y;
 	_itoa(z, Z, 10); zCoordonate += Z;
-	std::cout << xCoordonate << " " << yCoordonate << " " << zCoordonate << std::endl;
+	posi(x, y, z);
+	//std::cout << xCoordonate << " " << yCoordonate << " " << zCoordonate << std::endl;
 	forX.changeText(xCoordonate);
 	forX.setTextColor(51, 51, 51, 255);
 	
@@ -586,7 +586,7 @@ void figuresInfo::figureInfoSize(sf::RenderWindow& window, std::string _size, st
 	}
 	char getIndex[100]{};
 	std::strncpy(getIndex, Index, strlen(Index) - 1);
-	std::cout << "getIndex= " << getIndex << std::endl;
+	//std::cout << "getIndex= " << getIndex << std::endl;
 	for (int i = 0; i < strlen(getIndex); i++)
 	{
 		if (getIndex[i] >= '0' && getIndex[i] <= '9')
@@ -677,7 +677,7 @@ void figuresInfo::figureInfoSize(sf::RenderWindow& window, std::string _size, st
 
 	forW.changeText(wSize);//
 	forW.setTextColor(51, 51, 51, 255);
-	std::cout << "index = " << index << std::endl;
+	//std::cout << "index = " << index << std::endl;
 
 	if (index == 2)
 	{
@@ -916,7 +916,7 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 		nothing++;
 	}
 	fclose(compNames2);
-	std::cout << "number of copmps= " << nothing << std::endl;
+	//std::cout << "number of copmps= " << nothing << std::endl;
 
 	if (nothing == 1)
 	{
@@ -925,13 +925,13 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 	else
 	{
 		FILE* compNames = fopen(path.c_str(), "r+");
-		std::cout << path << std::endl;
+		//std::cout << path << std::endl;
 		//if(!feof)
 		char buff[100];
 		fgets(buff, 100, compNames);
 		while (!feof(compNames))
 		{
-			std::cout << "nifint";
+			//std::cout << "nifint";
 			int index = 0;
 			char comp[100]{};
 			strncpy(comp, buff, strlen(buff) - 1);
@@ -1078,7 +1078,9 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 			for (int j = 0; j < strlen(everything[i]); j++)
 			{
 				if (everything[i][j] == ' ') c++;
-				else
+
+				if(everything[i][j] >='0' && everything[i][j] <= '9')
+				{
 					if (c == 0)
 						x = x * 10 + int(everything[i][j] - 48);
 					else if (c == 1)
@@ -1093,26 +1095,29 @@ void figuresInfo::change(sf::RenderWindow& window, Camera camera, std::string sa
 						L = L * 10 + int(everything[i][j] - 48);
 					else if (c == 6)
 						index = index * 10 + int(everything[i][j] - 48);
+				}
 			}
 			c = 0;
 			for (int j = 0; j < strlen(everything[i]); j++)
 			{
 				if (everything[i][j] == ' ') c++;
 				else
+				{
 					if (c == 0)
 						if (everything[i][j] == '-') x = x * -1;
-				if (c == 1)
-					if (everything[i][j] == '-') y = y * -1;
-				if (c == 2)
-					if (everything[i][j] == '-') z = z * -1;
+					if (c == 1)
+						if (everything[i][j] == '-') y = y * -1;
+					if (c == 2)
+						if (everything[i][j] == '-') z = z * -1;
+				}
 			}
 			//std::cout << nr << " " << x << " " << y << " " << z;
 			//std::cout << " " << index << " ";
 			//std::cout << h << " " << l << " " << L << std::endl;
-
+			
 			if (index == 2)
 			{
-				Cub cub(Vector(x, y, h), h);
+				Cub cub(Vector(x, y, z), h);
 				cub.render_solid(window, 1600, 900, camera);
 			}
 			else if (index == 3)
@@ -1219,7 +1224,7 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 		nothing++;
 	}
 	fclose(compNames2);
-	std::cout << "number of copmps= " << nothing << std::endl;
+	//std::cout << "number of copmps= " << nothing << std::endl;
 
 	if (nothing == 1)
 	{
@@ -1229,13 +1234,13 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 	{
 		FILE* compNames = fopen(path.c_str(), "r+");
 
-		std::cout << path << std::endl;
+		//std::cout << path << std::endl;
 		//if(!feof)
 		char buff[100];
 		fgets(buff, 100, compNames);
 		while (!feof(compNames))
 		{
-			std::cout << "nifint";
+			//std::cout << "nifint";
 			int index = 0;
 			char comp[100]{};
 			strncpy(comp, buff, strlen(buff) - 1);
@@ -1459,7 +1464,7 @@ void figuresInfo::simpleChange(sf::RenderWindow& window, Camera camera, std::str
 void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName, std::string projname, int& pozMx, int& pozMy, int x, int y, Camera camera)
 {
 	bool find = 0;
-	std::cout << "compNmae: " << projname << std::endl;
+	//std::cout << "compNmae: " << projname << std::endl;
 	sf::Font font;
 	if (!font.loadFromFile("Fonts/RobotoCondensed-Regular.ttf"));
 	sf::Text text("X", font, 22);
@@ -1470,7 +1475,7 @@ void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName
 	window.draw(text);
 	window.draw(divider);
 
-	std::cout << "x:" << pozMx << " y:" << pozMy << std::endl;
+	//std::cout << "x:" << pozMx << " y:" << pozMy << std::endl;
 	if (pozMx >= window.getSize().x - 50 && pozMx <= window.getSize().x - 10 && pozMy >= y && pozMy <= y + 30)
 	{
 		std::string path = "src\\userProjects\\";
@@ -1494,7 +1499,7 @@ void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName
 				char nou[100]{};
 				strncpy(nou, sir, strlen(sir) - 1);
 				if (compName.compare(nou) == 0) {
-					std::cout << "am gasit" << std::endl;
+					//std::cout << "am gasit" << std::endl;
 					buff = nou;
 				}
 				else
@@ -1510,7 +1515,7 @@ void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName
 		fclose(temp);
 		removeF += buff;
 		removeF += ".txt";
-		std::cout << "remove: " << removeF << std::endl;
+		//std::cout << "remove: " << removeF << std::endl;
 
 		remove(removeF.c_str());
 		FILE* afterDelete = fopen(path.c_str(), "w");
@@ -1522,7 +1527,7 @@ void figuresInfo::deleteComponent(sf::RenderWindow& window, std::string compName
 			fgets(sir, 100, temp2);
 			while (!feof(temp2))
 			{
-				std::cout << "sir: " << sir;
+				//std::cout << "sir: " << sir;
 				fprintf(afterDelete, "%s", sir);
 				fgets(sir, 100, temp2);
 
