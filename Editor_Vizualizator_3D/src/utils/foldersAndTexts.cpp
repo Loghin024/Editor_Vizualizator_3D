@@ -57,6 +57,14 @@ void createFolderAndTexts()
 	fprintf(programUtilities11, "%s", "Apasa C pentru modul editare\nPress c for edit mode\nRusa");
 	fclose(programUtilities11);
 
+	FILE* programUtilities12 = fopen("src\\programtexts/positionText.txt", "w");
+	fprintf(programUtilities12, "%s", "Pozitii:\nPosition:\nRusa");
+	fclose(programUtilities12);
+
+	FILE* programUtilities13 = fopen("src\\programtexts/Line.txt", "w");
+	fprintf(programUtilities13, "%s", "Coordonatele primului punct\nPut the Coordonates of\nRusa\nCoordonatele celeui de al doilea punct\nSecond point coordonates\nRusa");
+	fclose(programUtilities13);
+
 
 	if (_mkdir("src\\images"));
 	if (_mkdir("src\\Fonts"));

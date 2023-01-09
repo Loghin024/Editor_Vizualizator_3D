@@ -7,3 +7,6 @@ testare editor
 rotiri
 final test
 testare linii
+xfdf
+bugfixes
+bugfixes1

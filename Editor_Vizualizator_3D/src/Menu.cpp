@@ -372,7 +372,6 @@ void myProjectsWindow(sf::RenderWindow& window, char output2[10][100], int back,
 			if (!nivel2 && view == 1)
 			{
 				clear = 1;
-				std::cout << saveNameOfProject << "eheheh ";
 				curentWindow = 3;
 				char temp[100]{};
 				strncpy(temp, proiecte, strlen(proiecte) - 1);
@@ -603,220 +602,6 @@ void viewAndEdit(sf::RenderWindow& window, Camera camera, int xMoved, int yMoved
 	window.display();
 }
 
-void updateVectors(sf::RenderWindow& window, std::string saveNameOfProject)
-{
-	//cubes.clear();
-	int nr = 0;
-	std::string path = "src\\userProjects\\";
-	path += saveNameOfProject;
-	path += "\\";
-	path += "name.txt";
-	char everything[100][100];
-	FILE* compNames = fopen(path.c_str(), "r+");
-	//std::cout << path << std::endl;
-	//if(!feof)
-	std::cout << path << "\n";
-	if (!feof(compNames))
-	{
-		//char buff[100];
-		//fgets(buff, 100, compNames);
-		while (!feof(compNames))
-		{
-			window.clear();
-			char buff[100];
-			int index = 0;
-			char comp[100]{};
-			fgets(buff, 100, compNames);
-			strncpy(comp, buff, strlen(buff) - 1);
-			std::string pathForDates = "src\\userProjects\\";
-			pathForDates += saveNameOfProject;
-			pathForDates += "\\";
-			pathForDates += comp;
-			pathForDates += ".txt";
-			//std::cout << pathForDates << std::endl;
-			FILE* compDates = fopen(pathForDates.c_str(), "r+");
-			char position[100], sizes[101], Index[10];
-
-			if (!feof(compDates))
-			{
-				std::fgets(position, 100, compDates);
-				std::fgets(sizes, 101, compDates);
-				std::fgets(Index, 10, compDates);
-			}
-			char getIndex[100];
-			strncpy(getIndex, Index, strlen(Index) - 1);
-			for (int i = 0; i < strlen(getIndex); i++)
-			{
-				if (getIndex[i] >= '0' && getIndex[i] <= '9')
-					index = index * 10 + int(getIndex[i] - 48);
-			}
-			index /= 10;
-
-			int h = 0, l = 0, L = 0;
-			int x = 0, y = 0, z = 0;
-			//scoatem size - urile din fisier
-			int c = 0;
-			for (int i = 0; i < strlen(sizes); i++)
-			{
-				if (sizes[i] == ' ') c++;
-				else
-				{
-					if (sizes[i] >= '0' && sizes[i] <= '9')
-					{
-						if (c == 0)
-							h = h * 10 + int(sizes[i] - 48);
-						else if (c == 1)
-							l = l * 10 + int(sizes[i] - 48);
-						else if (c == 2)
-							L = L * 10 + int(sizes[i] - 48);
-					}
-				}
-			}
-			c = 0;
-			for (int i = 0; i < strlen(sizes); i++)
-			{
-				if (sizes[i] == ' ') c++;
-				else
-				{
-					//std::cout << getText[i] << " " << c << std::endl;
-					if (c == 0)
-						if (sizes[i] == '-') h = h * -1;
-					if (c == 1)
-						if (sizes[i] == '-') l = l * -1;
-					if (c == 2)
-						if (sizes[i] == '-') L = L * -1;
-				}
-			}
-
-			//scoatem pozitiile din fisier
-			c = 0;
-			char getText[100];
-			strncpy(getText, position, strlen(position) - 1);
-
-			for (int i = 0; i < strlen(getText); i++)
-			{
-				if (getText[i] == ' ') c++;
-				else
-				{
-					if (getText[i] >= '0' && getText[i] <= '9')
-					{
-						if (c == 0)
-							x = x * 10 + int(getText[i] - 48);
-						else if (c == 1)
-							y = y * 10 + int(getText[i] - 48);
-						else if (c == 2)
-							z = z * 10 + int(getText[i] - 48);
-					}
-				}
-			}
-			c = 0;
-			for (int i = 0; i < strlen(getText); i++)
-			{
-				if (getText[i] == ' ') c++;
-				else
-				{
-					//std::cout << getText[i] << " " << c << std::endl;
-					if (c == 0)
-						if (getText[i] == '-') x = x * -1;
-					if (c == 1)
-						if (getText[i] == '-') y = y * -1;
-					if (c == 2)
-						if (getText[i] == '-') z = z * -1;
-				}
-			}
-			fclose(compDates);
-			//std::cout << x << " " << y << " " << z << std::endl;
-			//std::cout << index << std::endl;
-			//std::cout << h << " " << l << " " << L << std::endl;
-			char X[100]{};
-			_itoa(x, X, 10);
-			strcpy(everything[nr], X);
-			strcat(everything[nr], " ");
-			memset(X, 0, sizeof(X));
-			_itoa(y, X, 10);
-			strcat(everything[nr], X);
-			strcat(everything[nr], " ");
-			memset(X, 0, sizeof(X));
-			_itoa(z, X, 10);
-			strcat(everything[nr], X);
-			strcat(everything[nr], " ");
-			memset(X, 0, sizeof(X));
-			_itoa(h, X, 10);
-			strcat(everything[nr], X);
-			strcat(everything[nr], " ");
-			memset(X, 0, sizeof(X));
-			_itoa(l, X, 10);
-			strcat(everything[nr], X);
-			strcat(everything[nr], " ");
-			memset(X, 0, sizeof(X));
-			_itoa(L, X, 10);
-			strcat(everything[nr], X);
-			strcat(everything[nr], " ");
-			memset(X, 0, sizeof(X));
-			_itoa(index, X, 10);
-			strcat(everything[nr], X);
-			strcat(everything[nr], " ");
-			nr++;
-
-		}
-	}
-	else
-		std::cout << "aiurea";
-	fclose(compNames);
-
-	for (int i = 0; i < nr; i++)
-	{
-		int x = 0, y = 0, z = 0, index = 0, h = 0, l = 0, L = 0;
-		int c = 0;
-		for (int j = 0; j < strlen(everything[i]); j++)
-		{
-			if (everything[i][j] == ' ') c++;
-			if (everything[i][j] >= '0' && everything[i][j] <= '9')
-				if (c == 0)
-					x = x * 10 + int(everything[i][j] - 48);
-				else if (c == 1)
-					y = y * 10 + int(everything[i][j] - 48);
-				else if (c == 2)
-					z = z * 10 + int(everything[i][j] - 48);
-				else if (c == 3)
-					h = h * 10 + int(everything[i][j] - 48);
-				else if (c == 4)
-					l = l * 10 + int(everything[i][j] - 48);
-				else if (c == 5)
-					L = L * 10 + int(everything[i][j] - 48);
-				else if (c == 6)
-					index = index * 10 + int(everything[i][j] - 48);
-		}
-		c = 0;
-		for (int j = 0; j < strlen(everything[i]); j++)
-		{
-			if (everything[i][j] == ' ') c++;
-			if (everything[i][j] >= '0' && everything[i][j] <= '9')
-			{
-				if (c == 0)
-					if (everything[i][j] == '-') x = x * -1;
-				if (c == 1)
-					if (everything[i][j] == '-') y = y * -1;
-				if (c == 2)
-					if (everything[i][j] == '-') z = z * -1;
-			}
-		}
-		/*std::cout << "111111111111111111111111111111111111111111111111111111111\n";
-		std::cout << x << " " << y << " " << z << " " << h << " " << l << " " << L << "\n";*/
-		if (index == 2)
-		{
-			//cubes.push_back(Cub(Vector(x, y, z), h));
-			//if (cubes.find("cub1") == cubes.end())
-			//{
-			//	cubes.insert(std::pair<std::string, Cub>("cub1", Cub(Vector(x, y, z), h)));
-			//}
-			//else
-			//{
-			//	//cubes["cub1"].operator+=
-			//}
-		}
-	}
-}
 
 void interfata(sf::RenderWindow& window)
 {
@@ -1033,14 +818,9 @@ void interfata(sf::RenderWindow& window)
 								
 							strcpy(indexAndCoordonates[coordonates], playerInput.c_str());
 
-							if (coordonates == 1 || coordonates == 2 || coordonates == 3)
-								std::cout << "gdfggskhgkdshjgkdshgkdsghdskf"<<playerInput << "\n";
-
 							coordonates++;
 							if (coordonates == 5)
 							{
-								for (int i = 0; i < 4; ++i)
-									std::cout << "gfgfdgdfgdfgdfgfdgfdg" << indexAndCoordonates[i] << "\n";
 								//adaugam un cub
 								if (index == 2)
 								{
@@ -1596,8 +1376,8 @@ void interfata(sf::RenderWindow& window)
 				fclose(compNames2);
 				nothing--;
 
-				if (nothing >= 1 && changeUp == 1)
-					updateVectors(window, saveNameOfProject);
+				//if (nothing >= 1 && changeUp == 1)
+				//	updateVectors(window, saveNameOfProject);
 				//firstEntry.change(window, camera, saveNameOfProject);
 				if (rotateCamera == false || nothing == 0) {
 					viewAndEdit(window, camera, pozMx, pozMy, language, down, right, sidePress, pozX, pozY, saveNameOfProject, figureChosed, changeUp, changeDown, cPozX, cPozY, moving, compScroll);
@@ -1787,7 +1567,7 @@ void interfata(sf::RenderWindow& window)
 							for (int j = 0; j < strlen(everything[i]); j++)
 							{
 								if (everything[i][j] == ' ') c++;
-								if (everything[i][j] >= '0' && everything[i][j] <= '9')
+								else 
 								{
 									if (c == 0)
 										if (everything[i][j] == '-') x = x * -1;

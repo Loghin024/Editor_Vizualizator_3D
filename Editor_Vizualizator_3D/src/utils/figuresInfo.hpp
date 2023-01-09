@@ -1,13 +1,10 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include<vector>
 #include "..\\geometry\camera.hpp"
-
 class figuresInfo
 {
 public:
-
 	void cub(sf::RenderWindow& window, char output3[10][100], std::string playerText, char indexAndCoordonates[200][10], int coordonates, int minus);
 
 	void componentsDrawStatic(sf::RenderWindow& window, std::string Name, std::string componentName);
@@ -20,13 +17,13 @@ public:
 
 	void justFigures(sf::RenderWindow& window);
 
-	void justComponentsNmaes(sf::RenderWindow& window, std::string Name, int& compScroll, int compNr);
+	void justComponentsNmaes(sf::RenderWindow& window, std::string Name, int& compScroll, int compNr, int language);
 
 	void scrollBar(sf::RenderWindow& window, int numberOfComponents, int howMuch, int& scroll);
 
 	void figureInfoType(sf::RenderWindow& window, std::string type, std::string Name, std::string componentName, int language, int compNr);
-	
-	void figureInfoPosition(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string position, std::string Nmae, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy, Camera camera,int compScroll, int compNr);
+
+	void figureInfoPosition(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string position, std::string Nmae, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy, Camera camera, int compScroll, int compNr, int language);
 
 	void figureInfoSize(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string size, std::string Name, std::string componentName, int language, bool changeUp, bool changeDown, int pozMx, int pozMy, Camera camera, int compScroll, int compNr);
 
