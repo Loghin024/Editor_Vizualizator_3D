@@ -1,11 +1,9 @@
 nume
-testt tb243
 gfdge
 testare
 proiect testare
-testare2
 testare 3
 testare editor
 rotiri
-ertert
-rotiri2
+final test
+testare linii

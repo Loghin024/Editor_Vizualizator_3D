@@ -33,36 +33,36 @@ int main()
 	//Verificari//////////////////////////////////
 	/////////////////////////////////////////////
 
-	//////creaza un cub 
+	////creaza un cub 
 	//Cub cub(Vector(0, 0, 0), 10);
 	//Cub cub1(Vector(0, -10, 0), 10);
-	////Cub cub2(Vector(0, -45, 0), 10);
-	//////Cub cub1(Vector(100, 100, 100), 30
-	////Prism prisma1(Vector(0,0,0), 50, 20, 30);
+	//Cub cub2(Vector(0, -45, 0), 10);
+	////Cub cub1(Vector(100, 100, 100), 30
+	//Prism prisma1(Vector(0,0,0), 50, 20, 30);
 
-	/////*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
-	////Prism leg2(Vector(0, 0, 20), 30, 5, 5);
-	////Prism leg3(Vector(40, 0, 0), 30, 5, 5);
-	////Prism leg4(Vector(40, 0, 20), 30, 5, 5);
-	////Prism fata(Vector(-25, -35, -25), 5, 50, 70);
-	////Line line(Vector(0, 0 ,0), Vector(15, 0, 40), 240);
+	///*Prism leg1(Vector(0, 0, 0), 30, 5, 5);*/
+	//Prism leg2(Vector(0, 0, 20), 30, 5, 5);
+	//Prism leg3(Vector(40, 0, 0), 30, 5, 5);
+	//Prism leg4(Vector(40, 0, 20), 30, 5, 5);
+	//Prism fata(Vector(-25, -35, -25), 5, 50, 70);
+	//Line line(Vector(0, 0 ,0), Vector(15, 0, 40), 240);
 
-	////char figura[100];
-	////Con3d figura(Vector(0, 0, 0), 70, 30, 100);
-	////Sphere3d sfera(Vector(0, 0, 0), 100, 40, 40);
+	//char figura[100];
+	//Con3d figura(Vector(0, 0, 0), 70, 30, 100);
+	//Sphere3d sfera(Vector(0, 0, 0), 100, 40, 40);
 
-	////Cylinder3d cilindru(Vector(0, 0, 0), 100, 5, 100);
-	////Cylinder3d cilindru1(Vector(50, 0, 0), 20, 40, 500);
+	//Cylinder3d cilindru(Vector(0, 0, 0), 100, 5, 100);
+	//Cylinder3d cilindru1(Vector(50, 0, 0), 20, 40, 500);
 
-	////Con3d con1(Vector(0, 0, 0), 70, 30, 100);
-	////Pyramid3d piramida(Vector(0, 0, 0), 20, 30, 100);
+	//Con3d con1(Vector(0, 0, 0), 70, 30, 100);
+	//Pyramid3d piramida(Vector(0, 0, 0), 20, 30, 100);
 
-	//////////////////////////////////////////////////////
-	/////////////////////////////////////////////////////
 	////////////////////////////////////////////////////
+	///////////////////////////////////////////////////
+	//////////////////////////////////////////////////
 
 	//std::vector<Cub>cubes;
-	//cubes.push_back(cub);
+	//
 
 	// //create camera
 	//Camera camera(Vector(0, -100, -230),-30, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -81,6 +81,16 @@ int main()
 	//			WINDOW_WIDTH = event.size.width;
 	//			WINDOW_HEIGHT = event.size.height;
 	//			camera.reload_figures(WINDOW_WIDTH, WINDOW_HEIGHT);
+	//		}
+
+	//		if (event.type == sf::Event::TextEntered)
+	//		{
+	//			if (event.text.unicode == 13)
+	//			{
+	//				Cub cubp(Vector(0, 0, 0), 30);
+	//				cubes.push_back(cubp);
+	//				std::cout << "*";
+	//			}
 	//		}
 
 	//	}
@@ -119,10 +129,15 @@ int main()
 
 	//	//afisare
 	//	window.clear();
+	//	for (auto i : cubes)
+	//	{
+	//		cubes[0].render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	//		cubes[0].rotate(Vector(0, 30, 0), Vector(1, 0, 0), 1, true);
+	//	}
 	//	//Cub cub(Vector(0, 0, 0), 10);
 	//	//cub.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	cubes[0].render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
-	//	cubes[0].rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, false);
+	//	/*cubes[0].render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
+	//	cubes[0].rotate(Vector(50, 0, 0), Vector(0, 1, 0), 1, false);*/
 	//	//cub1.render_solid(window, WINDOW_WIDTH, WINDOW_HEIGHT, camera);
 	//	//if (rotateCamera == false) {
 	//	//	a.figures(window, 0, 0, 0, 0, 1);

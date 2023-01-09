@@ -1,10 +1,13 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include<vector>
 #include "..\\geometry\camera.hpp"
+
 class figuresInfo
 {
 public:
+
 	void cub(sf::RenderWindow& window, char output3[10][100], std::string playerText, char indexAndCoordonates[200][10], int coordonates, int minus);
 
 	void componentsDrawStatic(sf::RenderWindow& window, std::string Name, std::string componentName);
@@ -29,7 +32,7 @@ public:
 
 	void figureInfoSize2(sf::RenderWindow& window, std::string _size, std::string Name, std::string componentName, int language, bool changeUp, bool changeDown, int pozMx, int pozMy, int compScroll);
 
-	void change(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT,Camera camera, std::string saveNameOfProject, std::string componentName, int language, int pozMx, int pozMy, int compScroll, int compNr);
+	void change(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, Camera camera, std::string saveNameOfProject, std::string componentName, int language, int pozMx, int pozMy, int compScroll, int compNr);
 
 	void simpleChange(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, Camera camera, std::string saveNameOfProject);
 
