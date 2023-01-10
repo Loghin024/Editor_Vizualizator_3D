@@ -1,0 +1,12 @@
+picior1
+picior2
+picior3
+picior4
+cilindru1
+cilindru2
+fata
+up1
+up2
+cil2
+cil3
+cil4

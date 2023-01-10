@@ -84,6 +84,7 @@ void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100
 			window.draw(playerText2);
 		}
 	}
+
 	for (int i = 0; i < 4;i++)
 	{
 		detail.changeTheText(output[1]);
@@ -100,6 +101,130 @@ void componentsDates::cubAndSfera(sf::RenderWindow& window, char output3[10][100
 	
 	window.draw(playerText2);
 }
+
+void componentsDates::Line(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int index, int language)
+{
+	using namespace sf;
+	char output[10][100]{};
+	FILE* text = fopen("src\\programtexts/Line.txt", "r");
+	for(int i = 0; i<=1; i++)
+	{
+		char sir[100];
+		for (int j = 1; j <= 3; j++)
+		{
+			fgets(sir, 100, text);
+			if (j == language)
+				strncpy(output[i], sir, strlen(sir) - 1);
+		}
+	}
+
+	sf::Font font;
+	if (!font.loadFromFile("res/Fonts/Montserrat/static/Montserrat-Medium.ttf"));
+	texts text1(output[0], 45, 120, 0, 0, 30, 0, 0, 0, 255);
+	text1.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+	sf::FloatRect nameText = text1.getLocalBoundsAuto();
+	Text playerText2(playerText, font, 30);
+	//playerText2.setFillColor(Color(26, 30, 28, 255));
+	FloatRect width = text1.getLocalBoundsAuto();
+	playerText2.setPosition(600, 70);
+
+	if (coordonates > 0)
+	{
+		text1.draw(window);
+
+		texts text2(output[1], 45, 170, 0, 0, 30, 0, 0, 0, 255);
+		text2.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+		FloatRect width2 = text2.getLocalBoundsAuto();
+
+		if (coordonates >= 4)
+			text2.draw(window);
+
+		if (coordonates <= 3 && coordonates >= 1)
+		{
+			playerText2.setPosition(45 + width.width + 40 + (140 * (coordonates - 1)), 120);
+			window.draw(playerText2);
+		}
+
+		if (coordonates >= 4)
+		{
+			playerText2.setPosition(45 + width2.width + 40 + (140 * (coordonates - 4)), 170);
+			window.draw(playerText2);
+		}
+
+		texts detail(output[3], 10, 50, 0, 0, 30, 0, 0, 0, 255);
+		for (int i = 1; i <= coordonates;i++)
+		{
+
+			if (i == 1)
+			{
+				detail.PositionSizeString("x:", 45 + width.width + 10, 120, 30);
+				playerText2.setPosition(45 + width.width + 40, 120);
+			}
+			detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+			detail.draw(window);
+
+			if (i == 2)
+			{
+				detail.PositionSizeString("y:", 45 + width.width + 150, 120, 30);
+				playerText2.setPosition(45 + width.width + 180, 120);
+			}
+			detail.draw(window);
+
+			if (i == 3)
+			{
+				detail.PositionSizeString("z:", 45 + width.width + 290, 120, 30);
+				playerText2.setPosition(45 + width.width + 320, 120);
+			}
+			detail.draw(window);
+			if (i == 4)
+			{
+				detail.PositionSizeString("x:", 45 + width2.width + 10, 170, 30);
+				playerText2.setPosition(45 + width.width + 40, 120);
+			}
+			detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+			detail.draw(window);
+
+			if (i == 5)
+			{
+				detail.PositionSizeString("y:", 45 + width2.width + 150, 170, 30);
+				playerText2.setPosition(45 + width.width + 180, 120);
+			}
+			detail.draw(window);
+
+			if (i == 6)
+			{
+				detail.PositionSizeString("z:", 45 + width2.width + 290, 170, 30);
+				playerText2.setPosition(45 + width.width + 320, 120);
+			}
+			detail.draw(window);
+		}
+
+		fclose(text);
+		for (int i = 0; i < coordonates;i++)
+		{
+			detail.changeTheText(output[0]);
+			detail.setFont("res/Fonts/Montserrat/static/Montserrat-Medium.ttf");
+			detail.changeColor(255, 255, 255, 255);
+			sf::FloatRect textWidth = detail.getLocalBoundsAuto();
+
+			if
+				(i == 0) detail.PositionSizeString(indexAndCoordonates[i], 600, 70, 30);
+			else if (i >= 1 && i < 4)
+				detail.PositionSizeString(indexAndCoordonates[i], 45 + width.width + 40 + (i - 1) * 140, 120, 30);
+			else
+			{
+				detail.changeTheText(output[1]);
+				sf::FloatRect textWidth = detail.getLocalBoundsAuto();
+				detail.PositionSizeString(indexAndCoordonates[i], 45 + width2.width + 40 + (i - 4) * 140, 170, 30);
+
+			}
+			detail.draw(window);
+		}
+	}
+	if(coordonates == 0)
+	window.draw(playerText2);
+}
+
 
 void componentsDates::conAndCilinder(sf::RenderWindow& window, std::string playerText, char indexAndCoordonates[200][100], int coordonates, int minus, int index, int language)
 {
@@ -453,11 +578,33 @@ void componentsDates::piramide(sf::RenderWindow& window, std::string playerText,
 void componentsDates::createTxtForComponent(std::string saveNameOfProject, std::string& project, std::string playerInput)
 {
 	char projectFolder[100];
+	//FILE* verifyDuplicate = fopen("src//userProjects", "r")
 	strcpy(projectFolder, "src\\userProjects\\");
 	strcat(projectFolder, saveNameOfProject.c_str());
 	strcat(projectFolder, "\\name.txt");
-	FILE* numeProiect = fopen(projectFolder, "a");
+	FILE* numeProiect2 = fopen(projectFolder, "r");
 	project = playerInput;
+	while (!feof(numeProiect2))
+	{
+		char buff[100];
+		fgets(buff, 100, numeProiect2);
+		char verify[100]{};
+		strncpy(verify, buff, strlen(buff) - 1);
+		std::string compo = verify;
+		std::cout << verify << "as" << std::endl;
+		if (compo.compare(project) == 0)
+		{
+			project += ' ';
+			fseek(numeProiect2, SEEK_SET, 0);
+
+			std::cout << project << "as" << std::endl;
+			std::cout << compo << std::endl;
+		}
+	}
+	fclose(numeProiect2);
+
+	FILE* numeProiect = fopen(projectFolder, "a");
+	std::cout << project << "as" << std::endl;
 	fprintf(numeProiect, "%s", project.c_str());
 	fprintf(numeProiect, "%s", "\n");
 	fclose(numeProiect);
@@ -469,8 +616,8 @@ void componentsDates::createTxtForComponent(std::string saveNameOfProject, std::
 	strcpy(sir, project.c_str());
 	strcat(projectFolder, sir);
 	strcat(projectFolder, ".txt");
-	FILE* numeProiect2 = fopen(projectFolder, "w");
-	fclose(numeProiect2);
+	FILE* numeProiect3 = fopen(projectFolder, "w");
+	fclose(numeProiect3);
 }
 
 void componentsDates::addCoordonates(std::string saveNameOfProject, std::string& project, std::string playerInput, int coordonates)

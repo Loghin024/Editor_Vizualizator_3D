@@ -16,3 +16,6 @@ Rusa
 Raza:
 Radius:
 Rusa
+Pozitii
+Positions
+Rusa

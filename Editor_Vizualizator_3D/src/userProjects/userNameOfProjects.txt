@@ -1,12 +1,5 @@
-nume
-gfdge
-testare
-proiect testare
-testare 3
-testare editor
-rotiri
-final test
-testare linii
-xfdf
-bugfixes
-bugfixes1
+brad
+masa
+scara
+scaun
+test

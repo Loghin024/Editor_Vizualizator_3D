@@ -1,0 +1,7 @@
+stanga
+1
+dreapta
+cil2
+cil4
+cil5
+cil7

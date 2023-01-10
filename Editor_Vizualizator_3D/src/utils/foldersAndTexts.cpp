@@ -50,7 +50,7 @@ void createFolderAndTexts()
 	fclose(programUtilities9);
 
 	FILE* programUtilities10 = fopen("src\\programtexts/textsForSizes.txt", "w");
-	fprintf(programUtilities10, "%s", "Marimi:\nSize:\nRusa\nLungime:\nLenght:\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nDiametru:\nDiameter:\nRusa\nRaza:\nRadius:\nRusa");
+	fprintf(programUtilities10, "%s", "Marimi:\nSize:\nRusa\nLungime:\nLenght:\nRusa\nInaltime:\nHeight:\nRusa\nLatime:\nWidth:\nRusa\nDiametru:\nDiameter:\nRusa\nRaza:\nRadius:\nRusa\nPozitii\nPositions\nRusa");
 	fclose(programUtilities10);
 
 	FILE* programUtilities11 = fopen("src\\programtexts/justView.txt", "w");

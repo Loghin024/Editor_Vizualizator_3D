@@ -22,8 +22,8 @@ public:
 	void scrollBar(sf::RenderWindow& window, int numberOfComponents, int howMuch, int& scroll);
 
 	void figureInfoType(sf::RenderWindow& window, std::string type, std::string Name, std::string componentName, int language, int compNr);
-
-	void figureInfoPosition(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string position, std::string Nmae, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy, Camera camera, int compScroll, int compNr, int language);
+	
+	void figureInfoPosition(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string position, std::string Nmae, std::string componentName, bool& changeUp, bool& changeDown, int& pozMx, int& pozMy, Camera camera,int compScroll, int compNr, int language);
 
 	void figureInfoSize(sf::RenderWindow& window, int WINDOW_WIDTH, int WINDOW_HEIGHT, std::string size, std::string Name, std::string componentName, int language, bool changeUp, bool changeDown, int pozMx, int pozMy, Camera camera, int compScroll, int compNr);
 
