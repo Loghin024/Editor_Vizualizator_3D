@@ -42,7 +42,7 @@ From this page user can open/delete an existing project
 
 **Editor**
 
-Using the left side, user can select the figure he wants to add in his workspace and after selecting it he needs to fill a formular with figure's details, such as coordinates, size, etc.
+Using the left side, user can select the figure he wants to add in his workspace and after selecting it he needs to fill a form with figure's details, such as coordinates, size, etc.
 Using the right side, user can edit the figure he added by simply searching after the name he gave to the component(the list on the upper right side displays all existing figures) and clicking on it. After that, the user can select which detail he wants to change(X-Position, Y-Position, Z-Position, different sizes of the component, etc). 
 
 **UP - ARROW** - increases selected detail
